@@ -2,10 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+
+@layer utilities {
+  .wrapper {
+    @apply max-w-7xl lg:mx-auto py-2 px-10 w-full;
+  }
+  .primary-btn {
+    @apply px-6 py-2 text-[.9rem] bg-primary text-black hover:bg-black hover:text-primary border border-primary hover:border-primary tracking-wide font-semibold transition-colors duration-300 rounded-full;
+  }
+  .secondary-btn {
+    @apply px-6 py-2 text-[.9rem] bg-black text-primary hover:bg-primary hover:text-black border border-primary tracking-wide font-semibold transition-colors duration-300 rounded-full;
+  }
+  .disabled-btn {
+    @apply px-6 py-2 text-[.9rem] bg-black text-gray-500 border border-gray-500 tracking-wide font-semibold rounded-full flex justify-center;
+  }
+}
+
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --tw-bg-opacity: 1;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,9 +31,21 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+} */
+
+/* html,
+body:root {
+  height: 100%;
+} */
+
+* {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
 }
 
-body {
+/* body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -24,10 +53,18 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+} */
+
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+::-webkit-scrollbar-thumb {
+  /* background: rgb(127 29 29 / var(--tw-bg-opacity)); */
+  background: #f1ff00;
+  border-radius: 6px;
+}
+
+body {
+  overflow-x: hidden;
 }
