@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer utilities {
   .wrapper {
     @apply max-w-7xl lg:mx-auto py-2 px-10 w-full;
@@ -67,4 +66,31 @@ body:root {
 
 body {
   overflow-x: hidden;
+}
+
+.animate-ball {
+  animation: ball-bounce 0.9s;
+  animation-direction: alternate;
+  animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
+  animation-iteration-count: infinite;
+  -webkit-animation-name: ball-bounce;
+  -webkit-animation-duration: 0.9s;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
+  -webkit-animation-iteration-count: infinite;
+}
+
+@keyframes ball-bounce {
+  0% {
+    -webkit-transform: translate3d(0, -180px, 0);
+    transform: translate3d(0, -180px, 0);
+  }
+  90% {
+    -webkit-transform: translate3d(0, -100px, 0);
+    transform: translate3d(0, -100px, 0);
+  }
+  100% {
+    -webkit-transform: scaleX(1.2);
+    transform: scaleX(1.2);
+  }
 }

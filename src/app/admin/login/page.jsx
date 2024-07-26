@@ -1,30 +1,18 @@
 "use client";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@/app/lib/schema";
+import { LoginSchema } from "@/app/utils/validationSchema";
 import { SpinnerContext } from "@/app/components/SpinnerContext";
-
-const signupUser = async (values) => {
-  const response = await fetch("/api/auth/register", {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(values),
-  });
-  const data = await response.json();
-  if (data.user) {
-    return data.user;
-  }
-  throw new Error("Login failed");
-};
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { login } from "@/app/apiCalls";
 
 const Login = () => {
   const { isLoading, setIsLoading } = useContext(SpinnerContext);
+  const [showPw, setShowPw] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -36,11 +24,23 @@ const Login = () => {
     defaultValues: { email: "", password: "" },
   });
 
+  // do login
   const onSubmit = async (values) => {
+    setIsLoading(true);
     try {
-      console.log(values);
+      const response = await login(values);
+      if (response.status === 200) {
+        toast.success(response.data.message);
+        router.replace("/admin");
+      }
     } catch (err) {
-      console.log(err, "Err");
+      if (err.response.status === 401 || err.response.status === 404) {
+        toast.error(err.response.data.error);
+      } else {
+        toast.error(err.message);
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -75,7 +75,7 @@ const Login = () => {
               id="email"
               type="email"
               placeholder="Enter email address"
-              className="px-3 py-2 text-black outline-none focus:border-primary rounded-full border border-black"
+              className="px-3 py-2 text-black outline-none border-primary rounded-full border"
               {...register("email")}
               disabled={isLoading}
             />
@@ -90,14 +90,23 @@ const Login = () => {
             >
               Password
             </label>
-            <input
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-              className="px-3 py-2 text-black outline-none focus:border-primary rounded-full border border-black"
-              {...register("password")}
-              disabled={isLoading}
-            />
+            <div className="flex px-3 gap-2 items-center bg-white rounded-full border border-primary">
+              <input
+                id="password"
+                type={showPw ? "text" : "password"}
+                placeholder="Enter your password"
+                className="w-full py-2 text-black outline-none rounded-full"
+                {...register("password")}
+                disabled={isLoading}
+              />
+              <div className="text-black text-2xl w-fit cursor-pointer">
+                {showPw ? (
+                  <FaEye onClick={() => setShowPw(false)} />
+                ) : (
+                  <FaEyeSlash onClick={() => setShowPw(true)} />
+                )}
+              </div>
+            </div>
             <small className="ml-2 text-yellow-500">
               {errors.password?.message}
             </small>

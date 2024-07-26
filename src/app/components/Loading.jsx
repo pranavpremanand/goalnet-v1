@@ -5,7 +5,8 @@ const Loading = () => {
       className="flex justify-center items-center bg-black/70 fixed top-0 left-0 z-50 w-full h-full"
       role="status"
     >
-      <svg
+      <img src="/assets/images/loading-icon.png" alt="loading" className='w-[5rem] h-[5rem] object-contain animate-ball animate-bounce'/>
+      {/* <svg
         className="h-12 w-12 animate-spin stroke-white"
         viewBox="0 0 256 256"
       >
@@ -81,7 +82,7 @@ const Loading = () => {
           strokeLinejoin="round"
           strokeWidth="24"
         ></line>
-      </svg>
+      </svg> */}
     </div>
   );
 };
