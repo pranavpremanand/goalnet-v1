@@ -35,12 +35,11 @@ import { NextResponse } from "next/server";
 //   }
 // };
 
-
 // delete a category
-export const POST = async (req) => {
+export const POST = async (req, { params }) => {
   try {
     connectDb();
-    const { id } = await req.json();
+    const { id } = params;
 
     const postsExist = await Post.findOne({ category: id });
     if (postsExist) {
@@ -73,9 +72,8 @@ export const POST = async (req) => {
   }
 };
 
-
-// delete a category with posts
-export const DELETE = async (req) => {
+// delete a category with it's posts
+export const DELETE = async (req, { params }) => {
   try {
     connectDb();
     const { id } = params;
@@ -93,5 +91,3 @@ export const DELETE = async (req) => {
     );
   }
 };
-
-

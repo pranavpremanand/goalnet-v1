@@ -62,10 +62,9 @@ const CategoryItem = ({ category, refetchData }) => {
   const handleDeleteCategory = async () => {
     setIsLoading(true);
     try {
-      const response = await deleteCategory({
-        id: category._id,
-      }).then((res) => res.json());
-
+      const response = await deleteCategory(category._id).then((res) =>
+        res.json()
+      );
       setShowDeleteConfirmation(false);
       if (response.success) {
         toast.success(response.message);
@@ -78,7 +77,6 @@ const CategoryItem = ({ category, refetchData }) => {
       }
     } catch (err) {
       toast.error(err.message);
-      console.log(err);
     } finally {
       setIsLoading(false);
     }
@@ -163,7 +161,7 @@ const CategoryItem = ({ category, refetchData }) => {
             Delete
           </button>
         </div>
-        <span className="self-start md:self-auto text-xs md:w-[10rem] md:ml-3 text-gray-600">
+        <span className="self-start mt-1 md:self-auto text-xs md:w-[10rem] md:ml-3 text-gray-600">
           {formatDistanceToNow(category.createdAt, {
             addSuffix: true,
           })}

@@ -46,19 +46,18 @@ export const updateCategory = (data) => {
 };
 
 // delete a category
-export const deleteCategory = (data) => {
-  return fetch("/api/category", {
+export const deleteCategory = (id) => {
+  return fetch(`/api/category/${id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
   });
 };
 
 // delete category and its posts
 export const deleteCategoryAndPosts = (id) => {
-  return fetch("/api/category/"+id, {
+  return fetch(`/api/category/${id}`, {
     method: "DELETE",
   });
 };

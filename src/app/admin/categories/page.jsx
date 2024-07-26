@@ -3,6 +3,8 @@ import CategoryForm from "@/components/CategoryForm";
 import Loading from "@/components/Loading";
 import useSWR from "swr";
 import CategoryItem from "@/components/CategoryItem";
+import Link from "next/link";
+import { PiCaretRightBold } from "react-icons/pi";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -24,8 +26,17 @@ const Categories = () => {
   if (!data) return <Loading />;
   const categories = data.categories;
   return (
-    <div className="my-3">
+    <div className="grow">
       <div className="wrapper">
+        <div className="flex items-center gap-1">
+          <Link href="/admin" className="text-md text-white">
+            Home
+          </Link>{" "}
+          <PiCaretRightBold className='text-sm'/>
+          <Link href="/admin/categories" className="text-md text-primary underline">
+            Categories
+          </Link>
+        </div>
         {categories.length === 0 && (
           <h1 className="text-3xl font-bold tracking-wider text-center">
             No Categories Found
@@ -40,7 +51,11 @@ const Categories = () => {
             <div className="w-full">
               <div className="w-full">
                 {categories.map((category) => (
-                  <CategoryItem key={category._id} category={category} refetchData={mutate}/>
+                  <CategoryItem
+                    key={category._id}
+                    category={category}
+                    refetchData={mutate}
+                  />
                 ))}
               </div>
             </div>
