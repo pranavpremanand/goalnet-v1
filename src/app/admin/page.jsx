@@ -4,7 +4,7 @@ import React from "react";
 const AdminHome = () => {
   const links = [
     { title: "Banners", link: "/" },
-    { title: "Posts", link: "/" },
+    { title: "Posts", link: "/posts" },
     { title: "Categories", link: "/categories" },
   ];
   return (

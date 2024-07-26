@@ -6,7 +6,6 @@ import { FaRegClock } from "react-icons/fa";
 const CardItem = ({ img, idx }) => {
   return (
     <div
-      key={img}
       className={`grid grid-cols-1 md:grid-cols-[47%,50%] lg:grid-cols-[40%,45%] gap-5 md:border-none pb-5 ${
         images[idx + 1] && "border-b"
       }`}

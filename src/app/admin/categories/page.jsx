@@ -32,20 +32,22 @@ const Categories = () => {
           <Link href="/admin" className="text-md text-white">
             Home
           </Link>{" "}
-          <PiCaretRightBold className='text-sm'/>
+          <PiCaretRightBold className='text-sm mt-[.15rem]'/>
           <Link href="/admin/categories" className="text-md text-primary underline">
             Categories
           </Link>
         </div>
+
         {categories.length === 0 && (
           <h1 className="text-3xl font-bold tracking-wider text-center">
             No Categories Found
           </h1>
         )}
+
         <CategoryForm refetchData={mutate} />
         {categories.length > 0 && (
           <div className="flex flex-col gap-4">
-            <h1 className="text-3xl font-bold tracking-wider text-center mb-2">
+            <h1 className="text-2xl font-bold tracking-wider text-center mb-2">
               Categories
             </h1>
             <div className="w-full">
