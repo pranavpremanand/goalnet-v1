@@ -1,7 +1,7 @@
-import CardItem from "./components/CardItem";
-import { images } from "./constants";
+import CardItem from "../components/CardItem";
+import { images } from "../constants";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
-import Banner from "./components/Banner";
+import Banner from "../components/Banner";
 
 export default function Home() {
   return (

@@ -1,9 +1,9 @@
 import { Jost } from "next/font/google";
 import "./globals.css";
-import { SpinnerProvider } from "./components/SpinnerContext";
+import { SpinnerProvider } from "../components/SpinnerContext";
 import { Toaster } from "react-hot-toast";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import "keen-slider/keen-slider.min.css";
 
 const jost = Jost({
@@ -24,12 +24,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${jost.className} bg-black text-white `}>
+      <body className={`${jost.className} bg-black text-white min-h-screen flex flex-col`}>
         <SpinnerProvider>
           <Toaster position="top-center" />
-          
+          <Header />
           {children}
-          
+          <Footer />
         </SpinnerProvider>
       </body>
     </html>

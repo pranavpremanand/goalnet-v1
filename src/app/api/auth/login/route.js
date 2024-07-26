@@ -1,5 +1,5 @@
-import { connectDb } from "@/app/utils/database";
-import User from "@/app/utils/database/models/user.model";
+import { connectDb } from "@/utils/database";
+import User from "@/utils/database/models/user.model";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
@@ -31,16 +31,14 @@ export const POST = async (req) => {
     const user = await User.findOne({ email: body.email });
     if (!user) {
       return NextResponse.json(
-        { error: "Admin not found" },
-        {
-          status: 404,
-        }
+        { success: false, message: "Admin not found" },
+        { status: 404 }
       );
     } else {
       const isMatch = await bcrypt.compare(body.password, user.password);
       if (!isMatch) {
         return NextResponse.json(
-          { error: "Incorrect password" },
+          { success: false, message: "Incorrect password" },
           {
             status: 401,
           }
@@ -70,13 +68,12 @@ export const POST = async (req) => {
         secure: process.env.NODE_ENV === "production", // Set to true in production
         sameSite: "strict",
         maxAge: 7 * 24 * 60 * 60, // 7 days in seconds
-        path: '/',
+        path: "/",
       });
 
       return res;
     }
   } catch (err) {
-    console.log(err);
     return NextResponse.json(err);
   }
 };

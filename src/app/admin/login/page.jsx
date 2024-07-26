@@ -5,10 +5,10 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@/app/utils/validationSchema";
-import { SpinnerContext } from "@/app/components/SpinnerContext";
+import { LoginSchema } from "@/utils/validationSchema";
+import { SpinnerContext } from "@/components/SpinnerContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { login } from "@/app/apiCalls";
+import { login } from "@/apiCalls";
 
 const Login = () => {
   const { isLoading, setIsLoading } = useContext(SpinnerContext);
@@ -33,7 +33,7 @@ const Login = () => {
         toast.success(response.message);
         router.replace("/admin");
       } else {
-        toast.error(response.error);
+        toast.error(response.message);
       }
     } catch (err) {
       toast.error(err.message);
@@ -54,7 +54,7 @@ const Login = () => {
     // }
   };
   return (
-    <div className="h-[70vh] bg-gradient-radial from-gray-900 to-black">
+    <div className="bg-gradient-radial from-gray-900 to-black grow flex items-center">
       <div className="wrapper flex justify-center items-center h-full">
         <form
           onSubmit={handleSubmit(onSubmit)}

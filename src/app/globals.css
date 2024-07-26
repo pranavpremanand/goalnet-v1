@@ -68,7 +68,7 @@ body {
   overflow-x: hidden;
 }
 
-.animate-ball {
+/* .animate-ball {
   animation: ball-bounce 0.9s;
   animation-direction: alternate;
   animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
@@ -93,4 +93,4 @@ body {
     -webkit-transform: scaleX(1.2);
     transform: scaleX(1.2);
   }
-}
+} */
