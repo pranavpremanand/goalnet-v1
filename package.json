@@ -11,7 +11,6 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@material-tailwind/react": "^2.1.9",
-    "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
     "hamburger-react": "^2.5.1",
     "jose": "^5.6.3",

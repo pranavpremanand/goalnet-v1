@@ -52,13 +52,17 @@ const Banner = () => {
     <section className="flex flex-col items-center" id="home">
       <div ref={sliderRef} className="keen-slider" id="home">
         {images.map((img, i) => (
-          <div key={i} className="keen-slider__slide relative">
+          <div
+            key={i}
+            className="keen-slider__slide relative backdrop-blur-3xl"
+            style={{ backgroundImage: `url(${img})` }}
+          >
             <Image
               src={img}
               width={1000}
               height={1000}
               alt=""
-              className="w-full h-[60vh] sm:h-[55vh] md:h-[85vh] object-cover object-center brightness-[70%]"
+              className="w-full h-[60vh] sm:h-[55vh] md:h-[85vh] object-contain brightness-[70%]"
               style={{ opacity: opacities[i] }}
             />
             <div className="wrapper absolute sm:left-10 top-[45%] flex flex-col gap-2 md:gap-3 items-start">
@@ -70,10 +74,12 @@ const Banner = () => {
               </span>
               <h1 className="text-white font-bold text-2xl sm:text-3xl lg:text-5xl max-w-[96%] sm:max-w-[70%] lg:max-w-[75%] truncate-lines-2 line-clamp-3">
                 {
-                  "It's been 12 years since Leo Messi went off against Bayer Leverkusen ⚽⚽⚽⚽⚽ The first player in UCL history to score five goals in a single game, then Luiz Adriano and Erling Haaland followed suit ✋"
+                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, obcaecati quas dicta nostrum, asperiores nihil praesentium assumenda, vitae culpa odit eius officia quis earum porro nobis illum tempora corrupti quam."
                 }
               </h1>
-              <button className="primary-btn w-fit mt-2 md:mt-4">Read More</button>
+              <button className="primary-btn w-fit mt-2 md:mt-4">
+                Read More
+              </button>
             </div>
           </div>
         ))}

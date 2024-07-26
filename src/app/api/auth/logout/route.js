@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export const POST = (req) => {
+export const GET = (req) => {
   const res = NextResponse.json({ success: true, message: "Logout Successful" }, { status: 200 });
 
   // Clear the cookie by setting it with a past expiration date

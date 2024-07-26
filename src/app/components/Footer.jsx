@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { socialLinks } from "../constants";
 
 const Footer = () => {
@@ -16,7 +15,7 @@ const Footer = () => {
             loading='lazy'
           />
         </Link> */}
-        <small className="">© 2024 - GoalNet. | All rights reserved</small>
+        <small className="">© 2024 - GoalNet | All rights reserved</small>
         <div className="flex gap-4 text-2xl">
           {socialLinks.map((link) => (
             <Link

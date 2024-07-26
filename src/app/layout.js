@@ -27,9 +27,9 @@ export default function RootLayout({ children }) {
       <body className={`${jost.className} bg-black text-white `}>
         <SpinnerProvider>
           <Toaster position="top-center" />
-          <Header />
+          
           {children}
-          <Footer />
+          
         </SpinnerProvider>
       </body>
     </html>

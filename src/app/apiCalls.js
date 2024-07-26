@@ -1,13 +1,22 @@
-import axios from "axios";
+// export const baseUrl = "http://localhost:3000";
 
-export const baseUrl = "http://localhost:3000";
+// api instance
+const api = (url, method, data) => {
+  return fetch(url, {
+    method: method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};
 
 // login
 export const login = (data) => {
-  return axios.post(`${baseUrl}/api/auth/login`, data);
+  return api("/api/auth/login", "POST", data);
 };
 
 // logout
 export const logout = () => {
-  return axios.post(`${baseUrl}/api/auth/logout`);
+  return api("/api/auth/logout", "GET");
 };

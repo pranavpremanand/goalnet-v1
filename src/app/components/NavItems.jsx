@@ -5,29 +5,35 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { SpinnerContext } from "./SpinnerContext";
+import Loading from "./Loading";
 import { logout } from "../apiCalls";
+import toast from "react-hot-toast";
 
 const NavItems = () => {
   const pathname = usePathname();
   const router = useRouter();
   const isAdmin = pathname.includes("/admin") && pathname !== "/admin/login";
-  const { setIsLoading } = useContext(SpinnerContext);
+  const { isLoading, setIsLoading } = useContext(SpinnerContext);
 
   // do logout
   const handleLogout = async () => {
     setIsLoading(true);
     try {
-      const response = await logout();
-      if (response.status === 200) {
-        toast.success(response.data.message);
+      const response = await logout().then((res) => res.json());
+      if (response.success) {
+        toast.success(response.message);
         router.replace("/admin/login");
       }
     } catch (err) {
-      console.log(err);
+      toast.error(err.message);
     } finally {
       setIsLoading(false);
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="w-fit flex flex-col bg-black md:bg-transparent md:flex-row gap-3 md:gap-10">

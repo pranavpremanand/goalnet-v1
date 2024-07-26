@@ -1,5 +1,5 @@
-import { connectDb } from "@/app/lib/schema/database";
-import User from "@/app/lib/schema/database/models/user.model";
+import { connectDb } from "@/app/utils/database";
+import User from "@/app/utils/database/models/user.model";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
@@ -8,13 +8,13 @@ export const POST = async (req) => {
   connectDb();
   const body = await req.json();
 
-  const hashedPassword = await bcrypt.hash(body.password, 10);
-  const user = {
-    fullName: "Pranav",
-    email: body.email,
-    password: hashedPassword,
-    isAdmin: true,
-  };
+  // const hashedPassword = await bcrypt.hash(body.password, 10);
+  // const user = {
+  //   fullName: "Pranav",
+  //   email: body.email,
+  //   password: hashedPassword,
+  //   isAdmin: true,
+  // };
 
   try {
     // User.create(user).then((data) => {

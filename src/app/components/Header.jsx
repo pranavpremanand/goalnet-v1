@@ -1,15 +1,11 @@
 "use client";
 import { Poppins } from "next/font/google";
-import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import NavItems from "./NavItems";
 import { Squash as Hamburger } from "hamburger-react";
 import { Drawer } from "@material-tailwind/react";
 import { IoClose } from "react-icons/io5";
-import { useContext } from "react";
-import { SpinnerContext } from "./SpinnerContext";
-import Loading from "./Loading";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -19,7 +15,6 @@ const poppins = Poppins({
 const Header = () => {
   const [isOpen, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { isLoading } = useContext(SpinnerContext);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,11 +35,6 @@ const Header = () => {
     };
   }, []);
 
-
-  
-  if (isLoading) {
-    return <Loading />;
-  }
   return (
     <header className="sticky -top-1 left-0 z-30 w-full">
       <div

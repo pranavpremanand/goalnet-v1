@@ -28,17 +28,16 @@ const Login = () => {
   const onSubmit = async (values) => {
     setIsLoading(true);
     try {
-      const response = await login(values);
-      if (response.status === 200) {
-        toast.success(response.data.message);
+      const response = await login(values).then((res) => res.json());
+      if (response.success) {
+        toast.success(response.message);
         router.replace("/admin");
+      } else {
+        toast.error(response.error);
       }
     } catch (err) {
-      if (err.response.status === 401 || err.response.status === 404) {
-        toast.error(err.response.data.error);
-      } else {
-        toast.error(err.message);
-      }
+      toast.error(err.message);
+      console.log(err);
     } finally {
       setIsLoading(false);
     }
