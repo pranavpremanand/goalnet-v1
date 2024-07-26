@@ -1,16 +1,5 @@
 // export const baseUrl = "http://localhost:3000";
 
-// api instance
-// const api = (url, method, data) => {
-//   return fetch(url, {
-//     method: method,
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(data),
-//   });
-// };
-
 // login
 export const login = (data) => {
   return fetch("/api/auth/login", {
@@ -42,6 +31,34 @@ export const createCategory = (data) => {
 export const getCategories = () => {
   return fetch("/api/category", {
     method: "GET",
-    // next: { tags: ["categories"] },
+  });
+};
+
+// update a category
+export const updateCategory = (data) => {
+  return fetch("/api/category", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};
+
+// delete a category
+export const deleteCategory = (data) => {
+  return fetch("/api/category", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};
+
+// delete category and its posts
+export const deleteCategoryAndPosts = (id) => {
+  return fetch("/api/category/"+id, {
+    method: "DELETE",
   });
 };

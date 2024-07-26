@@ -70,10 +70,9 @@ export const POST = async (req) => {
         maxAge: 7 * 24 * 60 * 60, // 7 days in seconds
         path: "/",
       });
-
       return res;
     }
   } catch (err) {
-    return NextResponse.json(err);
+    return NextResponse.json({ success: false, message: err.message }, { status: 500 });
   }
 };

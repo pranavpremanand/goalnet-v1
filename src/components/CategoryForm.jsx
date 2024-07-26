@@ -15,7 +15,6 @@ const CategoryForm = ({ refetchData }) => {
     register,
     handleSubmit,
     reset,
-    clearErrors,
     formState: { errors },
   } = useForm({
     mode: "all",
@@ -46,7 +45,7 @@ const CategoryForm = ({ refetchData }) => {
   };
 
   return (
-    <div className="flex items-end justify-start gap-5 my-8">
+    <div className="flex items-end justify-center gap-5 my-8">
       {!showForm && (
         <button className="primary-btn w-fit" onClick={() => setShowForm(true)}>
           Add Category

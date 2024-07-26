@@ -15,6 +15,9 @@
   .disabled-btn {
     @apply px-6 py-2 text-[.9rem] bg-black text-gray-500 border border-gray-500 tracking-wide font-semibold rounded-full flex justify-center;
   }
+  .default-btn-styles{
+    @apply px-6 py-2 text-[.9rem] border tracking-wide font-semibold rounded-full flex justify-center;
+  }
 }
 
 /* :root {

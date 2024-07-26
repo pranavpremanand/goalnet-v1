@@ -24,9 +24,22 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${jost.className} bg-black text-white min-h-screen flex flex-col`}>
+      <body
+        className={`${jost.className} bg-black text-white min-h-screen flex flex-col`}
+      >
         <SpinnerProvider>
-          <Toaster position="top-center" />
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              className: "",
+              style: {
+                border: "1px solid #f1ff00",
+                padding: "16px",
+                color: "#f1ff00",
+                backgroundColor: "#191919",
+              },
+            }}
+          />
           <Header />
           {children}
           <Footer />

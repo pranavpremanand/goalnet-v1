@@ -31,5 +31,5 @@ export const PostSchema = z.object({
 });
 
 export const CategorySchema = z.object({
-  name: z.string().min(1, "Name is required").max(20, "Category name cannot be longer than 20 characters")
+  name: z.string().min(1, "Name is required").max(30, "Category name cannot be longer than 30 characters")
 });

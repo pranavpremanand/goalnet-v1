@@ -1,6 +1,6 @@
 import { connectDb } from "@/utils/database";
 import Category from "@/utils/database/models/category.model";
-import { revalidatePath } from "next/cache";
+import Post from "@/utils/database/models/post.model";
 import { NextResponse } from "next/server";
 
 // get all categories
@@ -10,7 +10,10 @@ export const GET = async () => {
     const categories = await Category.find().sort({ createdAt: "desc" });
     return NextResponse.json({ success: true, categories });
   } catch (err) {
-    return NextResponse.json(err);
+    return NextResponse.json(
+      { success: false, message: err.message },
+      { status: 500 }
+    );
   }
 };
 
@@ -27,16 +30,45 @@ export const POST = async (req) => {
     //     { status: 400 }
     //   );
     // } else {
-      const data = await Category.create({ name });
+    const data = await Category.create({ name });
 
-      revalidatePath("/admin/categories");
-
-      return NextResponse.json(
-        { success: true, data, message: "Category created successfully" },
-        { status: 201 }
-      );
+    return NextResponse.json(
+      { success: true, data, message: "Category created successfully" },
+      { status: 201 }
+    );
     // }
   } catch (err) {
-    return NextResponse.json(err);
+    return NextResponse.json(
+      { success: false, message: err.message },
+      { status: 500 }
+    );
+  }
+};
+
+// update a category
+export const PATCH = async (req) => {
+  try {
+    connectDb();
+    const { id, name } = await req.json();
+
+    const alreadyExist = await Category.findOne({ name });
+    if (alreadyExist) {
+      return NextResponse.json(
+        { success: false, message: "Category already exists" },
+        { status: 400 }
+      );
+    } else {
+      const data = await Category.findByIdAndUpdate(id, { name });
+
+      return NextResponse.json(
+        { success: true, data, message: "Category updated successfully" },
+        { status: 201 }
+      );
+    }
+  } catch (err) {
+    return NextResponse.json(
+      { success: false, message: err.message },
+      { status: 500 }
+    );
   }
 };
