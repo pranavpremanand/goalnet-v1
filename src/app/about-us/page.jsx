@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function About() {
   return (
-    <div className="w-full my-10">
+    <section className="w-full my-10">
       <div className="flex flex-col wrapper gap-10">
         <Image
           src="/assets/images/about-us-banner.jpg"
@@ -66,6 +66,6 @@ export default function About() {
           </h2>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

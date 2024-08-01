@@ -7,7 +7,9 @@ import { NextResponse } from "next/server";
 export const GET = async () => {
   try {
     connectDb();
-    const categories = await Category.find().sort({ createdAt: "desc" });
+    const categories = await Category.find({ isDeleted: false }).sort({
+      createdAt: "desc",
+    });
     return NextResponse.json({ success: true, categories });
   } catch (err) {
     return NextResponse.json(
@@ -23,20 +25,20 @@ export const POST = async (req) => {
     connectDb();
     const { name } = await req.json();
 
-    const alreadyExist = await Category.findOne({ name });
-    // if (alreadyExist) {
-    //   return NextResponse.json(
-    //     { success: false, message: "Category already exists" },
-    //     { status: 400 }
-    //   );
-    // } else {
-    const data = await Category.create({ name });
+    const alreadyExist = await Category.findOne({ name, isDeleted: false });
+    if (alreadyExist) {
+      return NextResponse.json(
+        { success: false, message: "Category already exists" },
+        { status: 400 }
+      );
+    } else {
+      const data = await Category.create({ name });
 
-    return NextResponse.json(
-      { success: true, data, message: "Category created successfully" },
-      { status: 201 }
-    );
-    // }
+      return NextResponse.json(
+        { success: true, data, message: "Category created successfully" },
+        { status: 201 }
+      );
+    }
   } catch (err) {
     return NextResponse.json(
       { success: false, message: err.message },
@@ -51,7 +53,7 @@ export const PATCH = async (req) => {
     connectDb();
     const { id, name } = await req.json();
 
-    const alreadyExist = await Category.findOne({ name });
+    const alreadyExist = await Category.findOne({ name, isDeleted: false });
     if (alreadyExist) {
       return NextResponse.json(
         { success: false, message: "Category already exists" },

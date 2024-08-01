@@ -22,12 +22,12 @@ export const LoginSchema = z.object({
 });
 
 export const PostSchema = z.object({
-  title: z.string().min(1, "Title is required"),
+  heading: z.string().min(1, "Heading is required"),
   content: z.string().min(1, "Content is required"),
   category: z.string().min(1, "Category is required"),
   image: z.string().url("Image is required"),
-  isBanner: z.boolean(),
-  otherLinks: z.string(),
+  // isBanner: z.boolean(),
+  // otherLinks: z.string(),
 });
 
 export const CategorySchema = z.object({

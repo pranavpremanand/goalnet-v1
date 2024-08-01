@@ -1,5 +1,7 @@
 // export const baseUrl = "http://localhost:3000";
 
+export const fetcher = (url) => fetch(url).then((res) => res.json());
+
 // login
 export const login = (data) => {
   return fetch("/api/auth/login", {
@@ -59,5 +61,16 @@ export const deleteCategory = (id) => {
 export const deleteCategoryAndPosts = (id) => {
   return fetch(`/api/category/${id}`, {
     method: "DELETE",
+  });
+};
+
+// create post
+export const createPost = (data) => {
+  return fetch("/api/post", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
   });
 };

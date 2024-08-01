@@ -1,8 +1,8 @@
-import { Schema, models, model, SchemaTypes } from "mongoose";
+import { Schema, models, model } from "mongoose";
 
 const postSchema = new Schema(
   {
-    title: {
+    heading: {
       type: String,
       required: true,
     },
@@ -11,9 +11,8 @@ const postSchema = new Schema(
       required: true,
     },
     category: {
-      type: SchemaTypes.ObjectId,
-      ref: "categories",
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "Category",
     },
     image: {
       type: String,
@@ -24,12 +23,16 @@ const postSchema = new Schema(
       default: false,
     },
     otherLinks: {
-      type: String,
+      type: Array,
     },
+    isDeleted:{
+      type: Boolean,
+      default: false,
+    }
   },
   { timestamps: true }
 );
 
-const Post = models?.posts || model("posts", postSchema);
+const Post = models?.Post || model("Post", postSchema);
 
 export default Post;

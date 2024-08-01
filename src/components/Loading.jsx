@@ -2,7 +2,7 @@ const Loading = () => {
   return (
     <div
       aria-label="Loading..."
-      className="flex justify-center items-center bg-black/70 fixed top-0 left-0 z-50 w-full h-full"
+      className="flex justify-center items-center bg-black/70 fixed top-0 left-0 z-50 w-screen h-screen"
       role="status"
     >
       {/* <img src="/assets/images/loading-icon.png" alt="loading" className='w-[5rem] h-[5rem] object-contain animate-ball animate-bounce'/> */}

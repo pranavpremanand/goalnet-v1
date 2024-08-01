@@ -5,11 +5,12 @@ import useSWR from "swr";
 import CategoryItem from "@/components/CategoryItem";
 import Link from "next/link";
 import { PiCaretRightBold } from "react-icons/pi";
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { fetcher } from "@/apiCalls";
 
 const Categories = () => {
   const { data, error, mutate } = useSWR(`/api/category`, fetcher);
+
+  let categories = [];
 
   if (error)
     return (
@@ -24,9 +25,9 @@ const Categories = () => {
     );
 
   if (!data) return <Loading />;
-  const categories = data.categories;
+  categories = data.categories;
   return (
-    <div className="grow">
+    <section className="grow">
       <div className="wrapper">
         <div className="flex items-center gap-1">
           <Link href="/admin" className="text-md text-white">
@@ -85,7 +86,7 @@ const Categories = () => {
           </button>
         </div> */}
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -6,10 +6,14 @@ const categorySchema = new Schema(
       type: String,
       required: true,
     },
+    isDeleted:{
+      type: Boolean,
+      default: false,
+    }
   },
   { timestamps: true }
 );
 
-const Category = models?.categories || model("categories", categorySchema);
+const Category = models?.Category || model("Category", categorySchema);
 
 export default Category;

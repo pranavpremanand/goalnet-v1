@@ -8,7 +8,7 @@ const AdminHome = () => {
     { title: "Categories", link: "/categories" },
   ];
   return (
-    <div className="wrapper grow">
+    <section className="wrapper grow">
       <Link href="/admin" className="text-md text-primary underline">
         Home
       </Link>
@@ -24,7 +24,7 @@ const AdminHome = () => {
           </Link>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -41,7 +41,7 @@ export const POST = async (req, { params }) => {
     connectDb();
     const { id } = params;
 
-    const postsExist = await Post.findOne({ category: id });
+    const postsExist = await Post.findOne({ category: id, isDeleted: false });
     if (postsExist) {
       return NextResponse.json(
         {
@@ -54,7 +54,7 @@ export const POST = async (req, { params }) => {
       );
     }
 
-    const data = await Category.findByIdAndDelete(id);
+    const data = await Category.findByIdAndUpdate(id, { isDeleted: true });
     return NextResponse.json(
       {
         success: true,
@@ -78,8 +78,8 @@ export const DELETE = async (req, { params }) => {
     connectDb();
     const { id } = params;
 
-    await Post.deleteMany({ category: id });
-    await Category.deleteOne({ _id: id });
+    await Post.updateMany({ category: id }, { $set: { isDeleted: true } });
+    await Category.updateOne({ _id: id }, { $set: { isDeleted: true } });
     return NextResponse.json(
       { success: true, message: "Category deleted successfully" },
       { status: 200 }

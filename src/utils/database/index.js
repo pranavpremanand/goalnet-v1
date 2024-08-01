@@ -1,33 +1,39 @@
 import mongoose from "mongoose";
 
 const connection = {};
+
 export async function connectDb() {
   try {
+    // Check if the connection already exists
     if (connection.isConnected) {
       console.log("Using existing database connection");
       return;
     }
-    const db = await mongoose.connect(process.env.MONGO_URL);
+
+    // If no connection exists, create a new one
+    const db = await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 30000, // 30 seconds
+      socketTimeoutMS: 45000, // 45 seconds
+    });
+
+    // Set the connection state
     connection.isConnected = db.connections[0].readyState;
+    console.log("Database connected");
   } catch (err) {
-    throw new Error("Database connection failed :\n", err);
+    console.error("Database connection failed:", err.message);
+    throw new Error("Database connection failed");
   }
+
   // try {
-  //   mongoose.connect(process.env.MONGO_URL);
-  //   const connection = mongoose.connection;
-
-  //   connection.on("connected", () => {
-  //     console.log("Database connected successfully!");
-  //   });
-
-  //   connection.on("error", (err) => {
-  //     console.log(
-  //       "Database connection error. Please make sure Database is running.\n",
-  //       err
-  //     );
-  //     process.exit();
-  //   });
+  //   if (connection.isConnected) {
+  //     console.log("Using existing database connection");
+  //     return;
+  //   }
+  //   const db = await mongoose.connect(process.env.MONGO_URL);
+  //   connection.isConnected = db.connections[0].readyState;
   // } catch (err) {
-  //   console.log("Database connection failed :\n", err);
+  //   throw new Error("Database connection failed :\n", err);
   // }
 }

@@ -45,9 +45,9 @@ const PostItem = ({ url }) => {
               <FaRegClock /> Just now
             </span>
             <div className="flex gap-2">
-              <button className="w-[6rem] px-2 py-1 bg-black text-primary hover:bg-primary hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full">
+              {/* <button className="w-[6rem] px-2 py-1 bg-black text-primary hover:bg-primary hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full">
                 Edit
-              </button>
+              </button> */}
               <button className="w-[6rem] px-2 py-1 bg-black text-red-600 hover:bg-red-600 hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full">
                 Delete
               </button>
