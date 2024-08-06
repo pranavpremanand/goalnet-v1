@@ -10,7 +10,6 @@ export const POST = async (req) => {
     const postLimit = 10;
     const body = await req.json();
     const { page, category } = body;
-    console.log(body);
     let posts;
     if (category !== "0") {
       posts = await Post.aggregate([
@@ -96,47 +95,6 @@ export const POST = async (req) => {
         .skip((page - 1) * postLimit);
     }
 
-    const banners = await Post.aggregate([
-      { $match: { isBanner: true, isDeleted: false } },
-      {
-        $lookup: {
-          from: "categories",
-          localField: "category",
-          foreignField: "_id",
-          as: "categoryDetails",
-        },
-      },
-      { $unwind: "$categoryDetails" },
-      {
-        $project: {
-          _id: { $toString: "$_id" },
-          heading: 1,
-          content: 1,
-          image: 1,
-          isBanner: 1,
-          createdAt: {
-            $dateToString: {
-              format: "%Y-%m-%dT%H:%M:%S.%LZ",
-              date: "$createdAt",
-            },
-          },
-          updatedAt: {
-            $dateToString: {
-              format: "%Y-%m-%dT%H:%M:%S.%LZ",
-              date: "$updatedAt",
-            },
-          },
-          category: {
-            _id: { $toString: "$categoryDetails._id" },
-            name: "$categoryDetails.name",
-          },
-        },
-      },
-      { $limit: 5 },
-    ]).sort({
-      createdAt: "desc",
-    });
-
     const categories = await Category.find({ isDeleted: false }).sort({
       createdAt: "desc",
     });
@@ -148,7 +106,6 @@ export const POST = async (req) => {
       {
         success: true,
         data: {
-          banners,
           posts,
           categories,
           totalItems,
@@ -156,7 +113,7 @@ export const POST = async (req) => {
           page,
           limit: postLimit,
         },
-        message: "Posts fetched successfully",
+        message: "Data fetched successfully",
       },
       { status: 200 }
     );

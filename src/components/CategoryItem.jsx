@@ -128,13 +128,13 @@ const CategoryItem = ({ category, refetchData }) => {
                   setEditable(false);
                   reset();
                 }}
-                className="px-4 py-1 md:ml-2 mt-2 text-[.9rem] md:text-[.8rem] bg-black text-white hover:bg-white hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full"
+                className="px-4 py-1 md:ml-2 mt-2 text-sm md:text-[.8rem] bg-black text-white hover:bg-white hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-4 py-1 md:ml-2 mt-2 text-[.9rem] md:text-[.8rem] bg-black text-primary hover:bg-primary hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full"
+                className="px-4 py-1 md:ml-2 mt-2 text-sm md:text-[.8rem] bg-black text-primary hover:bg-primary hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full"
               >
                 Save
               </button>
@@ -149,14 +149,14 @@ const CategoryItem = ({ category, refetchData }) => {
           {!editable && (
             <button
               onClick={() => setEditable(true)}
-              className="px-4 py-1 text-[.9rem] md:text-[.8rem] bg-black text-primary hover:bg-primary hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full"
+              className="px-4 py-1 text-sm md:text-[.8rem] bg-black text-primary hover:bg-primary hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full"
             >
               Edit
             </button>
           )}
           <button
             onClick={() => setShowDeleteConfirmation(true)}
-            className="px-4 py-1 text-[.9rem] md:text-[.8rem] bg-black text-red-600 hover:bg-red-600 hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full"
+            className="px-4 py-1 text-sm md:text-[.8rem] bg-black text-red-600 hover:bg-red-600 hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full"
           >
             Delete
           </button>

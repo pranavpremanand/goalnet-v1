@@ -64,10 +64,10 @@ const BannerItems = ({banners}) => {
             style={{ opacity: opacities[i] }}
           />
           <div className="wrapper absolute sm:left-10 top-[45%] flex flex-col gap-2 md:gap-3 items-start">
-            <span className="text-white flex items-center gap-2 rounded-sm text-[.9rem]">
+            <span className="text-white flex items-center gap-2 rounded-sm text-sm">
               <FaRegClock /> Just now
             </span>
-            <span className="bg-blue-500 text-white px-2 py-[.2rem] rounded-sm text-[.9rem]">
+            <span className="bg-blue-500 text-white px-2 py-[.2rem] rounded-sm text-sm">
               UEFA Champions League
             </span>
             <h1 className="text-white font-bold text-2xl sm:text-3xl lg:text-5xl max-w-[96%] sm:max-w-[70%] lg:max-w-[75%] truncate-lines-2 line-clamp-3">
