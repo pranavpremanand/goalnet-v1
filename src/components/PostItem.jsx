@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { FaRegClock } from "react-icons/fa";
 
-const PostItem = ({ url }) => {
+const PostItem = () => {
   return (
     <Link
       href="/admin/posts/1"
@@ -11,7 +11,7 @@ const PostItem = ({ url }) => {
     >
       <div className="w-full grid grid-cols-1 md:grid-cols-[50%_50%] lg:grid-cols-[30%_70%] gap-1 md:gap-5 border border-primary/60 rounded-xl">
         <Image
-          src={url}
+          src={'/assets/images/messi (2).jpg'}
           alt="post"
           width={1000}
           height={1000}

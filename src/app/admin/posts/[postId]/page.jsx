@@ -1,5 +1,4 @@
 "use client";
-import { images } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -37,10 +36,10 @@ const PostDetails = () => {
             </h2>
             <div
               className="w-full h-[45vh] backdrop-blur-3xl"
-              style={{ backgroundImage: `url(${images[4]})` }}
+              style={{ backgroundImage: `url(/assets/images/messi (2).jpg)` }}
             >
               <Image
-                src={images[4]}
+                src={'/assets/images/messi (2).jpg'}
                 alt="post"
                 width={500}
                 height={500}

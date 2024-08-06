@@ -1,5 +1,4 @@
 import PostItem from "@/components/PostItem";
-import { images } from "@/constants";
 import Link from "next/link";
 import React from "react";
 import { PiCaretRightBold } from "react-icons/pi";
@@ -27,9 +26,8 @@ const page = () => {
         </h1>
 
         <div className="grid grid-cols-1 gap-5 pb-5">
-          {images.map((url) => (
-            <PostItem url={url} key={url} />
-          ))}
+          
+            <PostItem  />
         </div>
       </div>
     </section>
