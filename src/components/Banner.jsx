@@ -65,17 +65,17 @@ const Banner = ({ banners }) => {
               width={1000}
               height={1000}
               alt="post"
-              className="w-full h-[35vh] sm:h-[55vh] md:h-[85vh] object-contain brightness-[70%] backdrop-blur-3xl"
+              className="w-full h-[65vh] sm:h-[55vh] md:h-[85vh] object-contain brightness-[70%] backdrop-blur-xl"
               style={{ opacity: opacities[i] }}
             />
             <div className="wrapper absolute sm:left-10 top-[45%] flex flex-col gap-2 md:gap-3 items-start">
-              <span className="text-white flex items-center gap-2 rounded-sm text-[.9rem]">
+              <span className="text-white flex items-center gap-2 rounded-sm text-sm">
                 <FaRegClock />
                 {formatDistanceToNow(banner.createdAt, {
                   addSuffix: true,
                 })}
               </span>
-              <span className="bg-blue-500 text-white px-2 py-[.2rem] rounded-sm text-[.9rem]">
+              <span className="bg-blue-500 text-white px-2 py-[.2rem] rounded-sm text-sm">
                 {banner.category.name}
               </span>
               <h1 className="text-white font-bold text-2xl sm:text-3xl lg:text-5xl max-w-[96%] sm:max-w-[70%] lg:max-w-[75%] truncate-lines-2 line-clamp-3">

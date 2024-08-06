@@ -37,7 +37,6 @@ const CategoryForm = ({ refetchData }) => {
       }
       reset();
     } catch (err) {
-      console.log(err, "ERR");
       toast.error(err.message);
     } finally {
       setIsLoading(false);
@@ -80,7 +79,10 @@ const CategoryForm = ({ refetchData }) => {
             <button
               className="secondary-btn w-full"
               type="button"
-              onClick={() => setShowForm(false)}
+              onClick={() => {
+                setShowForm(false);
+                reset();
+              }}
             >
               Cancel
             </button>

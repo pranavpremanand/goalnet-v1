@@ -14,7 +14,7 @@ import { PiCaretRightBold } from "react-icons/pi";
 import useSWR from "swr";
 
 const NewPost = () => {
-  const { data, error } = useSWR(`/api/category`, fetcher);
+  const { data, error } = useSWR({ url: `/api/category` }, fetcher);
   let categories = [];
   const [imgPreview, setImgPreview] = useState("");
   const { setIsLoading } = useContext(SpinnerContext);
@@ -58,14 +58,17 @@ const NewPost = () => {
   if (!data) return <Loading />;
   categories = data.categories;
 
-  if(categories.length === 0) return <div className="wrapper grow flex items-center justify-center flex-col gap-2">
-  <p className="text-2xl">
-    No categories found. Create a category before creating a post
-  </p>
-  <a className="secondary-btn" href="/admin/categories">
-    Categories
-  </a>
-</div>
+  if (categories.length === 0)
+    return (
+      <div className="wrapper grow flex items-center justify-center flex-col gap-2">
+        <p className="text-2xl">
+          No categories found. Create a category before creating a post
+        </p>
+        <a className="secondary-btn" href="/admin/categories">
+          Categories
+        </a>
+      </div>
+    );
 
   setValue("category", categories[0]._id);
 
@@ -115,7 +118,7 @@ const NewPost = () => {
 
       if (result.secure_url) {
         values.image = result.secure_url;
-        console.log(values)
+        console.log(values);
         const response = await createPost(values).then((res) => res.json());
         if (response.success) {
           toast.success(response.message);

@@ -1,50 +1,72 @@
+"use client";
+
+import { useState } from "react";
 import CardItem from "../components/CardItem";
-import { images } from "../constants";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import Banner from "../components/Banner";
-import Post from "@/utils/database/models/post.model";
-import { connectDb } from "@/utils/database";
+import useSWR from "swr";
+import { fetcher } from "@/apiCalls";
+import Link from "next/link";
 
-export default async function Home() {
-  await connectDb()
-  const posts = await Post.aggregate([
-    { $match: { isDeleted: false, isBanner: true } },
-    {
-      $lookup: {
-        from: "categories",
-        localField: "category",
-        foreignField: "_id",
-        as: "categoryDetails"
-      }
-    },
-    { $unwind: "$categoryDetails" },
-    {
-      $project: {
-        _id: { $toString: "$_id" },
-        heading: 1,
-        content: 1,
-        image: 1,
-        isBanner: 1,
-        createdAt: { $dateToString: { format: "%Y-%m-%dT%H:%M:%S.%LZ", date: "$createdAt" } },
-        updatedAt: { $dateToString: { format: "%Y-%m-%dT%H:%M:%S.%LZ", date: "$updatedAt" } },
-        category: {
-          _id: { $toString: "$categoryDetails._id" },
-          name: "$categoryDetails.name"
-        }
-      }
-    },
-    { $limit: 20 }
-  ]).sort({ createdAt: -1 });
+export default function Home() {
+  const [category, setCategory] = useState("0");
+  // let category = "0";
+  const [page, setPage] = useState(1);
+  // let page = 1;
 
-  const banners = posts.filter((post) => post.isBanner);
+  // get initial posts and banners
+  const { data, error, mutate } = useSWR(
+    {
+      url: "/api/all-posts",
+      options: { body: { page, category }, method: "POST" },
+    },
+    fetcher,
+    { revalidateOnFocus: true }
+  );
+
+  if (error) {
+    return (
+      <div className="wrapper grow flex items-center justify-center flex-col gap-2">
+        <p className="text-2xl">Failed to load data. Try reloading the page</p>
+        <Link className="secondary-btn" href="/">
+          Reload
+        </Link>
+      </div>
+    );
+  }
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
+  let { posts, banners, categories, totalPages } = data.data;
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value); // Update state with new category
+    setPage(1);
+    mutate();
+  };
   return (
     <section className="w-full">
-      <Banner banners={banners}/>
+      <Banner banners={banners} />
       <section id="latest-stories" className="wrapper mt-8">
         <div className="flex items-center justify-between border-b border-gray-500 mb-5 gap-4">
-          <h1 className="text-2xl sm:text-3xl font-semibold mb-3 tracking-wide capitalize">
+          {/* <h1 className="text-2xl sm:text-3xl font-semibold mb-3 tracking-wide capitalize">
             Latest news
-          </h1>
+          </h1> */}
+          {categories.length > 0 && (
+            <select
+              onChange={(e) => handleCategoryChange(e)}
+              value={category}
+              className="text-black bg-white px-3 py-1 mb-2 text-lg"
+            >
+              <option value="0">All</option>
+              {categories.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          )}
           <div className="flex gap-2 -mt-4">
             <button className="border hover:border-primary hover:text-primary transition duration-200 text-3xl">
               <GrFormPrevious />
@@ -55,14 +77,26 @@ export default async function Home() {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-10 w-full pt-5">
-          {posts.map((post) => (
-            <CardItem post={post} key={post._id} />
-          ))}
+          {posts.length > 0 ? (
+            posts.map((post) => <CardItem post={post} key={post._id} />)
+          ) : (
+            <h2 className="text-center text-2xl">No posts found</h2>
+          )}
           <div className="flex justify-between mb-5 -mt-4 gap-4">
-            <button className="disabled-btn min-w-[7rem] sm:min-w-[10rem]">
+            <button
+              disabled={page === 1}
+              className={`${
+                page === 1 ? "disabled-btn" : "secondary-btn"
+              } min-w-[7rem] sm:min-w-[10rem]`}
+            >
               Previous
             </button>
-            <button className="secondary-btn min-w-[7rem] sm:min-w-[10rem]">
+            <button
+              disabled={page === totalPages}
+              className={`${
+                page === totalPages ? "disabled-btn" : "secondary-btn"
+              } min-w-[7rem] sm:min-w-[10rem]`}
+            >
               Next
             </button>
           </div>

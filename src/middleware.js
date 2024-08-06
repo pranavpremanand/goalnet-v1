@@ -59,8 +59,8 @@ export function middleware(req) {
       return response;
     }
   } else {
-    console.log("No token found. Redirecting to /admin/login.");
     if (isAdminRoute && !isAuthRoute) {
+      console.log("No token found. Redirecting to /admin/login.");
       return NextResponse.redirect(new URL("/admin/login", origin));
     }
     // Allow access to public or authentication routes

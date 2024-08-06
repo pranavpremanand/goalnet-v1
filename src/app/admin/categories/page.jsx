@@ -8,7 +8,9 @@ import { PiCaretRightBold } from "react-icons/pi";
 import { fetcher } from "@/apiCalls";
 
 const Categories = () => {
-  const { data, error, mutate } = useSWR(`/api/category`, fetcher);
+  const { data, error, mutate } = useSWR({ url: `/api/category` }, fetcher, {
+    revalidateOnFocus: true,
+  });
 
   let categories = [];
 
@@ -25,6 +27,7 @@ const Categories = () => {
     );
 
   if (!data) return <Loading />;
+  console.log(data);
   categories = data.categories;
   return (
     <section className="grow">
@@ -33,8 +36,11 @@ const Categories = () => {
           <Link href="/admin" className="text-md text-white">
             Home
           </Link>{" "}
-          <PiCaretRightBold className='text-sm mt-[.15rem]'/>
-          <Link href="/admin/categories" className="text-md text-primary underline">
+          <PiCaretRightBold className="text-sm mt-[.15rem]" />
+          <Link
+            href="/admin/categories"
+            className="text-md text-primary underline"
+          >
             Categories
           </Link>
         </div>

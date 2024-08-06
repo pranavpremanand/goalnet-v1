@@ -7,16 +7,16 @@
     @apply max-w-7xl lg:mx-auto py-2 px-10 w-full;
   }
   .primary-btn {
-    @apply px-6 py-2 text-[.9rem] bg-primary text-black hover:bg-black hover:text-primary border border-primary hover:border-primary tracking-wide font-semibold transition-colors duration-300 rounded-full;
+    @apply px-4 py-1 md:px-6 md:py-2 text-[.9rem] bg-primary text-black hover:bg-black hover:text-primary border border-primary hover:border-primary tracking-wide font-medium transition-colors duration-300 rounded-full;
   }
   .secondary-btn {
-    @apply px-6 py-2 text-[.9rem] bg-black text-primary hover:bg-primary hover:text-black border border-primary tracking-wide font-semibold transition-colors duration-300 rounded-full;
+    @apply px-4 py-1 md:px-6 md:py-2 text-[.9rem] bg-black text-primary hover:bg-primary hover:text-black border border-primary tracking-wide font-medium transition-colors duration-300 rounded-full;
   }
   .disabled-btn {
-    @apply px-6 py-2 text-[.9rem] bg-black text-gray-500 border border-gray-500 tracking-wide font-semibold rounded-full flex justify-center;
+    @apply px-4 py-1 md:px-6 md:py-2 text-[.9rem] bg-black text-gray-500 border border-gray-500 tracking-wide font-medium rounded-full flex justify-center;
   }
   .default-btn-styles{
-    @apply px-6 py-2 text-[.9rem] border tracking-wide font-semibold rounded-full flex justify-center;
+    @apply px-4 py-1 md:px-6 md:py-2 text-[.9rem] border tracking-wide font-medium rounded-full flex justify-center;
   }
 }
 

@@ -1,6 +1,14 @@
 // export const baseUrl = "http://localhost:3000";
 
-export const fetcher = (url) => fetch(url).then((res) => res.json());
+export const fetcher = ({ url, options = {} }) =>
+  fetch(url, {
+    method: options.method || "GET",
+    headers: {
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
+    body: options.body ? JSON.stringify(options.body) : undefined,
+  }).then((res) => res.json());
 
 // login
 export const login = (data) => {
@@ -72,5 +80,12 @@ export const createPost = (data) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
+  });
+};
+
+// get all posts
+export const getPosts = () => {
+  return fetch("/api/post", {
+    method: "GET",
   });
 };
