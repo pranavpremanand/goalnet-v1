@@ -59,7 +59,7 @@ export default function Home() {
               value={category}
               className="text-black bg-white px-3 py-1 mb-2 text-lg"
             >
-              <option value="0">All</option>
+              <option value="0">Latest News</option>
               {categories.map((category) => (
                 <option key={category._id} value={category._id}>
                   {category.name}
