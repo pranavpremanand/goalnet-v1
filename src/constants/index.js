@@ -27,11 +27,3 @@ export const socialLinks = [
   },
   { label: "Facebook", url: "/", icon: <FaFacebookSquare /> },
 ];
-
-export const images = [
-  "/assets/images/messi (2).jpg",
-  "/assets/images/messi (1).jpg",
-  "/assets/images/messi (3).jpg",
-  "/assets/images/pexels-todd-trapani.jpg",
-  "/assets/images/lion.jpg",
-];

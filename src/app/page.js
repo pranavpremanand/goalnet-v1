@@ -3,9 +3,9 @@ import Banner from "../components/Banner";
 import useSWR from "swr";
 import { fetcher } from "@/apiCalls";
 import PostsList from "@/components/PostsList";
+import SmallLoader from "@/components/SmallLoader";
 
 export default function Home() {
-
   // get banners
   const { data, error, mutate } = useSWR(
     {
@@ -26,13 +26,17 @@ export default function Home() {
     );
   }
   if (!data) {
-    return <div>Loading...</div>;
+    return (
+    <div className="w-screen h-[40vh] sm:h-[55vh] md:h-[85vh] bg-white/5">
+      <SmallLoader />
+    </div>
+    );
   }
 
   let { banners } = data;
 
   return (
-    <section className="w-full">
+    <section className="w-full flex-1 grow">
       <Banner banners={banners} />
       <PostsList />
     </section>

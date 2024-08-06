@@ -9,7 +9,7 @@ import Loading from "./Loading";
 import { logout } from "../apiCalls";
 import toast from "react-hot-toast";
 
-const NavItems = () => {
+const NavItems = ({ onClose }) => {
   const pathname = usePathname();
   const router = useRouter();
   const isAdmin = pathname.includes("/admin") && pathname !== "/admin/login";
@@ -49,6 +49,7 @@ const NavItems = () => {
             <Link
               key={link.url}
               href={link.url}
+              onClick={onClose}
               className={`${
                 isActive ? "text-primary" : "text-blue-gray-100 md:text-white"
               } font-[600] tracking-wide text-base`}

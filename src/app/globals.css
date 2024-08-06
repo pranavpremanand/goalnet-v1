@@ -15,7 +15,7 @@
   .disabled-btn {
     @apply px-4 py-1 md:px-6 md:py-2 text-sm bg-black text-gray-500 border border-gray-500 tracking-wide font-medium rounded-full flex justify-center;
   }
-  .default-btn-styles{
+  .default-btn-styles {
     @apply px-4 py-1 md:px-6 md:py-2 text-sm border tracking-wide font-medium rounded-full flex justify-center;
   }
 }
@@ -97,3 +97,48 @@ body {
     transform: scaleX(1.2);
   }
 } */
+
+.banner-loader {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: #f1ff00;
+  position: relative;
+}
+.banner-loader:before,
+.banner-loader:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  inset: 0;
+  background: #fff;
+  transform: rotate(0deg) translate(30px);
+  animation: rotate 1s ease infinite;
+}
+.banner-loader:after {
+  animation-delay: 0.5s;
+}
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg) translate(30px);
+  }
+}
+
+/* home page card item loader */
+.card.is-loading .image,
+.card.is-loading span,
+.card.is-loading p,
+.card.is-loading h2,.card.is-loading small {
+  background: #eee;
+  background: linear-gradient(100deg, #ececec 8%, #cdcdcd 18%, #ececec 33%);
+  border-radius: 5px;
+  background-size: 200% 100%;
+  animation: 1.25s shine linear infinite;
+}
+
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}

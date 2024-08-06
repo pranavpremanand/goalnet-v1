@@ -4,6 +4,7 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import useSWR from "swr";
 import CardItem from "./CardItem";
 import { fetcher } from "@/apiCalls";
+import HomeCardItemLoader from "./HomeCardItemLoader";
 
 const PostsList = () => {
   const [page, setPage] = useState(1);
@@ -30,7 +31,7 @@ const PostsList = () => {
     );
   }
   if (!data) {
-    return <div>Loading...</div>;
+    return <HomeCardItemLoader />;
   }
 
   let { posts, categories, totalPages } = data.data;

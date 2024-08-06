@@ -79,7 +79,7 @@ const Header = () => {
             <IoClose />
           </button>
         </div>
-        <NavItems />
+        <NavItems onClose={() => setOpen(false)} />
       </Drawer>
     </header>
   );
