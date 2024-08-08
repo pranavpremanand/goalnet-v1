@@ -5,10 +5,12 @@ import { useState } from "react";
 import { FaRegClock } from "react-icons/fa";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
+import useSWR from "swr";
+import { fetcher } from "@/apiCalls";
+import SmallLoader from "./SmallLoader";
 
-const Banner = ({ banners }) => {
+const Banner = () => {
   const [opacities, setOpacities] = useState([]);
-
   const [sliderRef] = useKeenSlider(
     {
       initial: 0,
@@ -50,6 +52,38 @@ const Banner = ({ banners }) => {
     ]
   );
 
+  // get banners
+  const { data, error, mutate } = useSWR(
+    {
+      url: "/api/banners",
+    },
+    fetcher,
+    { revalidateOnFocus: true }
+  );
+
+  if (error) {
+    return (
+      <div className="wrapper grow flex items-center justify-center flex-col gap-2">
+        <p className="text-2xl">Failed to load data. Try reloading the page</p>
+        <a className="secondary-btn" href="/">
+          Reload
+        </a>
+      </div>
+    );
+  }
+  if (!data) {
+    return (
+      <div className="w-screen h-[40vh] sm:h-[55vh] md:h-[85vh] bg-blue-gray-50/5">
+        <SmallLoader />
+      </div>
+    );
+  }
+
+  
+    let { banners } = data;
+
+  
+
   if (banners.length === 0) return null;
 
   return (
@@ -82,7 +116,7 @@ const Banner = ({ banners }) => {
               <h1 className="text-blue-gray-50 font-bold text-xl sm:text-3xl lg:text-5xl max-w-[96%] sm:max-w-[70%] lg:max-w-[75%] truncate-lines-2 line-clamp-3">
                 {banner.content}
               </h1>
-              <Link href={`/posts/${banner._id}`} className="primary-btn w-fit mt-2 md:mt-4">
+              <Link href={`/${banner._id}`} className="primary-btn w-fit mt-2 md:mt-4">
                 Read More
               </Link>
             </div>
