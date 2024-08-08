@@ -1,3 +1,4 @@
+import RelatedPosts from "@/components/RelatedPosts";
 import ShareComponent from "@/components/ShareComponent";
 import Post from "@/lib/database/models/post.model";
 import { formatDate } from "date-fns";
@@ -5,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaRegClock } from "react-icons/fa";
 import { PiCaretRightBold } from "react-icons/pi";
-import RelatedPosts from "./components/RelatedPosts";
 
 const page = async ({ params }) => {
   const { postId } = params;
