@@ -39,7 +39,7 @@ const PostItem = ({ post }) => {
           width={500}
           height={500}
           alt="post"
-          className="w-full h-[30vh] max-h-[12rem] object-cover rounded-md hover:brightness-[70%] transition-all duration-150"
+          className="w-full h-[30vh] max-h-[12rem] object-contain rounded-md hover:brightness-[70%] transition-all duration-150"
         />
       </Link>
       <Link href={`/${post._id}`}>
