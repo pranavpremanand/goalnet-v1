@@ -8,25 +8,25 @@ import { FaRegClock } from "react-icons/fa";
 import { PiCaretRightBold } from "react-icons/pi";
 
 const PostInDetail = async ({ params }) => {
-  // const { postId } = params;
-  // let post
-  // try{
-  //   post = await Post.findOne({ _id: postId, isDeleted: false }).populate(
-  //     "category"
-  //   );
-  // }catch(err){
-  //   console.error("Failed to fetch post:", err);
-  //   return <div className="">error loading the page</div>
-  // }
+  const { postId } = params;
+  let post
+  try{
+    post = await Post.findOne({ _id: postId, isDeleted: false }).populate(
+      "category"
+    );
+  }catch(err){
+    console.error("Failed to fetch post:", err);
+    return <div className="">error loading the page</div>
+  }
 
-  // if(!post) return null
-  return (
-    <div className="">Post in detail</div>
-  )
+  if(!post) return null
+  // return (
+  //   <div className="">Post in detail</div>
+  // )
 
   return (
     <section className="wrapper grow text-blue-gray-50">
-      <div className="flex items-center gap-1 mb-10">
+      {/* <div className="flex items-center gap-1 mb-10">
         <Link href="/" className="text-md">
           Home
         </Link>
@@ -34,10 +34,10 @@ const PostInDetail = async ({ params }) => {
         <span className="text-md text-primary underline">
           {post.category.name}
         </span>
-      </div>
+      </div> */}
 
       <div className="pb-16">
-        <div className="flex flex-col gap-8 pb-7">
+        {/* <div className="flex flex-col gap-8 pb-7">
           <div
             className="w-full h-[35vh] sm:h-[55vh] md:h-[65vh]"
             style={{ backgroundImage: `url(${post.image}` }}
@@ -72,8 +72,8 @@ const PostInDetail = async ({ params }) => {
             </div>
           </div>
           <p className="text-blue-gray-200 text-lg">{post.content}</p>
-        </div>
-        {/* <RelatedPosts category={post.category} currentPostId={post._id} /> */}
+        </div> */}
+        <RelatedPosts category={post.category} currentPostId={post._id} />
       </div>
     </section>
   );
