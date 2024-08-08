@@ -10,22 +10,13 @@ import { PiCaretRightBold } from "react-icons/pi";
 
 const PostInDetail = async ({ params }) => {
   const { postId } = params;
-  let post
-  try{
-    connectDb()
-    post = await Post.findOne({ _id: postId, isDeleted: false })
-    // .populate(
-    //   "category"
-    // );
-  }catch(err){
-    console.error("Failed to fetch post:", err);
-    return <div className="">error loading the page</div>
-  }
+  let post;
+  connectDb();
+  post = await Post.findOne({ _id: postId, isDeleted: false }).populate(
+    "category"
+  );
 
-  if(!post) return null
-  // return (
-  //   <div className="">Post in detail</div>
-  // )
+  if (!post) return null;
 
   return (
     <section className="wrapper grow text-blue-gray-50">
@@ -54,9 +45,9 @@ const PostInDetail = async ({ params }) => {
             />
           </div>
           <div className="flex flex-col gap-4 md:gap-8">
-            {/* <span className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm w-fit text-sm">
+            <span className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm w-fit text-sm">
               {post.category.name}
-            </span> */}
+            </span>
             <h1 className="font-bold text-2xl sm:text-3xl lg:text-4xl">
               {post.heading}
             </h1>
@@ -76,7 +67,7 @@ const PostInDetail = async ({ params }) => {
           </div>
           <p className="text-blue-gray-200 text-lg">{post.content}</p>
         </div>
-        {/* <RelatedPosts category={post.category._id} currentPostId={post._id} /> */}
+        <RelatedPosts category={post.category._id} currentPostId={post._id} />
       </div>
     </section>
   );
