@@ -7,7 +7,7 @@ import Link from "next/link";
 import { FaRegClock } from "react-icons/fa";
 import { PiCaretRightBold } from "react-icons/pi";
 
-const page = async ({ params }) => {
+const PostInDetail = async ({ params }) => {
   const { postId } = params;
   let post
   post = await Post.findOne({ _id: postId, isDeleted: false }).populate(
@@ -71,4 +71,4 @@ const page = async ({ params }) => {
   );
 };
 
-export default page;
+export default PostInDetail;
