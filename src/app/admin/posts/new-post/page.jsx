@@ -252,11 +252,16 @@ const NewPost = () => {
             rows="3"
             {...register("heading", {
               required: "Heading is required",
+              minLength: {
+                value: 10,
+                message: "Heading should be at least 10 characters",
+              },
               maxLength: {
                 value: 150,
                 message: "Heading should be less than 150 characters",
               },
-              validate: (val) => val.length > 0,
+              validate: (val) =>
+                val.trim() === "" ? "Heading is required" : true,
             })}
           />
           {errors.heading?.message && (

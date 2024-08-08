@@ -88,7 +88,7 @@ const Login = () => {
             >
               Password
             </label>
-            <div className="flex px-3 gap-2 items-center bg-blue-gray-50 rounded-full border border-primary">
+            <div className="flex px-3 gap-2 items-center bg-white rounded-full border border-primary">
               <input
                 id="password"
                 type={showPw ? "text" : "password"}
