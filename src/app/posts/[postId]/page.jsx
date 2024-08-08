@@ -27,6 +27,8 @@ const PostInDetail = async ({ params }) => {
   //   <div className="">Post in detail</div>
   // )
 
+  console.log(post)
+
   return (
     <section className="wrapper grow text-blue-gray-50">
       <div className="flex items-center gap-1 mb-10">
@@ -76,7 +78,7 @@ const PostInDetail = async ({ params }) => {
           </div>
           <p className="text-blue-gray-200 text-lg">{post.content}</p>
         </div>
-        <RelatedPosts category={post.category._id} currentPostId={post._id} />
+        {/* <RelatedPosts category={post.category._id} currentPostId={post._id} /> */}
       </div>
     </section>
   );
