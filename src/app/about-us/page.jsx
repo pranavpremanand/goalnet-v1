@@ -18,7 +18,7 @@ export default function About() {
         <div className="flex flex-col gap-5">
           <h1 className="text-3xl">
             Welcome to{" "}
-            <b>
+            <b className="text-white">
               Goal<span className="text-primary">Net.</span>
             </b>
           </h1>
@@ -59,7 +59,7 @@ export default function About() {
           </div>
           <h2 className="text-2xl">
             Welcome to{" "}
-            <b>
+            <b className="text-white">
               Goal<span className="text-primary">Net.</span>
             </b>{" "}
             – where football lives and breathes.

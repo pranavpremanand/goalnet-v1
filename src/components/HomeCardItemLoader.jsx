@@ -7,7 +7,7 @@ const HomeCardItemLoader = ({ category }) => {
       id="latest-stories"
       className="wrapper mt-8 pt-5 grid grid-cols-1 gap-10"
     >
-      <div className="flex items-center justify-between border-b border-gray-500 gap-4">
+      <div className="flex items-center justify-between border-b border-[#191919] gap-4">
         <select
           disabled
           className="text-blue-gray-50 bg-[#191919] px-3 py-1 mb-2 text-xl w-full md:w-[16rem] text-ellipsis outline-none"

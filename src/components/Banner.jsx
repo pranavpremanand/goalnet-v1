@@ -103,7 +103,7 @@ const Banner = () => {
               className="w-full h-[40vh] sm:h-[55vh] md:h-[85vh] object-cover md:object-contain brightness-[65%] backdrop-blur-2xl"
               style={{ opacity: opacities[i] }}
             />
-            <div className="wrapper absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex flex-col gap-2 md:gap-3">
+            <div className="wrapper absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 lg:-translate-y-1/4 flex flex-col gap-2 md:gap-3">
               <span className="text-blue-gray-50 flex items-center gap-2 rounded-sm text-sm">
                 <FaRegClock />
                 {formatDistanceToNow(banner.createdAt, {

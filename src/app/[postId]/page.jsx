@@ -1,5 +1,5 @@
-import RelatedPosts from "@/components/RelatedPosts";
-import ShareComponent from "@/components/ShareComponent";
+import RelatedPosts from "@/app/[postId]/components/RelatedPosts";
+import ShareComponent from "@/app/[postId]/components/ShareComponent";
 import { connectDb } from "@/lib/database";
 import Post from "@/lib/database/models/post.model";
 import { formatDate } from "date-fns";
