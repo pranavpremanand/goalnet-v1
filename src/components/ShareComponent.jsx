@@ -39,7 +39,7 @@ const ShareComponent = ({ content }) => {
       >
         <FaShareAlt />
       </button>
-      <Link
+      {/* <Link
         href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
           content.url
         )}`}
@@ -86,7 +86,7 @@ const ShareComponent = ({ content }) => {
         className="text-2xl md:text-3xl text-blue-600 md:text-blue-gray-50 md:bg-blue-600 w-8 h-8 md:w-10 md:h-10 md:p-1 flex justify-center items-center rounded-full"
       >
         <FaTelegram />
-      </Link>
+      </Link> */}
     </div>
   );
 };
