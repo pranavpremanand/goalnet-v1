@@ -1,5 +1,6 @@
 import RelatedPosts from "@/components/RelatedPosts";
 import ShareComponent from "@/components/ShareComponent";
+import { connectDb } from "@/lib/database";
 import Post from "@/lib/database/models/post.model";
 import { formatDate } from "date-fns";
 import Image from "next/image";
@@ -10,6 +11,7 @@ import { PiCaretRightBold } from "react-icons/pi";
 const PostInDetail = async ({ params }) => {
   const { postId } = params;
   let post
+  connectDb()
   try{
     post = await Post.findOne({ _id: postId, isDeleted: false }).populate(
       "category"
