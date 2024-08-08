@@ -34,6 +34,10 @@ const PostItem = ({ post }) => {
   return (
     <div className="flex flex-col gap-3 border-b border-[#191919] pb-4 sm:border-none">
       <Link href={`/${post._id}`}>
+          <div
+            className="w-full h-[30vh] max-h-[12rem]"
+            style={{ backgroundImage: `url(${post.image}` }}
+          >
         <Image
           src={post.image}
           width={500}
@@ -41,6 +45,7 @@ const PostItem = ({ post }) => {
           alt="post"
           className="w-full h-[30vh] max-h-[12rem] object-contain rounded-md hover:brightness-[70%] transition-all duration-150"
         />
+</div>
       </Link>
       <Link href={`/${post._id}`}>
         <h2 className="text-blue-gray-50 hover:text-primary duration-200 transition-colors font-semibold text-lg sm:text-xl lg:text-2xl truncate-lines-2 line-clamp-2">
