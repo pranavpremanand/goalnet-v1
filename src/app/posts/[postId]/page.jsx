@@ -14,9 +14,9 @@ const PostInDetail = async ({ params }) => {
   try{
     connectDb()
     post = await Post.findOne({ _id: postId, isDeleted: false })
-    .populate(
-      "category"
-    );
+    // .populate(
+    //   "category"
+    // );
   }catch(err){
     console.error("Failed to fetch post:", err);
     return <div className="">error loading the page</div>
@@ -26,8 +26,6 @@ const PostInDetail = async ({ params }) => {
   // return (
   //   <div className="">Post in detail</div>
   // )
-
-  console.log(post)
 
   return (
     <section className="wrapper grow text-blue-gray-50">
@@ -56,9 +54,9 @@ const PostInDetail = async ({ params }) => {
             />
           </div>
           <div className="flex flex-col gap-4 md:gap-8">
-            <span className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm w-fit text-sm">
+            {/* <span className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm w-fit text-sm">
               {post.category.name}
-            </span>
+            </span> */}
             <h1 className="font-bold text-2xl sm:text-3xl lg:text-4xl">
               {post.heading}
             </h1>
