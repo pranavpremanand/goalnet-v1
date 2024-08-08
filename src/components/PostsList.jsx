@@ -35,6 +35,7 @@ const PostsList = () => {
   }
 
   let { posts, categories, totalPages } = data.data;
+  console.log(data.data)
 
   const handleCategoryChange = (e) => {
     let selectedCategory = categories.find(
@@ -89,9 +90,9 @@ const PostsList = () => {
             <GrFormPrevious />
           </button>
           <button
-            disabled={page === totalPages}
+            disabled={page >= totalPages}
             className={`${
-              page === totalPages
+              page >= totalPages
                 ? "text-gray-500 border-gray-500"
                 : "text-primary border-primary hover:border-gray-500 hover:text-gray-500"
             }  transition duration-200 text-3xl border`}
@@ -116,9 +117,9 @@ const PostsList = () => {
             Previous
           </button>
           <button
-            disabled={page === totalPages}
+            disabled={page >= totalPages}
             className={`${
-              page === totalPages ? "disabled-btn" : "secondary-btn"
+              page >= totalPages ? "disabled-btn" : "secondary-btn"
             } min-w-[7rem] sm:min-w-[10rem]`}
           >
             Next

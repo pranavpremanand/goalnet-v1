@@ -1,6 +1,6 @@
 "use client";
 import { fetcher } from "@/apiCalls";
-import PostItem from "@/components/PostItem";
+import PostItem from "@/app/admin/posts/components/PostItem";
 import Link from "next/link";
 import React, { useState } from "react";
 import { PiCaretRightBold } from "react-icons/pi";
@@ -99,7 +99,7 @@ const Posts = () => {
 
             <div className="grid grid-cols-1 gap-5 pb-5">
               {posts.map((post) => (
-                <PostItem post={post} key={post._id} refetchData={mutate} />
+                <PostItem post={post} key={post._id} />
               ))}
             </div>
           </>
@@ -145,7 +145,7 @@ const Loader = ({ category }) => {
           Posts
         </h1>
 
-        <div className="grid grid-cols-1 gap-5 pb-5">
+        <div className="grid grid-cols-1 gap-10 pb-5">
           <div className="card rounded-xl bg-black is-loading w-full  grid grid-cols-1 md:grid-cols-[50%_50%] lg:grid-cols-[30%_70%] gap-1 md:gap-5">
             <div className="image h-[30vh] sm:h-[35vh] lg:h-[30vh] rounded-xl"></div>
             <div className="content pt-2 flex flex-col gap-3">
@@ -153,7 +153,7 @@ const Loader = ({ category }) => {
                 <div className="flex flex-col gap-3">
                   <span className="h-[1.75rem] w-[13rem]"></span>
                   <h2 className="h-[2.5rem] md:h-[4rem]"></h2>
-                  <p className="h-[5rem] md:h-[7rem]"></p>
+                  <p className="h-[5rem] md:h-[6rem]"></p>
                 </div>
                 <small className="w-[6.5rem] h-[1rem]"></small>
               </div>
@@ -166,7 +166,7 @@ const Loader = ({ category }) => {
                 <div className="flex flex-col gap-3">
                   <span className="h-[1.75rem] w-[13rem]"></span>
                   <h2 className="h-[2.5rem] md:h-[4rem]"></h2>
-                  <p className="h-[5rem] md:h-[7rem]"></p>
+                  <p className="h-[5rem] md:h-[6rem]"></p>
                 </div>
                 <small className="w-[6.5rem] h-[1rem]"></small>
               </div>

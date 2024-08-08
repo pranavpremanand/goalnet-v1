@@ -253,8 +253,8 @@ const NewPost = () => {
             {...register("heading", {
               required: "Heading is required",
               maxLength: {
-                value: 100,
-                message: "Heading should be less than 100 characters",
+                value: 150,
+                message: "Heading should be less than 150 characters",
               },
               validate: (val) => val.length > 0,
             })}
@@ -270,7 +270,7 @@ const NewPost = () => {
           <select
             name=""
             id=""
-            className="bg-blue-gray-50 text-black p-3"
+            className="bg-white text-black p-3"
             {...register("category")}
           >
             {categories.length > 0 &&

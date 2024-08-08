@@ -6,8 +6,8 @@ import { FaRegClock } from "react-icons/fa";
 
 const PostItem = ({ post}) => {
   return (
-    <div className="hover:scale-105 duration-200 transition-all">
-      <div className="w-full grid grid-cols-1 md:grid-cols-[50%_50%] lg:grid-cols-[30%_70%] gap-1 md:gap-5 border border-primary/60 rounded-xl">
+    <div className="hover:scale-105 duration-200 transition-all p-2 border rounded-xl border-primary/60">
+      <div className="w-full grid grid-cols-1 md:grid-cols-[50%_50%] lg:grid-cols-[30%_65%] gap-1 md:gap-5">
         <Link href={`/admin/posts/${post._id}`}>
           <Image
             src={post.image}
@@ -17,11 +17,11 @@ const PostItem = ({ post}) => {
             className="h-[30vh] sm:h-[35vh] lg:h-[30vh] rounded-xl object-center object-cover hover:brightness-[70%] duration-200 transition-all"
           />
         </Link>
-        <div className="flex flex-col justify-start gap-3 p-3 sm:p-5">
+        <div className="flex flex-col justify-start gap-3">
           <span className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm text-sm w-fit">
             {post.category.name}
           </span>
-          <div className="grow">
+          <div className="grow flex flex-col gap-3">
             <Link
               href={`/admin/posts/${post._id}`}
               className="text-blue-gray-50 font-semibold text-lg sm:text-xl
