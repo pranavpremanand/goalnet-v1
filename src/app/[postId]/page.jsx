@@ -54,7 +54,7 @@ const PostInDetail = async ({ params }) => {
               alt="post"
               width={500}
               height={500}
-              className="w-full h-[35vh] sm:h-[55vh] md:h-[65vh] md:object-contain object-cover backdrop-blur-3xl"
+              className="w-full h-[35vh] sm:h-[55vh] md:h-[65vh] object-contain backdrop-blur-3xl"
             />
           </div>
           <div className="flex flex-col gap-4 md:gap-8">
