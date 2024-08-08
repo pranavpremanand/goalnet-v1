@@ -70,7 +70,7 @@ const PostInDetail = async ({ params }) => {
           </div>
           <p className="text-blue-gray-200 text-lg">{post.content}</p>
         </div>
-        <RelatedPosts category={post.category} currentPostId={post._id} />
+        {/* <RelatedPosts category={post.category} currentPostId={post._id} /> */}
       </div>
     </section>
   );
