@@ -10,9 +10,14 @@ import { PiCaretRightBold } from "react-icons/pi";
 const PostInDetail = async ({ params }) => {
   const { postId } = params;
   let post
-  post = await Post.findOne({ _id: postId, isDeleted: false }).populate(
-    "category"
-  );
+  try{
+    post = await Post.findOne({ _id: postId, isDeleted: false }).populate(
+      "category"
+    );
+  }catch(err){
+    console.error("Failed to fetch post:", err);
+    return <div className="">error loading the page</div>
+  }
 
   if(!post) return null
 
