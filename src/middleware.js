@@ -49,7 +49,6 @@ export function middleware(req) {
       // Continue to the requested page
       return NextResponse.next();
     } catch (error) {
-      console.log("Invalid token. Redirecting to /admin/login.", error);
       if (isAdminRoute) {
         return NextResponse.redirect(new URL("/admin/login", origin));
       }
@@ -60,7 +59,6 @@ export function middleware(req) {
     }
   } else {
     if (isAdminRoute && !isAuthRoute) {
-      console.log("No token found. Redirecting to /admin/login.");
       return NextResponse.redirect(new URL("/admin/login", origin));
     }
     // Allow access to public or authentication routes

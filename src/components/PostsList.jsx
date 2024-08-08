@@ -8,13 +8,13 @@ import HomeCardItemLoader from "./HomeCardItemLoader";
 
 const PostsList = () => {
   const [page, setPage] = useState(1);
-  const [category, setCategory] = useState("0");
+  const [category, setCategory] = useState({ name: "Latest News", _id: "0" });
 
   // get initial posts
   const { data, error, mutate } = useSWR(
     {
       url: "/api/all-posts",
-      options: { body: { page, category }, method: "POST" },
+      options: { body: { page, category: category._id }, method: "POST" },
     },
     fetcher,
     { revalidateOnFocus: true }
@@ -31,41 +31,71 @@ const PostsList = () => {
     );
   }
   if (!data) {
-    return <HomeCardItemLoader />;
+    return <HomeCardItemLoader category={category} />;
   }
 
   let { posts, categories, totalPages } = data.data;
 
   const handleCategoryChange = (e) => {
-    setCategory(e.target.value); // Update state with new category
+    let selectedCategory = categories.find(
+      (category) => category._id === e.target.value
+    );
+
+    if (!selectedCategory) {
+      selectedCategory = { name: "Latest News", _id: "0" };
+    }
+    setCategory(selectedCategory); // Update state with new category
     setPage(1);
     mutate();
   };
   return (
     <section id="latest-stories" className="wrapper mt-8">
-      <div className="flex items-center justify-between border-b border-gray-500 mb-5 gap-4">
+      <div className="flex items-center justify-between border-b border-[#191919] mb-5 gap-4">
         {/* <h1 className="text-2xl sm:text-3xl font-semibold mb-3 tracking-wide capitalize">
             Latest news
           </h1> */}
         {categories.length > 0 && (
           <select
             onChange={(e) => handleCategoryChange(e)}
-            value={category}
-            className="text-black bg-white px-3 py-1 mb-2 text-lg w-full md:w-fit"
+            value={category._id}
+            className="text-blue-gray-50 bg-[#191919] px-3 py-1 mb-2 text-xl w-full md:w-[16rem] text-ellipsis outline-none"
           >
-            <option value="0">Latest News</option>
+            <option
+              value="0"
+              className="text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis"
+            >
+              Latest News
+            </option>
             {categories.map((category) => (
-              <option key={category._id} value={category._id}>
+              <option
+                key={category._id}
+                value={category._id}
+                className="text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis"
+              >
                 {category.name}
               </option>
             ))}
           </select>
         )}
         <div className="hidden md:flex gap-2 -mt-2">
-          <button className="border hover:border-primary hover:text-primary transition duration-200 text-3xl">
+          <button
+            disabled={page === 1}
+            className={`${
+              page === 1
+                ? "text-gray-500 border-gray-500"
+                : "text-primary border-primary hover:border-gray-500 hover:text-gray-500"
+            }  transition duration-200 text-3xl border`}
+          >
             <GrFormPrevious />
           </button>
-          <button className="border hover:border-primary hover:text-primary transition duration-200 text-3xl">
+          <button
+            disabled={page === totalPages}
+            className={`${
+              page === totalPages
+                ? "text-gray-500 border-gray-500"
+                : "text-primary border-primary hover:border-gray-500 hover:text-gray-500"
+            }  transition duration-200 text-3xl border`}
+          >
             <GrFormNext />
           </button>
         </div>

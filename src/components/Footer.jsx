@@ -3,7 +3,7 @@ import { socialLinks } from "../constants";
 
 const Footer = () => {
   return (
-    <div className="border-t border-gray-500 text-gray-500 py-6 h-fit bg-black">
+    <div className="border-t border-[#191919] text-gray-500 py-6 h-fit bg-black">
       <div className="wrapper flex items-center justify-between flex-col gap-4 sm:flex-row">
         {/* <Link href="/">
           <Image
@@ -15,7 +15,7 @@ const Footer = () => {
             loading='lazy'
           />
         </Link> */}
-        <small className="">© 2024 - GoalNet | All rights reserved</small>
+        <small>© 2024 - GoalNet | All rights reserved</small>
         <div className="flex gap-4 text-2xl">
           {socialLinks.map((link) => (
             <Link

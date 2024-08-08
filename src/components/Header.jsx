@@ -53,7 +53,7 @@ const Header = () => {
             className="w-[4rem] h-[4rem] object-contain object-center"
             loading='lazy'
           /> */}
-            <span className="text-2xl font-bold text-white">
+            <span className="text-2xl font-bold text-blue-gray-50">
               Goal<span className="text-primary">Net.</span>
             </span>
           </Link>

@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CategorySchema } from "@/utils/validationSchema";
+import { CategorySchema } from "@/lib/validationSchema";
 import { SpinnerContext } from "./SpinnerContext";
 import {
   deleteCategory,
@@ -128,7 +128,7 @@ const CategoryItem = ({ category, refetchData }) => {
                   setEditable(false);
                   reset();
                 }}
-                className="px-4 py-1 md:ml-2 mt-2 text-sm md:text-[.8rem] bg-black text-white hover:bg-white hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full"
+                className="px-4 py-1 md:ml-2 mt-2 text-sm md:text-[.8rem] bg-black text-blue-gray-50 hover:bg-blue-gray-50 hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full"
               >
                 Cancel
               </button>
@@ -188,7 +188,7 @@ export default CategoryItem;
 const DeleteCategoryAlert = ({ closePopup, handleDeleteCategory }) => {
   return (
     <PopupWrapper closePopup={closePopup}>
-      <div className="bg-white rounded-xl p-5 text-black max-w-xs">
+      <div className="bg-blue-gray-50 rounded-xl p-5 text-black max-w-xs">
         <h1 className="text-xl font-semibold">Delete Confirmation!</h1>
         <p className="text-sm text-gray-700 mt-2 mb-3">
           Are you sure you want to delete this category? This action cannot be
@@ -196,14 +196,14 @@ const DeleteCategoryAlert = ({ closePopup, handleDeleteCategory }) => {
         </p>
         <div className="grid grid-cols-2 gap-4">
           <button
-            className="default-btn-styles bg-black border-black text-white hover:bg-black/90"
+            className="default-btn-styles bg-black border-black text-blue-gray-50 hover:bg-black/90"
             onClick={closePopup}
           >
             Cancel
           </button>
           <button
             onClick={handleDeleteCategory}
-            className="default-btn-styles bg-red-700 border-red-700 text-white hover:bg-red-900"
+            className="default-btn-styles bg-red-700 border-red-700 text-blue-gray-50 hover:bg-red-900"
           >
             Confirm
           </button>
@@ -216,7 +216,7 @@ const DeleteCategoryAlert = ({ closePopup, handleDeleteCategory }) => {
 const DeletePostsAlert = ({ closePopup, handleDeletePosts }) => {
   return (
     <PopupWrapper closePopup={closePopup}>
-      <div className="bg-white rounded-xl p-5 text-black max-w-xs">
+      <div className="bg-blue-gray-50 rounded-xl p-5 text-black max-w-xs">
         <h1 className="text-xl font-semibold">Delete Confirmation!</h1>
         <p className="text-sm text-gray-700 mt-2 mb-3">
           Are you sure you want to delete the posts with this category? This
@@ -224,14 +224,14 @@ const DeletePostsAlert = ({ closePopup, handleDeletePosts }) => {
         </p>
         <div className="grid grid-cols-2 gap-4">
           <button
-            className="default-btn-styles bg-black border-black text-white hover:bg-black/90"
+            className="default-btn-styles bg-black border-black text-blue-gray-50 hover:bg-black/90"
             onClick={closePopup}
           >
             Cancel
           </button>
           <button
             onClick={handleDeletePosts}
-            className="default-btn-styles bg-red-700 border-red-700 text-white hover:bg-red-900"
+            className="default-btn-styles bg-red-700 border-red-700 text-blue-gray-50 hover:bg-red-900"
           >
             Confirm
           </button>

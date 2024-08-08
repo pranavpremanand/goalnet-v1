@@ -1,6 +1,7 @@
-import { connectDb } from "@/utils/database";
-import Category from "@/utils/database/models/category.model";
-import Post from "@/utils/database/models/post.model";
+import { connectDb } from "@/lib/database";
+import Category from "@/lib/database/models/category.model";
+import Post from "@/lib/database/models/post.model";
+import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
 // get posts and banners
@@ -10,10 +11,11 @@ export const POST = async (req) => {
     const postLimit = 10;
     const body = await req.json();
     const { page, category } = body;
+    const ObjectId = mongoose.Types.ObjectId;
     let posts;
     if (category !== "0") {
       posts = await Post.aggregate([
-        { $match: { isDeleted: false, category } },
+        { $match: { isDeleted: false, category: new ObjectId(category) } },
         {
           $lookup: {
             from: "categories",

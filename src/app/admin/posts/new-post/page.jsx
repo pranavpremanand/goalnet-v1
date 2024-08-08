@@ -2,7 +2,7 @@
 import { createPost, fetcher } from "@/apiCalls";
 import Loading from "@/components/Loading";
 import { SpinnerContext } from "@/components/SpinnerContext";
-import { PostSchema } from "@/utils/validationSchema";
+import { PostSchema } from "@/lib/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
@@ -214,7 +214,7 @@ const NewPost = () => {
           <label className="ml-1">Image</label>
           <input
             type="file"
-            className="outline-none p-2 rounded-sm text-black bg-white"
+            className="outline-none p-2 rounded-sm text-black bg-blue-gray-50"
             onChange={onImageChange}
             accept="image/jpg, image/jpeg, image/png, image/webp"
             ref={imgInputRef}
@@ -253,8 +253,8 @@ const NewPost = () => {
             {...register("heading", {
               required: "Heading is required",
               maxLength: {
-                value: 300,
-                message: "Heading should be less than 300 characters",
+                value: 100,
+                message: "Heading should be less than 100 characters",
               },
               validate: (val) => val.length > 0,
             })}
@@ -270,7 +270,7 @@ const NewPost = () => {
           <select
             name=""
             id=""
-            className="bg-white text-black p-3"
+            className="bg-blue-gray-50 text-black p-3"
             {...register("category")}
           >
             {categories.length > 0 &&
@@ -288,9 +288,9 @@ const NewPost = () => {
             rows="5"
             {...register("content", {
               required: "Content is required",
-              maxLength: {
-                value: 1000,
-                message: "Content should be less than 1000 characters",
+              minLength: {
+                value: 500,
+                message: "Content should be more than 500 characters",
               },
               validate: (val) => val.length > 0,
             })}
@@ -336,7 +336,7 @@ const NewPost = () => {
             </div>
             {otherLinks.map((link) => (
               <div key={link} className="flex items-center">
-                <div className="bg-white p-2 rounded-sm text-black w-full">
+                <div className="bg-blue-gray-50 p-2 rounded-sm text-black w-full">
                   {link}
                 </div>
                 <button

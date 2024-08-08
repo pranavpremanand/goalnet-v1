@@ -33,7 +33,7 @@ const Categories = () => {
     <section className="grow">
       <div className="wrapper">
         <div className="flex items-center gap-1">
-          <Link href="/admin" className="text-md text-white">
+          <Link href="/admin" className="text-md text-blue-gray-50">
             Home
           </Link>{" "}
           <PiCaretRightBold className="text-sm mt-[.15rem]" />
@@ -79,7 +79,7 @@ const Categories = () => {
           >
             Previous
           </button>
-          <div className='w-7 h-7 text-black flex justify-center items-center font-semibold rounded-full bg-white'>{data.pagination.page}</div>
+          <div className='w-7 h-7 text-black flex justify-center items-center font-semibold rounded-full bg-blue-gray-50'>{data.pagination.page}</div>
           <button
             className={
               data.pagination.totalPages === data.pagination.page

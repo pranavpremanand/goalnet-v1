@@ -1,7 +1,7 @@
 import React from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
-const HomeCardItemLoader = () => {
+const HomeCardItemLoader = ({ category }) => {
   return (
     <section
       id="latest-stories"
@@ -10,15 +10,23 @@ const HomeCardItemLoader = () => {
       <div className="flex items-center justify-between border-b border-gray-500 gap-4">
         <select
           disabled
-          className="text-black bg-white px-3 py-1 mb-2 text-lg w-full md:w-[15rem]"
+          className="text-blue-gray-50 bg-[#191919] px-3 py-1 mb-2 text-xl w-full md:w-[16rem] text-ellipsis outline-none"
         >
-          <option value="0">Latest News</option>
+          <option className="text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis">
+            {category.name}
+          </option>
         </select>
         <div className="hidden md:flex gap-2 -mt-2">
-          <button className="border hover:border-primary hover:text-primary transition duration-200 text-3xl">
+          <button
+            disabled
+            className="border text-gray-500 border-gray-500 transition duration-200 text-3xl"
+          >
             <GrFormPrevious />
           </button>
-          <button className="border hover:border-primary hover:text-primary transition duration-200 text-3xl">
+          <button
+            disabled
+            className="border text-gray-500 border-gray-500 transition duration-200 text-3xl"
+          >
             <GrFormNext />
           </button>
         </div>

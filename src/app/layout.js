@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${jost.className} bg-black text-white min-h-screen flex flex-col`}
+        className={`${jost.className} bg-black text-blue-gray-100 min-h-screen flex flex-col`}
       >
         <SpinnerProvider>
           <Toaster

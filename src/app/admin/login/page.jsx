@@ -5,7 +5,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@/utils/validationSchema";
+import { LoginSchema } from "@/lib/validationSchema";
 import { SpinnerContext } from "@/components/SpinnerContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { login } from "@/apiCalls";
@@ -53,7 +53,7 @@ const Login = () => {
     // }
   };
   return (
-    <section className="bg-gradient-radial from-gray-900 to-black grow flex items-center">
+    <section className="bg-gradient-radial from-[#191919] to-black grow flex items-center">
       <div className="wrapper flex justify-center items-center h-full">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -88,7 +88,7 @@ const Login = () => {
             >
               Password
             </label>
-            <div className="flex px-3 gap-2 items-center bg-white rounded-full border border-primary">
+            <div className="flex px-3 gap-2 items-center bg-blue-gray-50 rounded-full border border-primary">
               <input
                 id="password"
                 type={showPw ? "text" : "password"}

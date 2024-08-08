@@ -1,5 +1,5 @@
 "use client";
-import { CategorySchema } from "@/utils/validationSchema";
+import { CategorySchema } from "@/lib/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";

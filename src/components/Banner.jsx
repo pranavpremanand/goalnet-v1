@@ -4,6 +4,7 @@ import { useKeenSlider } from "keen-slider/react";
 import { useState } from "react";
 import { FaRegClock } from "react-icons/fa";
 import { formatDistanceToNow } from "date-fns";
+import Link from "next/link";
 
 const Banner = ({ banners }) => {
   const [opacities, setOpacities] = useState([]);
@@ -53,7 +54,7 @@ const Banner = ({ banners }) => {
 
   return (
     <section className="flex flex-col items-center" id="home">
-      <div ref={sliderRef} className="keen-slider" id="home">
+      <div ref={sliderRef} className="keen-slider">
         {banners.map((banner, i) => (
           <div
             key={i}
@@ -68,23 +69,22 @@ const Banner = ({ banners }) => {
               className="w-full h-[40vh] sm:h-[55vh] md:h-[85vh] object-cover md:object-contain brightness-[65%] backdrop-blur-2xl"
               style={{ opacity: opacities[i] }}
             />
-            {/* sm:left-10  */}
             <div className="wrapper absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex flex-col gap-2 md:gap-3">
-              <span className="text-white flex items-center gap-2 rounded-sm text-sm">
+              <span className="text-blue-gray-50 flex items-center gap-2 rounded-sm text-sm">
                 <FaRegClock />
                 {formatDistanceToNow(banner.createdAt, {
                   addSuffix: true,
                 })}
               </span>
-              <span className="bg-blue-500 text-white px-2 py-[.2rem] rounded-sm text-sm w-fit">
+              <span className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm text-sm w-fit">
                 {banner.category.name}
               </span>
-              <h1 className="text-white font-bold text-xl sm:text-3xl lg:text-5xl max-w-[96%] sm:max-w-[70%] lg:max-w-[75%] truncate-lines-2 line-clamp-3">
+              <h1 className="text-blue-gray-50 font-bold text-xl sm:text-3xl lg:text-5xl max-w-[96%] sm:max-w-[70%] lg:max-w-[75%] truncate-lines-2 line-clamp-3">
                 {banner.content}
               </h1>
-              <button className="primary-btn w-fit mt-2 md:mt-4">
+              <Link href={`/${banner._id}`} className="primary-btn w-fit mt-2 md:mt-4">
                 Read More
-              </button>
+              </Link>
             </div>
           </div>
         ))}

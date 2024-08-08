@@ -51,7 +51,7 @@ const NavItems = ({ onClose }) => {
               href={link.url}
               onClick={onClose}
               className={`${
-                isActive ? "text-primary" : "text-blue-gray-100 md:text-white"
+                isActive ? "text-primary" : "text-gray-100 md:text-blue-gray-50"
               } font-[600] tracking-wide text-base`}
             >
               {link.label}
@@ -60,7 +60,7 @@ const NavItems = ({ onClose }) => {
         })}
       {isAdmin && (
         <span
-          className="text-blue-gray-100 cursor-pointer md:text-white font-[600] tracking-wide text-base"
+          className="text-gray-100 cursor-pointer md:text-blue-gray-50 font-[600] tracking-wide text-base"
           onClick={handleLogout}
         >
           Logout

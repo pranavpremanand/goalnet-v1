@@ -10,7 +10,7 @@ const PostDetails = () => {
   const [editHeading, setEditHeading] = useState(false);
   const [editContent, setEditContent] = useState(false);
   return (
-    <section className="wrapper grow text-white">
+    <section className="wrapper grow text-blue-gray-50">
       <div className="flex items-center gap-1 mb-10">
         <Link href="/admin" className="text-md">
           Home
@@ -104,7 +104,7 @@ const PostDetails = () => {
             <h2 className="text-2xl underline text-center font-semibold">
               Category
             </h2>
-            <select name="" id="" className='bg-gray-900 p-3 font-semibold'>
+            <select name="" id="" className='bg-[#191919] p-3 font-semibold'>
               <option value="">UEFA Champions League</option>
               <option value="">UEFA Europa League</option>
               <option value="">Copa Libertadores</option>
@@ -132,7 +132,7 @@ const PostDetails = () => {
             debitis quis?"
               />
             ) : (
-              <p className="text-blue-gray-300 text-md">
+              <p className="text-gray-300 text-md">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
                 velit repudiandae repellat alias eligendi ex iste officiis, hic
                 vitae molestias! Velit expedita distinctio dignissimos quos

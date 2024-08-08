@@ -40,7 +40,7 @@ body:root {
   height: 100%;
 } */
 
-* {
+html {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -129,8 +129,8 @@ body {
 .card.is-loading span,
 .card.is-loading p,
 .card.is-loading h2,.card.is-loading small {
-  background: #eee;
-  background: linear-gradient(100deg, #ececec 8%, #cdcdcd 18%, #ececec 33%);
+  background: #f1ff00;
+  background: linear-gradient(100deg, #191919 8%, #313131 18%, #191919 33%);
   border-radius: 5px;
   background-size: 200% 100%;
   animation: 1.25s shine linear infinite;

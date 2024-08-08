@@ -1,6 +1,6 @@
-import { connectDb } from "@/utils/database";
-import Category from "@/utils/database/models/category.model";
-import Post from "@/utils/database/models/post.model";
+import { connectDb } from "@/lib/database";
+import Category from "@/lib/database/models/category.model";
+import Post from "@/lib/database/models/post.model";
 import { NextResponse } from "next/server";
 
 // export const GET = async (req, { params }) => {

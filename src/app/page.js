@@ -27,18 +27,20 @@ export default function Home() {
   }
   if (!data) {
     return (
-    <div className="w-screen h-[40vh] sm:h-[55vh] md:h-[85vh] bg-white/5">
-      <SmallLoader />
-    </div>
+      <div className="w-screen h-[40vh] sm:h-[55vh] md:h-[85vh] bg-blue-gray-50/5">
+        <SmallLoader />
+      </div>
     );
   }
 
-  let { banners } = data;
+  if (data) {
+    let { banners } = data;
 
-  return (
-    <section className="w-full flex-1 grow">
-      <Banner banners={banners} />
-      <PostsList />
-    </section>
-  );
+    return (
+      <section className="w-full grow">
+        <Banner banners={banners} />
+        <PostsList />
+      </section>
+    );
+  }
 }
