@@ -4,7 +4,7 @@
 
 @layer utilities {
   .wrapper {
-    @apply max-w-7xl lg:mx-auto py-2 px-10 w-full;
+    @apply max-w-7xl lg:mx-auto py-2 px-5 md:px-10 w-full;
   }
   .primary-btn {
     @apply px-4 py-1 md:px-6 md:py-2 text-sm bg-primary text-black hover:bg-black hover:text-primary border border-primary hover:border-primary tracking-wide font-medium transition-colors duration-300 rounded-full;
