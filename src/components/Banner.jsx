@@ -82,7 +82,7 @@ const Banner = ({ banners }) => {
               <h1 className="text-blue-gray-50 font-bold text-xl sm:text-3xl lg:text-5xl max-w-[96%] sm:max-w-[70%] lg:max-w-[75%] truncate-lines-2 line-clamp-3">
                 {banner.content}
               </h1>
-              <Link href={`/${banner._id}`} className="primary-btn w-fit mt-2 md:mt-4">
+              <Link href={`/posts/${banner._id}`} className="primary-btn w-fit mt-2 md:mt-4">
                 Read More
               </Link>
             </div>

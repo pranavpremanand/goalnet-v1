@@ -9,9 +9,12 @@ import RelatedPosts from "./components/RelatedPosts";
 
 const page = async ({ params }) => {
   const { postId } = params;
-  const post = await Post.findOne({ _id: postId, isDeleted: false }).populate(
+  let post
+  post = await Post.findOne({ _id: postId, isDeleted: false }).populate(
     "category"
   );
+
+  if(!post) return null
 
   return (
     <section className="wrapper grow text-blue-gray-50">

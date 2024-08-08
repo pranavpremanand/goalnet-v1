@@ -9,7 +9,7 @@ const CardItem = ({ post }) => {
       className={`grid grid-cols-1 md:grid-cols-[47%,50%] lg:grid-cols-[40%,45%] gap-5 border-b border-[#191919] pb-5
       }`}
     >
-      <Link href={`/${post._id}`}>
+      <Link href={`/posts/${post._id}`}>
         <Image
           src={post.image}
           alt="Post"
@@ -23,7 +23,7 @@ const CardItem = ({ post }) => {
           <span className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm text-sm w-fit">
             {post.category.name}
           </span>
-          <Link href={`/${post._id}`}>
+          <Link href={`/posts/${post._id}`}>
             <h1 className="text-blue-gray-50 hover:text-primary duration-200 transition-colors font-semibold text-lg sm:text-xl lg:text-2xl truncate-lines-2 line-clamp-2">
               {post.heading}
             </h1>
@@ -31,7 +31,7 @@ const CardItem = ({ post }) => {
           <p className="text-blue-gray-300 truncate-lines-3 line-clamp-3">
             {post.content}
           </p>
-          <Link href={`/${post._id}`} className="primary-btn w-fit">
+          <Link href={`/posts/${post._id}`} className="primary-btn w-fit">
             Read more
           </Link>
         </div>
