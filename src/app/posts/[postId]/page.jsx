@@ -3,6 +3,7 @@ import ShareComponent from "@/components/ShareComponent";
 import { connectDb } from "@/lib/database";
 import Post from "@/lib/database/models/post.model";
 import { formatDate } from "date-fns";
+import mongoose from "mongoose";
 import Image from "next/image";
 import Link from "next/link";
 import { FaRegClock } from "react-icons/fa";
@@ -10,13 +11,25 @@ import { PiCaretRightBold } from "react-icons/pi";
 
 const PostInDetail = async ({ params }) => {
   const { postId } = params;
+  
   let post;
   connectDb();
-  post = await Post.findOne({ _id: postId, isDeleted: false }).populate(
-    "category"
-  );
+  const posts = await Post.aggregate([
+    { $match: { _id: new mongoose.Types.ObjectId(postId), isDeleted: false } },
+    {
+      $lookup: {
+        from: "categories", // The collection name for categories
+        localField: "category", // The field in the post document
+        foreignField: "_id", // The field in the category document
+        as: "category" // The name of the new field to add
+      }
+    },
+    { $unwind: "$category" } // Deconstruct the array (if multiple categories)
+  ]).exec()
 
-  if (!post) return null;
+  if (posts.length===0) return null;
+
+  post = posts[0];
 
   return (
     <section className="wrapper grow text-blue-gray-50">
