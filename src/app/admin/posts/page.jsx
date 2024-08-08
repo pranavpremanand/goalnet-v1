@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { PiCaretRightBold } from "react-icons/pi";
 import useSWR from "swr";
 
-const page = () => {
+const Posts = () => {
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState({ name: "Latest News", _id: "0" });
 
@@ -113,7 +113,7 @@ const page = () => {
   );
 };
 
-export default page;
+export default Posts;
 
 const Loader = ({ category }) => {
   return (
