@@ -11,6 +11,7 @@ import SmallLoader from "./SmallLoader";
 
 const Banner = () => {
   const [opacities, setOpacities] = useState([]);
+  let banners = [];
   const [sliderRef] = useKeenSlider(
     {
       initial: 0,
@@ -71,6 +72,7 @@ const Banner = () => {
       </div>
     );
   }
+
   if (!data) {
     return (
       <div className="w-screen h-[40vh] sm:h-[55vh] md:h-[85vh] bg-blue-gray-50/5">
@@ -79,10 +81,7 @@ const Banner = () => {
     );
   }
 
-  
-    let { banners } = data;
-
-  
+  banners = data.banners;
 
   if (banners.length === 0) return null;
 
@@ -110,13 +109,16 @@ const Banner = () => {
                   addSuffix: true,
                 })}
               </span>
-              <span className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm text-sm w-fit">
+              <span className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm text-sm w-fit leading-5">
                 {banner.category.name}
               </span>
               <h1 className="text-blue-gray-50 font-bold text-xl sm:text-3xl lg:text-5xl max-w-[96%] sm:max-w-[70%] lg:max-w-[75%] truncate-lines-2 line-clamp-3">
-                {banner.content}
+                {banner.heading}
               </h1>
-              <Link href={`/${banner._id}`} className="primary-btn w-fit mt-2 md:mt-4">
+              <Link
+                href={`/${banner._id}`}
+                className="primary-btn w-fit mt-2 md:mt-4"
+              >
                 Read More
               </Link>
             </div>

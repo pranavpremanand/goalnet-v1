@@ -20,22 +20,22 @@ const PostsList = () => {
     { revalidateOnFocus: true }
   );
 
-  if (error) {
-    return (
-      <div className="wrapper grow flex items-center justify-center flex-col gap-2">
-        <p className="text-2xl">Failed to load data. Try reloading the page</p>
-        <a className="secondary-btn" href="/">
-          Reload
-        </a>
-      </div>
-    );
-  }
+  if (error) return null;
+  // return (
+  //   <div className="wrapper grow flex items-center justify-center flex-col gap-2">
+  //     <p className="text-2xl">Failed to load data. Try reloading the page</p>
+  //     <a className="secondary-btn" href="/">
+  //       Reload
+  //     </a>
+  //   </div>
+  // );
+
   if (!data) {
     return <HomeCardItemLoader category={category} />;
   }
 
   let { posts, categories, totalPages } = data.data;
-  console.log(data.data)
+  console.log(data.data);
 
   const handleCategoryChange = (e) => {
     let selectedCategory = categories.find(
