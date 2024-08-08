@@ -9,12 +9,6 @@ import { RiTwitterXLine } from "react-icons/ri";
 
 const ShareComponent = ({ content }) => {
   const handleShare = async () => {
-    // const shareData = {
-    //     title: "Check this out!",
-    //     text: `${post.heading}:`,
-    //     url: `https://goalnetonline.vercel.app/${post._id}`,
-    //   };
-
     const handleCopy = () => {
       navigator.clipboard.writeText(content.url);
       toast.success("Link Copied");
@@ -39,7 +33,7 @@ const ShareComponent = ({ content }) => {
       >
         <FaShareAlt />
       </button>
-      {/* <Link
+      <Link
         href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
           content.url
         )}`}
@@ -86,7 +80,7 @@ const ShareComponent = ({ content }) => {
         className="text-2xl md:text-3xl text-blue-600 md:text-blue-gray-50 md:bg-blue-600 w-8 h-8 md:w-10 md:h-10 md:p-1 flex justify-center items-center rounded-full"
       >
         <FaTelegram />
-      </Link> */}
+      </Link>
     </div>
   );
 };
