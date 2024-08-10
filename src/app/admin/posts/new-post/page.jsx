@@ -75,7 +75,7 @@ const NewPost = () => {
   const onImageChange = (event) => {
     const selectedFile = event.target.files[0];
     const validTypes = ["image/jpeg", "image/png", "image/jpg", "image/webp"];
-    const maxSize = 4 * 1024 * 1024; // 4 MB
+    const maxSize = 5 * 1024 * 1024; // 5 MB
 
     if (selectedFile) {
       if (!validTypes.includes(selectedFile.type)) {
@@ -87,8 +87,8 @@ const NewPost = () => {
       }
 
       if (selectedFile.size > maxSize) {
-        // toast.error("File size should be less than 4 MB");
-        setError("image", { message: "File size should be less than 4 MB" });
+        // toast.error("File size should be less than 5 MB");
+        setError("image", { message: "File size should be less than 5 MB" });
         return;
       }
       setValue("image", selectedFile);
