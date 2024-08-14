@@ -12,62 +12,69 @@ import { FaRegClock } from "react-icons/fa";
 const PostInDetail = async ({ params }) => {
   const { postId } = params;
 
-  connectDb();
   // const post = await Post.findOne({ _id: postId, isDeleted: false }).populate({
   //   path: "categories",
   //   select: "name _id",
   // });
-  const posts = await Post.aggregate([
-    {
-      $match: {
-        _id: new mongoose.Types.ObjectId(postId),
-        isDeleted: false,
+  let post
+  try {
+    connectDb();
+    const posts = await Post.aggregate([
+      {
+        $match: {
+          _id: new mongoose.Types.ObjectId(postId),
+          isDeleted: false,
+        },
       },
-    },
-    {
-      $lookup: {
-        from: "categories",
-        localField: "categories",
-        foreignField: "_id",
-        as: "categoryDetails",
+      {
+        $lookup: {
+          from: "categories",
+          localField: "categories",
+          foreignField: "_id",
+          as: "categoryDetails",
+        },
       },
-    },
-    {
-      $unwind: {
-        path: "$categoryDetails",
-        preserveNullAndEmptyArrays: true,
+      {
+        $unwind: {
+          path: "$categoryDetails",
+          preserveNullAndEmptyArrays: true,
+        },
       },
-    },
-    {
-      $project: {
-        _id: 1,
-        heading: 1,
-        content: 1,
-        image: 1,
-        isBanner: 1,
-        createdAt: {
-          $dateToString: {
-            format: "%Y-%m-%dT%H:%M:%S.%LZ",
-            date: "$createdAt",
-            onNull: "N/A", // Handle null values if necessary
+      {
+        $project: {
+          _id: 1,
+          heading: 1,
+          content: 1,
+          image: 1,
+          isBanner: 1,
+          createdAt: {
+            $dateToString: {
+              format: "%Y-%m-%dT%H:%M:%S.%LZ",
+              date: "$createdAt",
+              onNull: "N/A",
+            },
+          },
+          updatedAt: {
+            $dateToString: {
+              format: "%Y-%m-%dT%H:%M:%S.%LZ",
+              date: "$updatedAt",
+              onNull: "N/A",
+            },
+          },
+          categories: {
+            _id: { $toString: "$categoryDetails._id" },
+            name: "$categoryDetails.name",
           },
         },
-        updatedAt: {
-          $dateToString: {
-            format: "%Y-%m-%dT%H:%M:%S.%LZ",
-            date: "$updatedAt",
-            onNull: "N/A", // Handle null values if necessary
-          },
-        },
-        categories: {
-          _id: { $toString: "$categoryDetails._id" },
-          name: "$categoryDetails.name",
-        },
       },
-    },
-  ]);
+    ]);
 
-  const post = posts[0];
+    post = posts[0];
+  } catch (error) {
+    console.error('Error fetching post:', error);
+    return <p>Error loading post details.</p>;
+  }
+
   return (
     <section className="wrapper grow text-blue-gray-50">
       <div className="flex items-center gap-1 mb-5">

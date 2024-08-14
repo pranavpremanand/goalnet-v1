@@ -37,7 +37,7 @@ const PostItem = ({ post }) => {
     <div className="flex flex-col gap-3 border-b border-[#191919] pb-4 sm:border-none group">
       <Link
         href={`/${post._id}`}
-        className="w-full h-[30vh] max-h-[12rem] group-hover:brightness-75"
+        className="w-full h-[25vh] max-h-[10rem] group-hover:brightness-75"
         style={{ backgroundImage: `url(${post.image}` }}
       >
         <Image
