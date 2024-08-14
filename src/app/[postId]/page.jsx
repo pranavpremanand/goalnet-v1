@@ -13,11 +13,61 @@ const PostInDetail = async ({ params }) => {
   const { postId } = params;
 
   connectDb();
-  const post = await Post.findOne({ _id: postId, isDeleted: false }).populate({
-    path: "categories",
-    select: "name _id",
-  });
+  // const post = await Post.findOne({ _id: postId, isDeleted: false }).populate({
+  //   path: "categories",
+  //   select: "name _id",
+  // });
+  const posts = await Post.aggregate([
+    {
+      $match: {
+        _id: new mongoose.Types.ObjectId(postId),
+        isDeleted: false,
+      },
+    },
+    {
+      $lookup: {
+        from: "categories",
+        localField: "categories",
+        foreignField: "_id",
+        as: "categoryDetails",
+      },
+    },
+    {
+      $unwind: {
+        path: "$categoryDetails",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        heading: 1,
+        content: 1,
+        image: 1,
+        isBanner: 1,
+        createdAt: {
+          $dateToString: {
+            format: "%Y-%m-%dT%H:%M:%S.%LZ",
+            date: "$createdAt",
+            onNull: "N/A", // Handle null values if necessary
+          },
+        },
+        updatedAt: {
+          $dateToString: {
+            format: "%Y-%m-%dT%H:%M:%S.%LZ",
+            date: "$updatedAt",
+            onNull: "N/A", // Handle null values if necessary
+          },
+        },
+        categories: {
+          _id: { $toString: "$categoryDetails._id" },
+          name: "$categoryDetails.name",
+        },
+      },
+    },
+  ]);
 
+  const post = posts[0];
   return (
     <section className="wrapper grow text-blue-gray-50">
       <div className="flex items-center gap-1 mb-5">
