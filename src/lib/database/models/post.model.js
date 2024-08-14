@@ -10,10 +10,12 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
-    category: {
-      type: Schema.Types.ObjectId,
-      ref: "Category",
-    },
+    categories: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Category",
+      },
+    ],
     image: {
       type: String,
       required: true,
@@ -25,10 +27,10 @@ const postSchema = new Schema(
     otherLinks: {
       type: Array,
     },
-    isDeleted:{
+    isDeleted: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   { timestamps: true }
 );

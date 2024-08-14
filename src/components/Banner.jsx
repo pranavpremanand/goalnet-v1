@@ -5,9 +5,9 @@ import { useState } from "react";
 import { FaRegClock } from "react-icons/fa";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
-import useSWR from "swr";
-import { fetcher } from "@/apiCalls";
+import { getBanners } from "@/apiCalls";
 import SmallLoader from "./SmallLoader";
+import { useQuery } from "@tanstack/react-query";
 
 const Banner = () => {
   const [opacities, setOpacities] = useState([]);
@@ -54,13 +54,15 @@ const Banner = () => {
   );
 
   // get banners
-  const { data, error, mutate } = useSWR(
-    {
-      url: "/api/banners",
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["banners"],
+    queryFn: async () => {
+      const response = await getBanners();
+      return response.json();
     },
-    fetcher,
-    { revalidateOnFocus: true }
-  );
+
+    revalidateOnFocus: true,
+  });
 
   if (error) {
     return (
@@ -73,7 +75,7 @@ const Banner = () => {
     );
   }
 
-  if (!data) {
+  if (isLoading) {
     return (
       <div className="w-screen h-[40vh] sm:h-[55vh] md:h-[85vh] bg-blue-gray-50/5">
         <SmallLoader />
@@ -99,20 +101,27 @@ const Banner = () => {
               width={1000}
               height={1000}
               alt="post"
-              className="w-full h-[40vh] sm:h-[55vh] md:h-[85vh] object-cover md:object-contain brightness-[65%] backdrop-blur-2xl"
+              className="w-full h-[40vh] sm:h-[55vh] md:h-[85vh] object-contain md:object-contain brightness-[65%] backdrop-blur-xl"
               style={{ opacity: opacities[i] }}
             />
-            <div className="wrapper absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 lg:-translate-y-1/4 flex flex-col gap-2 md:gap-3">
+            <div className="wrapper absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-[35%] lg:-translate-y-1/4 flex flex-col gap-2 md:gap-3">
               <span className="text-blue-gray-50 flex items-center gap-2 rounded-sm text-sm">
                 <FaRegClock />
                 {formatDistanceToNow(banner.createdAt, {
                   addSuffix: true,
                 })}
               </span>
-              <span className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm text-sm w-fit leading-5">
-                {banner.category.name}
-              </span>
-              <h1 className="text-blue-gray-50 font-bold text-xl sm:text-3xl lg:text-5xl max-w-[96%] sm:max-w-[70%] lg:max-w-[75%] truncate-lines-2 line-clamp-3">
+              <div className="flex max-w-lg gap-2 truncate line-clamp-1">
+                {banner.categories.map((category) => (
+                  <span
+                    key={category._id}
+                    className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm text-[.8rem] sm:text-sm w-fit leading-5"
+                  >
+                    {category.name}
+                  </span>
+                ))}
+              </div>
+              <h1 className="text-blue-gray-50 font-bold text-xl sm:text-3xl lg:text-5xl max-w-[96%] sm:max-w-[70%] lg:max-w-[75%] truncate-lines-2 line-clamp-2 md:line-clamp-3">
                 {banner.heading}
               </h1>
               <Link

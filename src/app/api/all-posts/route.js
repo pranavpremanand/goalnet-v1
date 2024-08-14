@@ -8,113 +8,50 @@ import { NextResponse } from "next/server";
 export const POST = async (req) => {
   try {
     connectDb();
-    const postLimit = 10;
     const body = await req.json();
     const { page, category } = body;
-    const ObjectId = mongoose.Types.ObjectId;
-    let posts;
+    let posts, totalItems,postLimit = 10;
     if (category !== "0") {
-      posts = await Post.aggregate([
-        { $match: { isDeleted: false, category: new ObjectId(category) } },
-        {
-          $lookup: {
-            from: "categories",
-            localField: "category",
-            foreignField: "_id",
-            as: "categoryDetails",
-          },
-        },
-        { $unwind: "$categoryDetails" },
-        {
-          $project: {
-            _id: { $toString: "$_id" },
-            heading: 1,
-            content: 1,
-            image: 1,
-            isBanner: 1,
-            createdAt: {
-              $dateToString: {
-                format: "%Y-%m-%dT%H:%M:%S.%LZ",
-                date: "$createdAt",
-              },
-            },
-            updatedAt: {
-              $dateToString: {
-                format: "%Y-%m-%dT%H:%M:%S.%LZ",
-                date: "$updatedAt",
-              },
-            },
-            category: {
-              _id: { $toString: "$categoryDetails._id" },
-              name: "$categoryDetails.name",
-            },
-          },
-        },
-        { $limit: postLimit },
-      ])
+      posts = await Post.find({ isDeleted: false, categories: category })
+        .populate({
+          path: "categories",
+          select: "name _id",
+        })
         .sort({ createdAt: -1 })
-        .skip((page - 1) * postLimit);
+        .skip((page - 1) * postLimit)
+        .limit(postLimit);
+        totalItems = await Post.countDocuments({ isDeleted: false, categories: category });
     } else {
-      posts = await Post.aggregate([
-        { $match: { isDeleted: false } },
-        {
-          $lookup: {
-            from: "categories",
-            localField: "category",
-            foreignField: "_id",
-            as: "categoryDetails",
-          },
-        },
-        { $unwind: "$categoryDetails" },
-        {
-          $project: {
-            _id: { $toString: "$_id" },
-            heading: 1,
-            content: 1,
-            image: 1,
-            isBanner: 1,
-            createdAt: {
-              $dateToString: {
-                format: "%Y-%m-%dT%H:%M:%S.%LZ",
-                date: "$createdAt",
-              },
-            },
-            updatedAt: {
-              $dateToString: {
-                format: "%Y-%m-%dT%H:%M:%S.%LZ",
-                date: "$updatedAt",
-              },
-            },
-            category: {
-              _id: { $toString: "$categoryDetails._id" },
-              name: "$categoryDetails.name",
-            },
-          },
-        },
-        { $limit: postLimit },
-      ])
+      posts = await Post.find({ isDeleted: false })
+        .populate({
+          path: "categories",
+          select: "name _id",
+        })
         .sort({ createdAt: -1 })
-        .skip((page - 1) * postLimit);
+        .skip((page - 1) * postLimit)
+        .limit(postLimit);
+        totalItems = await Post.countDocuments({ isDeleted: false});
     }
 
     const categories = await Category.find({ isDeleted: false }).sort({
-      createdAt: "desc",
+      createdAt: -1,
     });
 
-    const totalItems = await Post.countDocuments(); // Get total count of items
     const totalPages = Math.ceil(totalItems / postLimit);
+
+    const data = {
+      posts,
+      categories,
+      totalItems,
+      totalPages,
+      page,
+      limit: postLimit,
+    };
 
     return NextResponse.json(
       {
         success: true,
-        data: {
-          posts,
-          categories,
-          totalItems,
-          totalPages,
-          page,
-          limit: postLimit,
-        },
+        data,
         message: "Data fetched successfully",
       },
       { status: 200 }

@@ -59,7 +59,7 @@ export const POST = async (req) => {
       );
 
       const res = NextResponse.json(
-        { success: true, user: data, message: "Login Successful" },
+        { success: true, user: data, message: "Login Successful", accessToken },
         { status: 200 }
       );
 

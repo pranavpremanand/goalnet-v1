@@ -1,24 +1,24 @@
 "use client";
-import { fetcher } from "@/apiCalls";
+import { getAllPosts } from "@/apiCalls";
 import PostItem from "@/app/admin/posts/components/PostItem";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import React, { useState } from "react";
 import { PiCaretRightBold } from "react-icons/pi";
-import useSWR from "swr";
 
 const Posts = () => {
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState({ name: "Latest News", _id: "0" });
 
   // get initial posts
-  const { data, error, mutate } = useSWR(
-    {
-      url: "/api/all-posts",
-      options: { body: { page, category: category._id }, method: "POST" },
+  const { data, error, refetch, isLoading } = useQuery({
+    queryKey: ["all-posts", page, category._id],
+    queryFn: async () => {
+      const response = await getAllPosts({ page, category: category._id });
+      return response.json();
     },
-    fetcher,
-    { revalidateOnFocus: true }
-  );
+    refetchOnWindowFocus: true,
+  });
 
   if (error) {
     return (
@@ -30,23 +30,21 @@ const Posts = () => {
       </div>
     );
   }
-  if (!data) {
+  if (isLoading) {
     return <Loader category={category} />;
   }
 
-  let { posts, categories } = data.data;
+  let { posts, categories, totalPages } = data.data;
 
-  const handleCategoryChange = (e) => {
-    let selectedCategory = categories.find(
-      (category) => category._id === e.target.value
-    );
+  const handleCategoryChange = (val) => {
+    let selectedCategory = categories.find((category) => category._id === val);
 
     if (!selectedCategory) {
       selectedCategory = { name: "Latest News", _id: "0" };
     }
     setCategory(selectedCategory); // Update state with new category
     setPage(1);
-    mutate();
+    refetch();
   };
 
   return (
@@ -62,13 +60,13 @@ const Posts = () => {
           </Link>
         </div>
 
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col gap-4 md:flex-row justify-between items-center">
           <Link href="/admin/posts/new-post" className="primary-btn">
             Upload a post
           </Link>
           {categories.length > 0 && (
             <select
-              onChange={(e) => handleCategoryChange(e)}
+              onChange={(e) => handleCategoryChange(e.target.value)}
               value={category._id}
               className="text-blue-gray-50 bg-[#191919] px-3 py-1 mb-2 text-lg w-full md:w-[16rem] text-ellipsis outline-none"
             >
@@ -99,8 +97,34 @@ const Posts = () => {
 
             <div className="grid grid-cols-1 gap-5 pb-5">
               {posts.map((post) => (
-                <PostItem post={post} key={post._id} />
+                <PostItem
+                  post={post}
+                  key={post._id}
+                  handleCategoryChange={handleCategoryChange}
+                />
               ))}
+            </div>
+            <div className="flex justify-between mb-5 -mt-2 gap-4">
+              <button
+                disabled={page === 1}
+                className={`${
+                  page === 1 ? "disabled-btn" : "secondary-btn"
+                } min-w-[7rem] sm:min-w-[10rem]`}
+                onClick={() => setPage((prev) => (page > 1 ? prev - 1 : prev))}
+              >
+                Previous
+              </button>
+              <button
+                disabled={page >= totalPages}
+                className={`${
+                  page >= totalPages ? "disabled-btn" : "secondary-btn"
+                } min-w-[7rem] sm:min-w-[10rem]`}
+                onClick={() =>
+                  setPage((prev) => (prev < totalPages ? prev + 1 : prev))
+                }
+              >
+                Next
+              </button>
             </div>
           </>
         ) : (
@@ -137,7 +161,9 @@ const Loader = ({ category }) => {
             disabled
             className="text-blue-gray-50 bg-[#191919] px-3 py-1 mb-2 text-lg w-full md:w-[16rem] text-ellipsis outline-none"
           >
-            <option className="text-blue-gray-50 bg-[#191919]">{category.name}</option>
+            <option className="text-blue-gray-50 bg-[#191919]">
+              {category.name}
+            </option>
           </select>
         </div>
 

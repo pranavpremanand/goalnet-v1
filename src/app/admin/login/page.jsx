@@ -29,6 +29,7 @@ const Login = () => {
     setIsLoading(true);
     try {
       const response = await login(values).then((res) => res.json());
+      console.log(response)
       if (response.success) {
         toast.success(response.message);
         router.replace("/admin");

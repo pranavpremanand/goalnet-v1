@@ -9,11 +9,11 @@ export const headerLinks = [
   //   url: "/admin/categories",
   //   adminOnly: true,
   // },
-  // {
-  //   label: "Banners",
-  //   url: "/admin/banners",
-  //   adminOnly: true,
-  // },
+  {
+    label: "Home",
+    url: "/admin",
+    adminOnly: true,
+  },
   { label: "About Us", url: "/about-us", adminOnly: false },
   { label: "Contact Us", url: "/#", adminOnly: false },
   // { label: "Contact Us", url: "/contact-us", adminOnly: false },

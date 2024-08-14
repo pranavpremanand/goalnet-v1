@@ -12,8 +12,8 @@ import toast from "react-hot-toast";
 const NavItems = ({ onClose }) => {
   const pathname = usePathname();
   const router = useRouter();
-  const isAdmin = pathname.includes("/admin") && pathname !== "/admin/login";
   const { isLoading, setIsLoading } = useContext(SpinnerContext);
+  const isAdmin = pathname.includes("/admin") && pathname !== "/admin/login";
 
   // do logout
   const handleLogout = async () => {
@@ -40,8 +40,8 @@ const NavItems = ({ onClose }) => {
       {headerLinks
         .filter(
           (link) =>
-            (link.url.includes("/admin") && isAdmin) ||
-            (!link.url.includes("/admin") && !isAdmin)
+            (link.url.includes("/admin") && isAdmin) || // admin
+            (!link.url.includes("/admin") && !isAdmin) // not admin
         )
         .map((link) => {
           const isActive = pathname === link.url;

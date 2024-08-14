@@ -41,7 +41,7 @@ export const POST = async (req, { params }) => {
     connectDb();
     const { id } = params;
 
-    const postsExist = await Post.findOne({ category: id, isDeleted: false });
+    const postsExist = await Post.findOne({ categories: id, isDeleted: false });
     if (postsExist) {
       return NextResponse.json(
         {

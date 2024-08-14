@@ -24,7 +24,6 @@ const CategoryItem = ({ category, refetchData }) => {
     register,
     handleSubmit,
     reset,
-    setValue,
     formState: { errors },
   } = useForm({
     mode: "all",
@@ -190,7 +189,7 @@ const DeleteCategoryAlert = ({ closePopup, handleDeleteCategory }) => {
     <PopupWrapper closePopup={closePopup}>
       <div className="bg-blue-gray-50 rounded-xl p-5 text-black max-w-xs">
         <h1 className="text-xl font-semibold">Delete Confirmation!</h1>
-        <p className="text-sm text-gray-700 mt-2 mb-3">
+        <p className="text-md text-gray-700 mt-2 mb-3">
           Are you sure you want to delete this category? This action cannot be
           undone.
         </p>
@@ -218,7 +217,7 @@ const DeletePostsAlert = ({ closePopup, handleDeletePosts }) => {
     <PopupWrapper closePopup={closePopup}>
       <div className="bg-blue-gray-50 rounded-xl p-5 text-black max-w-xs">
         <h1 className="text-xl font-semibold">Delete Confirmation!</h1>
-        <p className="text-sm text-gray-700 mt-2 mb-3">
+        <p className="text-md text-gray-700 mt-2 mb-3">
           Are you sure you want to delete the posts with this category? This
           action cannot be undone.
         </p>

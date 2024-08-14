@@ -1,15 +1,3 @@
-// export const baseUrl = "http://localhost:3000";
-
-export const fetcher = ({ url, options = {} }) =>
-  fetch(url, {
-    method: options.method || "GET",
-    headers: {
-      "Content-Type": "application/json",
-      ...options.headers,
-    },
-    body: options.body ? JSON.stringify(options.body) : undefined,
-  }).then((res) => res.json());
-
 // login
 export const login = (data) => {
   return fetch("/api/auth/login", {
@@ -87,5 +75,59 @@ export const createPost = (data) => {
 export const getPosts = () => {
   return fetch("/api/post", {
     method: "GET",
+  });
+};
+
+// get posts by page and category
+export const getAllPosts = (data) => {
+  return fetch("/api/all-posts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};
+
+// get banners
+export const getBanners = () => {
+  return fetch("/api/banners", {
+    method: "GET",
+  });
+};
+
+// get post by id and all categories
+export const getPostById = (id) => {
+  return fetch(`/api/post/${id}`, {
+    method: "GET",
+  });
+};
+
+// update post
+export const updatePost = (data) => {
+  return fetch("/api/post", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};
+
+// change post visibility
+export const changePostVisibility = (body) => {
+  return fetch(`/api/post/${body.id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+};
+
+// delete post
+export const deletePost = (id) => {
+  return fetch(`/api/post/${id}`, {
+    method: "DELETE",
   });
 };

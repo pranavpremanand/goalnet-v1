@@ -1,15 +1,21 @@
 "use client";
 import CategoryForm from "@/components/CategoryForm";
 import Loading from "@/components/Loading";
-import useSWR from "swr";
 import CategoryItem from "@/components/CategoryItem";
 import Link from "next/link";
 import { PiCaretRightBold } from "react-icons/pi";
-import { fetcher } from "@/apiCalls";
+import { getCategories } from "@/apiCalls";
+import { useQuery } from "@tanstack/react-query";
 
 const Categories = () => {
-  const { data, error, mutate } = useSWR({ url: `/api/category` }, fetcher, {
-    revalidateOnFocus: true,
+
+  const { data, error, refetch, isLoading } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const response = await getCategories();
+      return response.json();
+    },
+    refetchOnWindowFocus: true,
   });
 
   let categories = [];
@@ -26,7 +32,7 @@ const Categories = () => {
       </div>
     );
 
-  if (!data) return <Loading />;
+  if (isLoading) return <Loading />;
   console.log(data);
   categories = data.categories;
   return (
@@ -51,7 +57,7 @@ const Categories = () => {
           </h1>
         )}
 
-        <CategoryForm refetchData={mutate} />
+        <CategoryForm refetchData={refetch} />
         {categories.length > 0 && (
           <div className="flex flex-col gap-4">
             <h1 className="text-2xl font-bold tracking-wider text-center mb-2">
@@ -63,7 +69,7 @@ const Categories = () => {
                   <CategoryItem
                     key={category._id}
                     category={category}
-                    refetchData={mutate}
+                    refetchData={refetch}
                   />
                 ))}
               </div>

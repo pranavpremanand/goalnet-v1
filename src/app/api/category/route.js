@@ -54,18 +54,25 @@ export const PATCH = async (req) => {
     const { id, name } = await req.json();
 
     const alreadyExist = await Category.findOne({ name, isDeleted: false });
-    if (alreadyExist) {
-      return NextResponse.json(
-        { success: false, message: "Category already exists" },
-        { status: 400 }
-      );
-    } else {
+    if (!alreadyExist) {
       const data = await Category.findByIdAndUpdate(id, { name });
 
       return NextResponse.json(
         { success: true, data, message: "Category updated successfully" },
         { status: 201 }
       );
+    } else {
+      if (alreadyExist._id == id) {
+        return NextResponse.json(
+          { success: false, message: "Try a new name" },
+          { status: 400 }
+        );
+      } else if (alreadyExist._id != id) {
+        return NextResponse.json(
+          { success: false, message: "Category already exists" },
+          { status: 400 }
+        );
+      }
     }
   } catch (err) {
     return NextResponse.json(

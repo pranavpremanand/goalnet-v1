@@ -2,13 +2,15 @@ import Post from "@/lib/database/models/post.model";
 import Image from "next/image";
 import Link from "next/link";
 
-const RelatedPosts = async ({ category, currentPostId }) => {
+const RelatedPosts = async ({ categories, currentPostId }) => {
   let posts = [];
+  const categoryList = categories.map((category) => category._id);
   posts = await Post.find({
     _id: { $ne: currentPostId },
-    category,
+    categories: categoryList,
     isDeleted: false,
   })
+    .populate({ path: "categories", select: "name _id" })
     .limit(4)
     .sort({
       createdAt: -1,
@@ -32,23 +34,32 @@ export default RelatedPosts;
 
 const PostItem = ({ post }) => {
   return (
-    <div className="flex flex-col gap-3 border-b border-[#191919] pb-4 sm:border-none">
-      <Link href={`/${post._id}`}>
-          <div
-            className="w-full h-[30vh] max-h-[12rem]"
-            style={{ backgroundImage: `url(${post.image}` }}
-          >
+    <div className="flex flex-col gap-3 border-b border-[#191919] pb-4 sm:border-none group">
+      <Link
+        href={`/${post._id}`}
+        className="w-full h-[30vh] max-h-[12rem] group-hover:brightness-75"
+        style={{ backgroundImage: `url(${post.image}` }}
+      >
         <Image
           src={post.image}
           width={500}
           height={500}
           alt="post"
-          className="w-full h-[30vh] max-h-[12rem] object-contain rounded-md hover:brightness-[70%] transition-all duration-150"
+          className="w-full h-full overflow-hidden backdrop-blur-sm object-contain transition-all duration-150 group-hover:brightness-75"
         />
-</div>
       </Link>
+      <div className="flex flex-wrap max-w-md gap-2">
+        {post.categories.map((category) => (
+          <button
+            key={category._id}
+            className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm text-[.8rem] sm:text-sm w-fit"
+          >
+            {category.name}
+          </button>
+        ))}
+      </div>
       <Link href={`/${post._id}`}>
-        <h2 className="text-blue-gray-50 hover:text-primary duration-200 transition-colors font-semibold text-lg sm:text-xl lg:text-2xl truncate-lines-2 line-clamp-2">
+        <h2 className="text-blue-gray-50 group-hover:text-primary duration-200 transition-colors font-semibold text-lg sm:text-xl lg:text-2xl truncate-lines-2 line-clamp-2">
           {post.heading}
         </h2>
       </Link>

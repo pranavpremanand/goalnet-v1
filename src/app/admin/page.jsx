@@ -17,7 +17,7 @@ const AdminHome = () => {
         {links.map(({ link, title }) => (
           <Link
             key={link}
-            href={`/admin/${link.toLowerCase()}`}
+            href={`/admin${link}`}
             className={`bg-[#191919] text-primary rounded-xl aspect-square flex items-center justify-center p-4 text-xl font-semibold`}
           >
             {title}

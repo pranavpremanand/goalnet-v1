@@ -1,27 +1,39 @@
 "use client";
-import { createPost, fetcher } from "@/apiCalls";
+import { createCategory, createPost, getCategories } from "@/apiCalls";
+import CategoryForm from "@/components/CategoryForm";
 import Loading from "@/components/Loading";
+import PopupWrapper from "@/components/PopupWrapper";
 import { SpinnerContext } from "@/components/SpinnerContext";
-import { PostSchema } from "@/lib/validationSchema";
+import { CategorySchema, PostSchema } from "@/lib/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useRef, useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { BiMinus, BiPlus } from "react-icons/bi";
-import { PiCaretRightBold } from "react-icons/pi";
-import useSWR from "swr";
+import { PiCaretRightBold, PiPlus, PiPlusBold } from "react-icons/pi";
 
 const NewPost = () => {
-  const { data, error } = useSWR({ url: `/api/category` }, fetcher);
+  const { data, error, isLoading, refetch } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const response = await getCategories();
+      return response.json();
+    },
+    refetchOnWindowFocus: true,
+  });
   let categories = [];
   const [imgPreview, setImgPreview] = useState("");
   const { setIsLoading } = useContext(SpinnerContext);
   const imgInputRef = useRef(null);
-  const [link, setLink] = useState("");
-  const [otherLinks, setOtherLinks] = useState([]);
-  const [linkError, setLinkError] = useState("");
+  // const [link, setLink] = useState("");
+  // const [otherLinks, setOtherLinks] = useState([]);
+  // const [linkError, setLinkError] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [showFormModal, setShowFormModal] = useState(false);
   const {
     register,
     setValue,
@@ -37,7 +49,7 @@ const NewPost = () => {
     defaultValues: {
       heading: "",
       content: "",
-      category: "",
+      categories: [],
       image: "",
       isBanner: false,
     },
@@ -55,7 +67,7 @@ const NewPost = () => {
       </div>
     );
 
-  if (!data) return <Loading />;
+  if (isLoading) return <Loading />;
   categories = data.categories;
 
   if (categories.length === 0)
@@ -70,8 +82,7 @@ const NewPost = () => {
       </div>
     );
 
-  setValue("category", categories[0]._id);
-
+  // on image change
   const onImageChange = (event) => {
     const selectedFile = event.target.files[0];
     const validTypes = ["image/jpeg", "image/png", "image/jpg", "image/webp"];
@@ -97,12 +108,14 @@ const NewPost = () => {
     }
   };
 
+  // reset image data
   const resetImgData = () => {
     setValue("image", "");
     setImgPreview("");
     setError("image", { message: "Image is required" });
   };
 
+  // submit form
   const onFormSubmit = async (values) => {
     setIsLoading(true);
     try {
@@ -118,12 +131,13 @@ const NewPost = () => {
 
       if (result.secure_url) {
         values.image = result.secure_url;
-        console.log(values);
+        values.categories = selectedCategories;
         const response = await createPost(values).then((res) => res.json());
         if (response.success) {
           toast.success(response.message);
-          reset();
-          setImgPreview("");
+          // reset();
+          // setSelectedCategories([]);
+          // setImgPreview("");
         } else {
           console.log(response);
           toast.error(response.message);
@@ -139,49 +153,76 @@ const NewPost = () => {
     }
   };
 
-  const validateImage = () => {
+  // check whether the image and categories are selected
+  const validateValues = () => {
     if (!getValues("image")) {
-      {
-        setError("image", { message: "Image is required" });
-        return;
+      setError("image", { message: "Image is required" });
+    }
+    if (selectedCategories.length === 0) {
+      setError("categories", {
+        message: "Please select at least one category",
+      });
+    }
+  };
+
+  // select clicked category
+  const handleCategorySelect = (newCategory) => {
+    if (selectedCategories.length === 5) {
+      setError("categories", {
+        message: "Cannot select more than 5 categories",
+      });
+      return;
+    }
+    if (!selectedCategories.includes(newCategory)) {
+      clearErrors("categories");
+      setSelectedCategories([...selectedCategories, newCategory]);
+    } else {
+      let filteredCategories = selectedCategories.filter(
+        (c) => c !== newCategory
+      );
+      setSelectedCategories(filteredCategories);
+      if (filteredCategories.length === 0) {
+        setError("categories", {
+          message: "Please select at least one category",
+        });
       }
     }
   };
 
-  const onLinkChange = (e) => {
-    const { value } = e.target;
-    setLink(value);
+  // const onLinkChange = (e) => {
+  //   const { value } = e.target;
+  //   setLink(value);
 
-    const pattern = new RegExp(
-      "^(https?:\\/\\/)?" + // protocol
-        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-        "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-        "(\\:\\d+)?" + // port
-        "(\\/[-a-z\\d%_.~+]*)*" + // path
-        "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-        "(\\#[-a-z\\d_]*)?$",
-      "i"
-    ); // fragment locator
-    if (pattern.test(value)) {
-      setLinkError("");
-      return;
-    }
-    setLinkError("Link is not valid");
-  };
+  //   const pattern = new RegExp(
+  //     "^(https?:\\/\\/)?" + // protocol
+  //       "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+  //       "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+  //       "(\\:\\d+)?" + // port
+  //       "(\\/[-a-z\\d%_.~+]*)*" + // path
+  //       "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+  //       "(\\#[-a-z\\d_]*)?$",
+  //     "i"
+  //   ); // fragment locator
+  //   if (pattern.test(value)) {
+  //     setLinkError("");
+  //     return;
+  //   }
+  //   setLinkError("Link is not valid");
+  // };
 
-  const addLink = () => {
-    if (!link) {
-      setLinkError("Link is required");
-      return;
-    }
-    if (!otherLinks.includes(link) && !linkError) {
-      setOtherLinks([...otherLinks, link]);
-      setLink("");
-      setLinkError("");
-    } else {
-      setLinkError("Link already exists");
-    }
-  };
+  // const addLink = () => {
+  //   if (!link) {
+  //     setLinkError("Link is required");
+  //     return;
+  //   }
+  //   if (!otherLinks.includes(link) && !linkError) {
+  //     setOtherLinks([...otherLinks, link]);
+  //     setLink("");
+  //     setLinkError("");
+  //   } else {
+  //     setLinkError("Link already exists");
+  //   }
+  // };
 
   return (
     <section className="wrapper grow">
@@ -210,7 +251,7 @@ const NewPost = () => {
         onSubmit={handleSubmit(onFormSubmit)}
         className="w-full lg:w-9/12 grid grid-col gap-4 mb-5 mx-auto"
       >
-        <div className="grid gap-2">
+        <div className="grid">
           <label className="ml-1">Image</label>
           <input
             type="file"
@@ -239,7 +280,7 @@ const NewPost = () => {
                   className="rounded-md backdrop-blur-3xl"
                 />
               </div>
-              <button className="secondary-btn w-fit" onClick={resetImgData}>
+              <button className="secondary-btn w-fit mt-2" onClick={resetImgData}>
                 Cancel
               </button>
             </>
@@ -272,7 +313,30 @@ const NewPost = () => {
         </div>
         <div className="grid gap-1">
           <label className="ml-1">Category</label>
-          <select
+          <div className="p-2 flex flex-wrap max-h-[15rem] overflow-scroll gap-3 bg-white rounded-sm">
+            {categories.map((category) => (
+              <button
+                type="button"
+                className={`${
+                  selectedCategories.includes(category._id)
+                    ? "bg-[#191919] text-white"
+                    : "bg-blue-gray-100 text-[#191919]"
+                } rounded-full px-3 py-2 text-sm`}
+                key={category._id}
+                onClick={() => handleCategorySelect(category._id)}
+              >
+                {category.name}
+              </button>
+            ))}
+            <button
+              type="button"
+              className="text-white bg-[#191919] rounded-full w-[2.2rem] h-[2.2rem] flex justify-center items-center"
+              onClick={() => setShowFormModal(true)}
+            >
+              <PiPlusBold />
+            </button>
+          </div>
+          {/* <select
             name=""
             id=""
             className="bg-white text-black p-3"
@@ -284,13 +348,18 @@ const NewPost = () => {
                   {category.name}
                 </option>
               ))}
-          </select>
+          </select> */}
+          {errors.categories?.message && (
+            <small className="ml-2 text-yellow-500">
+              {errors.categories?.message}
+            </small>
+          )}
         </div>
         <div className="grid">
           <label className="ml-1">Content</label>
           <textarea
             className="outline-none p-2 rounded-sm text-black"
-            rows="5"
+            rows="10"
             {...register("content", {
               required: "Content is required",
               minLength: {
@@ -358,12 +427,90 @@ const NewPost = () => {
           </div>
         </div> */}
 
-        <button type="submit" className="primary-btn" onClick={validateImage}>
+        <button
+          disabled={isLoading}
+          type="submit"
+          className="primary-btn"
+          onClick={validateValues}
+        >
           Submit
         </button>
       </form>
+      {showFormModal && (
+        <AddCategoryForm
+          closePopup={() => setShowFormModal(false)}
+          refetch={refetch}
+        />
+      )}
     </section>
   );
 };
 
 export default NewPost;
+
+const AddCategoryForm = ({ closePopup, refetch }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    mode: "all",
+    resolver: zodResolver(CategorySchema),
+    defaultValues: {
+      name: "",
+    },
+  });
+
+  // create category
+  const onSubmit = async (values) => {
+    setIsLoading(true);
+    try {
+      const response = await createCategory(values).then((res) => res.json());
+      if (response.success) {
+        toast.success(response.message);
+        refetch();
+        closePopup();
+      } else {
+        toast.error(response.message);
+      }
+      reset();
+    } catch (err) {
+      toast.error(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <PopupWrapper closePopup={closePopup}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-3 bg-blue-gray-50 p-6 max-w-xs rounded-xl text-black"
+      >
+        <div className="w-full">
+          <label className="ml-1">Add Category</label>
+          <input
+            {...register("name")}
+            disabled={isLoading}
+            type="text"
+            className="outline-none p-2 rounded-full border-black/50 text-black border w-full"
+          />
+          <small className="ml-2 text-black">{errors.name?.message}</small>
+        </div>
+        <button
+          className={`${isLoading ? "disabled-btn" : "primary-btn"} w-full`}
+          disabled={isLoading}
+          type="submit"
+        >
+          {isLoading ? (
+            <AiOutlineLoading3Quarters className="animate-spin text-[1.35rem] text-center" />
+          ) : (
+            "Create"
+          )}
+        </button>
+      </form>
+    </PopupWrapper>
+  );
+};

@@ -4,28 +4,39 @@ import Link from "next/link";
 import React from "react";
 import { FaRegClock } from "react-icons/fa";
 
-const PostItem = ({ post}) => {
+const PostItem = ({ post, handleCategoryChange }) => {
   return (
-    <div className="hover:scale-105 duration-200 transition-all p-2 border rounded-xl border-primary/60">
-      <div className="w-full grid grid-cols-1 md:grid-cols-[50%_50%] lg:grid-cols-[30%_65%] gap-1 md:gap-5">
-        <Link href={`/admin/posts/${post._id}`}>
+    <div className="hover:scale-[101%] duration-200 transition-all p-2 border rounded-xl border-primary/60 group">
+      <div className="h-[60vh] md:h-[40vh] lg:h-[35vh] w-full grid grid-cols-1 md:grid-cols-[45%_50%] lg:grid-cols-[30%_65%] gap-1 md:gap-5">
+        <Link
+          href={`/admin/posts/${post._id}`}
+          style={{ backgroundImage: `url(${post.image})` }}
+          className="rounded-xl overflow-hidden"
+        >
           <Image
             src={post.image}
             alt="post"
-            width={1000}
-            height={1000}
-            className="h-[30vh] sm:h-[35vh] lg:h-[30vh] rounded-xl object-center object-cover hover:brightness-[70%] duration-200 transition-all"
+            width={500}
+            height={500}
+            className="w-full h-full rounded-xl object-contain group-hover:brightness-75 duration-200 transition-all backdrop-blur-xl"
           />
         </Link>
         <div className="flex flex-col justify-start gap-3">
-          <span className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm text-sm w-fit">
-            {post.category.name}
-          </span>
+          <div className="flex max-w-lg gap-2 truncate line-clamp-1">
+            {post.categories.map((category) => (
+              <button
+                key={category._id}
+                onClick={() => handleCategoryChange(category._id)}
+                className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm text-[.8rem] sm:text-sm w-fit"
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
           <div className="grow flex flex-col gap-3">
             <Link
               href={`/admin/posts/${post._id}`}
-              className="text-blue-gray-50 font-semibold text-lg sm:text-xl
-              line-clamp-2 truncate-lines-2"
+              className="text-blue-gray-50 font-semibold text-lg sm:text-xl group-hover:text-primary duration-200 transition-colors line-clamp-2 truncate-lines-2"
             >
               {post.heading}
             </Link>
