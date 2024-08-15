@@ -131,3 +131,14 @@ export const deletePost = (id) => {
     method: "DELETE",
   });
 };
+
+// get related posts
+export const getRelatedPosts = (data) => {
+  return fetch("/api/related-posts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+}

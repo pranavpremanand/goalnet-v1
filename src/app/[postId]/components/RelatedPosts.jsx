@@ -1,3 +1,4 @@
+import { connectDb } from "@/lib/database";
 import Post from "@/lib/database/models/post.model";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,6 +6,7 @@ import Link from "next/link";
 const RelatedPosts = async ({ categories, currentPostId }) => {
   let posts = [];
   const categoryList = categories.map((category) => category._id);
+  connectDb()
   posts = await Post.find({
     _id: { $ne: currentPostId },
     categories: categoryList,
