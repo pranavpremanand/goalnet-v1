@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BiCaretLeft } from "react-icons/bi";
 import { FaRegClock } from "react-icons/fa";
+import Category from "@/lib/database/models/category.model";
 
 const PostInDetail = async ({ params }) => {
   const { postId } = params;
