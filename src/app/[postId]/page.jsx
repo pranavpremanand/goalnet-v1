@@ -44,7 +44,7 @@ const PostInDetail = async ({ params }) => {
 
   return (
     <section className="wrapper grow text-blue-gray-50">
-      <div className="flex items-center gap-1 mb-5">
+      <div className="flex justify-end md:justify-start items-center gap-1 mb-5">
         <Link href="/" className="text-md flex items-center font-medium">
           <BiCaretLeft className="text-3xl sm:text-2xl" /> Back
         </Link>
