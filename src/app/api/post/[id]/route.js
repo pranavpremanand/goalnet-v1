@@ -11,7 +11,7 @@ export const GET = async (req, { params }) => {
       path: "categories",
       select: "name _id",
     });
-    const categories = await Category.find();
+    const categories = await Category.find({isDeleted: false});
     if (!data) {
       return NextResponse.json(
         { success: false, message: "Post not found" },
