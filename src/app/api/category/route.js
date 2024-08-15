@@ -56,9 +56,16 @@ export const PATCH = async (req) => {
     const alreadyExist = await Category.findOne({ name, isDeleted: false });
     if (!alreadyExist) {
       const data = await Category.findByIdAndUpdate(id, { name });
-
+      const newData = {
+        ...data._doc,
+        name,
+      };
       return NextResponse.json(
-        { success: true, data, message: "Category updated successfully" },
+        {
+          success: true,
+          data: newData,
+          message: "Category updated successfully",
+        },
         { status: 201 }
       );
     } else {

@@ -3,38 +3,6 @@ import Category from "@/lib/database/models/category.model";
 import Post from "@/lib/database/models/post.model";
 import { NextResponse } from "next/server";
 
-// export const GET = async (req, { params }) => {
-//   connectDb();
-
-//   const { page } = params;
-
-//   const limit = 10;
-
-//   try {
-//     const categories = await Category.find()
-//       .skip((page - 1) * limit) // Skip items for previous pages
-//       .limit(limit)   // Limit the number of items per page
-//       .sort({ createdAt: "desc" });
-
-//     const totalItems = await Category.countDocuments(); // Get total count of items
-//     const totalPages = Math.ceil(totalItems / limit);
-
-//     return NextResponse.json({
-//       success: true,
-//       message: "Categories fetched successfully",
-//       categories,
-//       pagination: {
-//         page: parseInt(page),
-//         limit,
-//         totalItems,
-//         totalPages,
-//       },
-//     });
-//   } catch (err) {
-//     return NextResponse.json({ success: false, message: err.message }, { status: 500 });
-//   }
-// };
-
 // delete a category
 export const POST = async (req, { params }) => {
   try {

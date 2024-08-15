@@ -9,10 +9,17 @@ export const POST = async (req) => {
   try {
     connectDb();
     const body = await req.json();
-    const { page, category } = body;
-    let posts, totalItems,postLimit = 10;
+    const { page, category, isAdmin } = body;
+    let posts,
+      totalItems,
+      postLimit = 10;
+
     if (category !== "0") {
-      posts = await Post.find({ isDeleted: false, categories: category })
+      posts = await Post.find(
+        isAdmin
+          ? { categories: category }
+          : { categories: category, isDeleted: false }
+      )
         .populate({
           path: "categories",
           select: "name _id",
@@ -20,9 +27,12 @@ export const POST = async (req) => {
         .sort({ createdAt: -1 })
         .skip((page - 1) * postLimit)
         .limit(postLimit);
-        totalItems = await Post.countDocuments({ isDeleted: false, categories: category });
+      totalItems = await Post.countDocuments({
+        isDeleted: false,
+        categories: category,
+      });
     } else {
-      posts = await Post.find({ isDeleted: false })
+      posts = await Post.find(isAdmin ? {} : { isDeleted: false })
         .populate({
           path: "categories",
           select: "name _id",
@@ -30,7 +40,7 @@ export const POST = async (req) => {
         .sort({ createdAt: -1 })
         .skip((page - 1) * postLimit)
         .limit(postLimit);
-        totalItems = await Post.countDocuments({ isDeleted: false});
+      totalItems = await Post.countDocuments({ isDeleted: false });
     }
 
     const categories = await Category.find({ isDeleted: false }).sort({

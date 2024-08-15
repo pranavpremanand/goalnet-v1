@@ -1,28 +1,22 @@
 "use client";
-import { createCategory, createPost, getCategories } from "@/apiCalls";
+import { createPost, getCategories } from "@/apiCalls";
 import AddCategoryFormModal from "@/components/AddCategoryFormModal";
-import CategoryForm from "@/components/CategoryForm";
 import Loading from "@/components/Loading";
-import PopupWrapper from "@/components/PopupWrapper";
 import { SpinnerContext } from "@/components/Providers";
 import { setCategories } from "@/lib/redux/storeSlice";
-import { CategorySchema, PostSchema } from "@/lib/validationSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useRef, useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { BiMinus, BiPlus } from "react-icons/bi";
-import { PiCaretRightBold, PiPlus, PiPlusBold } from "react-icons/pi";
+import { PiCaretRightBold, PiPlusBold } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 
 const NewPost = () => {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.store);
-  const { data, error, isLoading } = useQuery({
+  const { error, isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
       const response = await getCategories();
@@ -32,7 +26,6 @@ const NewPost = () => {
     },
     refetchOnWindowFocus: true,
   });
-  // let categories = [];
   const [imgPreview, setImgPreview] = useState("");
   const { setIsLoading } = useContext(SpinnerContext);
   const imgInputRef = useRef(null);
@@ -52,7 +45,6 @@ const NewPost = () => {
     formState: { errors },
   } = useForm({
     mode: "all",
-    // resolver: zodResolver(PostSchema),
     defaultValues: {
       heading: "",
       content: "",
@@ -75,7 +67,6 @@ const NewPost = () => {
     );
 
   if (isLoading) return <Loading />;
-  // categories = data.categories;
 
   if (categories.length === 0)
     return (

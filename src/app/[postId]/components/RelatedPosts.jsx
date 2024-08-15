@@ -10,7 +10,7 @@ const RelatedPosts = async ({ categories, currentPostId }) => {
     connectDb();
     posts = await Post.find({
       _id: { $ne: currentPostId },
-      categories: categoryList,
+      categories: { $in: categoryList },
       isDeleted: false,
     })
       .populate({ path: "categories", select: "name _id" })
@@ -54,7 +54,7 @@ const PostItem = ({ post }) => {
           className="w-full h-full overflow-hidden backdrop-blur-3xl object-contain transition-all duration-150 group-hover:brightness-75"
         />
       </Link>
-      <div className="flex flex-wrap max-w-md gap-2">
+      <div className="flex max-w-lg gap-2 truncate line-clamp-1">
         {post.categories.map((category) => (
           <span
             key={category._id}

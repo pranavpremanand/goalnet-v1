@@ -4,7 +4,6 @@ import { formatDistanceToNow } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CategorySchema } from "@/lib/validationSchema";
-import { SpinnerContext } from "./Providers";
 import {
   deleteCategory,
   deleteCategoryAndPosts,
@@ -13,9 +12,9 @@ import {
 import toast from "react-hot-toast";
 import PopupWrapper from "./PopupWrapper";
 
-const CategoryItem = ({ category, refetchData }) => {
+const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
   const [editable, setEditable] = useState(false);
-  const { isLoading, setIsLoading } = useContext(SpinnerContext);
+  const [isLoading, setIsLoading] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showDeletePostsConfirmation, setShowDeletePostsConfirmation] =
     useState(false);
@@ -45,13 +44,16 @@ const CategoryItem = ({ category, refetchData }) => {
       if (response.success) {
         toast.success(response.message);
         setEditable(false);
-        refetchData();
+        dispatch(
+          setCategories(
+            categories.map((c) => (c._id === category._id ? response.data : c))
+          )
+        );
       } else {
         toast.error(response.message);
       }
     } catch (err) {
       toast.error(err.message);
-      console.log(err);
     } finally {
       setIsLoading(false);
     }
@@ -67,7 +69,9 @@ const CategoryItem = ({ category, refetchData }) => {
       setShowDeleteConfirmation(false);
       if (response.success) {
         toast.success(response.message);
-        refetchData();
+        dispatch(
+          setCategories(categories.filter((c) => c._id !== category._id))
+        );
       } else {
         toast.error(response.message);
         if (response.deletePostsConfirmation) {
@@ -92,13 +96,14 @@ const CategoryItem = ({ category, refetchData }) => {
       if (response.success) {
         toast.success(response.message);
         setShowDeletePostsConfirmation(false);
-        refetchData();
+        dispatch(
+          setCategories(categories.filter((c) => c._id !== category._id))
+        )
       } else {
         toast.error(response.message);
       }
     } catch (err) {
       toast.error(err.message);
-      console.log(err);
     } finally {
       setIsLoading(false);
     }
@@ -218,7 +223,7 @@ const DeletePostsAlert = ({ closePopup, handleDeletePosts }) => {
       <div className="bg-blue-gray-50 rounded-xl p-5 text-black max-w-xs">
         <h1 className="text-xl font-semibold">Delete Confirmation!</h1>
         <p className="text-md text-gray-700 mt-2 mb-3">
-          Are you sure you want to delete the posts with this category? This
+          Are you sure you want to delete the posts associated with this category? This
           action cannot be undone.
         </p>
         <div className="grid grid-cols-2 gap-4">

@@ -53,7 +53,7 @@ const PostInDetail = async ({ params }) => {
       <div className="pb-16">
         <div className="flex flex-col gap-8 pb-7">
           <div
-            className="w-full h-[65vh] md:h-[73vh]"
+            className="w-full h-[55vh] sm:h-[65vh] md:h-[73vh]"
             style={{
               backgroundImage: `url(${
                 post.image || "/assets/images/logo.png"

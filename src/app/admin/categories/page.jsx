@@ -1,24 +1,27 @@
 "use client";
-import CategoryForm from "@/components/CategoryForm";
+import CategoryForm from "@/app/admin/categories/components/CategoryForm";
 import Loading from "@/components/Loading";
 import CategoryItem from "@/components/CategoryItem";
 import Link from "next/link";
 import { PiCaretRightBold } from "react-icons/pi";
 import { getCategories } from "@/apiCalls";
 import { useQuery } from "@tanstack/react-query";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategories } from "@/lib/redux/storeSlice";
 
 const Categories = () => {
-
-  const { data, error, refetch, isLoading } = useQuery({
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.store);
+  const { error, isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
       const response = await getCategories();
-      return response.json();
+      const data = await response.json();
+      dispatch(setCategories(data.categories));
+      return data;
     },
     refetchOnWindowFocus: true,
   });
-
-  let categories = [];
 
   if (error)
     return (
@@ -33,7 +36,6 @@ const Categories = () => {
     );
 
   if (isLoading) return <Loading />;
-  categories = data.categories;
   return (
     <section className="grow">
       <div className="wrapper">
@@ -56,7 +58,7 @@ const Categories = () => {
           </h1>
         )}
 
-        <CategoryForm refetchData={refetch} />
+        <CategoryForm dispatch={dispatch} categories={categories} setCategories={setCategories}/>
         {categories.length > 0 && (
           <div className="flex flex-col gap-4">
             <h1 className="text-2xl font-bold tracking-wider text-center mb-2">
@@ -68,7 +70,9 @@ const Categories = () => {
                   <CategoryItem
                     key={category._id}
                     category={category}
-                    refetchData={refetch}
+                    setCategories={setCategories}
+                    categories={categories}
+                    dispatch={dispatch}
                   />
                 ))}
               </div>

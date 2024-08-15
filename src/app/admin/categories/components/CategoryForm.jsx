@@ -1,16 +1,15 @@
 "use client";
 import { CategorySchema } from "@/lib/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { SpinnerContext } from "./Providers";
 import { createCategory } from "@/apiCalls";
 
-const CategoryForm = ({ refetchData }) => {
+const CategoryForm = ({ dispatch, categories, setCategories }) => {
   const [showForm, setShowForm] = useState(false);
-  const { isLoading, setIsLoading } = useContext(SpinnerContext);
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -31,7 +30,7 @@ const CategoryForm = ({ refetchData }) => {
       const response = await createCategory(values).then((res) => res.json());
       if (response.success) {
         toast.success(response.message);
-        refetchData();
+        dispatch(setCategories([response.data, ...categories]));
       } else {
         toast.error(response.message);
       }

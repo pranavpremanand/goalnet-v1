@@ -14,7 +14,11 @@ const Posts = () => {
   const { data, error, refetch, isLoading } = useQuery({
     queryKey: ["all-posts", page, category._id],
     queryFn: async () => {
-      const response = await getAllPosts({ page, category: category._id });
+      const response = await getAllPosts({
+        page,
+        category: category._id,
+        isAdmin: true,
+      });
       return response.json();
     },
     refetchOnWindowFocus: true,

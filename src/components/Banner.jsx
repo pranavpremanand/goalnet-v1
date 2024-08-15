@@ -101,7 +101,7 @@ const Banner = () => {
               width={1000}
               height={1000}
               alt="post"
-              className="w-full h-[65vh] md:h-[85vh] object-cover object-top md:object-center md:object-contain brightness-[65%] backdrop-blur-3xl"
+              className="w-full h-[65vh] md:h-[85vh] object-cover object-top md:object-center md:object-contain brightness-[68%] backdrop-blur-3xl"
               style={{ opacity: opacities[i] }}
             />
             <div className="wrapper absolute left-1/2 -translate-x-1/2 top-2/3 sm:top-1/2 -translate-y-[40%] sm:-translate-y-[30%] lg:-translate-y-1/4 flex flex-col gap-2 md:gap-3">

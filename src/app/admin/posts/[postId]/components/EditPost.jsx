@@ -32,6 +32,7 @@ const EditPost = ({ postId }) => {
   const [showDeletePostAlert, setShowDeletePostAlert] = useState(false);
   const [showPostVisibilityAlert, setShowPostVisibilityAlert] = useState(false);
   const [showFormModal, setShowFormModal] = useState(false);
+  const [post, setPost] = useState({});
   //   const [link, setLink] = useState("");
   //   const [otherLinks, setOtherLinks] = useState([]);
   //   const [linkError, setLinkError] = useState("");
@@ -45,7 +46,6 @@ const EditPost = ({ postId }) => {
     formState: { errors },
   } = useForm({
     mode: "all",
-    // resolver: zodResolver(PostSchema),
     defaultValues: {
       id: postId,
       heading: "",
@@ -56,13 +56,14 @@ const EditPost = ({ postId }) => {
     },
   });
 
-  const { data, error, isLoading } = useQuery({
+  const { error, isLoading } = useQuery({
     queryKey: ["post", postId],
     queryFn: async () => {
       const response = await getPostById(postId);
       const data = await response.json();
       dispatch(setCategories(data.categories));
       const postData = data.data;
+      setPost(postData);
       setValue("heading", postData.heading);
       setValue(
         "categories",
@@ -91,7 +92,6 @@ const EditPost = ({ postId }) => {
     );
 
   if (isLoading) return <Loading />;
-  const post = data.data;
 
   if (categories.length === 0)
     return (
@@ -216,8 +216,9 @@ const EditPost = ({ postId }) => {
         isDeleted: !post.isDeleted,
       }).then((res) => res.json());
       if (response.success) {
-        toast.success(response.message);
+        setPost({ ...post, isDeleted: !post.isDeleted });
         setShowPostVisibilityAlert(false);
+        toast.success(response.message);
       } else {
         toast.error(response.message);
       }
