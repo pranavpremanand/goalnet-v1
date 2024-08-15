@@ -77,7 +77,7 @@ const Banner = () => {
 
   if (isLoading) {
     return (
-      <div className="w-screen h-[40vh] sm:h-[55vh] md:h-[85vh] bg-blue-gray-50/5">
+      <div className="w-screen h-[65vh] md:h-[85vh] bg-blue-gray-50/5">
         <SmallLoader />
       </div>
     );

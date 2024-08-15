@@ -4,10 +4,10 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 const HomeCardItemLoader = ({ category }) => {
   return (
     <section
-      id="latest-stories"
+      id="posts"
       className="wrapper mt-8 pt-5 grid grid-cols-1 gap-10"
     >
-      <div className="flex items-center justify-between border-b border-[#191919] gap-4">
+      <div className="flex items-center justify-between border-b border-[#2e2e2e] gap-4">
         <select
           disabled
           className="text-blue-gray-50 bg-[#191919] px-3 py-1 mb-2 text-xl w-full md:w-[16rem] text-ellipsis outline-none"

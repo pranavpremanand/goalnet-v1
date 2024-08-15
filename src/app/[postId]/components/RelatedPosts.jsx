@@ -40,7 +40,7 @@ export default RelatedPosts;
 
 const PostItem = ({ post }) => {
   return (
-    <div className="flex flex-col gap-3 border-b border-[#191919] pb-4 sm:border-none group">
+    <div className="flex flex-col gap-3 border-b border-[#2e2e2e] pb-4 sm:border-none group">
       <Link
         href={`/${post._id}`}
         className="w-full h-[35vh] max-h-[15rem] group-hover:brightness-75"
