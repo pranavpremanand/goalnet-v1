@@ -12,13 +12,13 @@ import { FaRegClock } from "react-icons/fa";
 const PostInDetail = async ({ params }) => {
   const { postId } = params;
 
+  connectDb();
   const post = await Post.findOne({ _id: postId, isDeleted: false })
   // .populate({
   //   path: "categories",
   //   select: "name _id",
   // });
   // let post
-  //   connectDb();
   //   const posts = await Post.aggregate([
   //     {
   //       $match: {
