@@ -14,10 +14,10 @@ const PostInDetail = async ({ params }) => {
 
   connectDb();
   const post = await Post.findOne({ _id: postId, isDeleted: false })
-  // .populate({
-  //   path: "categories",
-  //   select: "name _id",
-  // });
+  .populate({
+    path: "categories",
+    select: "name _id",
+  });
   // let post
   //   const posts = await Post.aggregate([
   //     {
