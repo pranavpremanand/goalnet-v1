@@ -3,7 +3,6 @@ import ShareComponent from "@/app/[postId]/components/ShareComponent";
 import { connectDb } from "@/lib/database";
 import Post from "@/lib/database/models/post.model";
 import { formatDate } from "date-fns";
-import mongoose from "mongoose";
 import Image from "next/image";
 import Link from "next/link";
 import { BiCaretLeft } from "react-icons/bi";
@@ -12,64 +11,36 @@ import { FaRegClock } from "react-icons/fa";
 const PostInDetail = async ({ params }) => {
   const { postId } = params;
 
-  connectDb();
-  const post = await Post.findOne({ _id: postId, isDeleted: false })
-  .populate({
-    path: "categories",
-    select: "name _id",
-  });
-  // let post
-  //   const posts = await Post.aggregate([
-  //     {
-  //       $match: {
-  //         _id: new mongoose.Types.ObjectId(postId),
-  //         isDeleted: false,
-  //       },
-  //     },
-  //     {
-  //       $lookup: {
-  //         from: "categories",
-  //         localField: "categories",
-  //         foreignField: "_id",
-  //         as: "categoryDetails",
-  //       },
-  //     },
-  //     {
-  //       $unwind: {
-  //         path: "$categoryDetails",
-  //         preserveNullAndEmptyArrays: true,
-  //       },
-  //     },
-  //     {
-  //       $project: {
-  //         _id: 1,
-  //         heading: 1,
-  //         content: 1,
-  //         image: 1,
-  //         isBanner: 1,
-  //         createdAt: {
-  //           $dateToString: {
-  //             format: "%Y-%m-%dT%H:%M:%S.%LZ",
-  //             date: "$createdAt",
-  //             onNull: "N/A",
-  //           },
-  //         },
-  //         updatedAt: {
-  //           $dateToString: {
-  //             format: "%Y-%m-%dT%H:%M:%S.%LZ",
-  //             date: "$updatedAt",
-  //             onNull: "N/A",
-  //           },
-  //         },
-  //         categories: {
-  //           _id: { $toString: "$categoryDetails._id" },
-  //           name: "$categoryDetails.name",
-  //         },
-  //       },
-  //     },
-  //   ]);
+  let post;
 
-  //   post = posts[0];
+  try {
+    connectDb();
+    post = await Post.findOne({ _id: postId, isDeleted: false }).populate({
+      path: "categories",
+      select: "name _id",
+    });
+
+    if (!post) {
+      return (
+        <div className="wrapper grow flex items-center justify-center flex-col gap-2">
+          <p className="text-2xl">Post not found</p>
+          <a className="secondary-btn" href="/">
+            Home page
+          </a>
+        </div>
+      );
+    }
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    return (
+      <div className="wrapper grow flex items-center justify-center flex-col gap-2">
+        <p className="text-2xl">Failed to load post. Try reloading the page</p>
+        <a className="secondary-btn" href={`/${postId}`}>
+          Reload
+        </a>
+      </div>
+    );
+  }
 
   return (
     <section className="wrapper grow text-blue-gray-50">
@@ -82,27 +53,32 @@ const PostInDetail = async ({ params }) => {
       <div className="pb-16">
         <div className="flex flex-col gap-8 pb-7">
           <div
-            className="w-full h-[35vh] sm:h-[55vh] md:h-[71vh]"
-            style={{ backgroundImage: `url(${post.image}` }}
+            className="w-full h-[65vh] md:h-[73vh]"
+            style={{
+              backgroundImage: `url(${
+                post.image || "/assets/images/logo.png"
+              })`,
+            }}
           >
             <Image
-              src={post.image}
+              src={post.image || "/assets/images/logo.png"}
               alt="post"
               width={1000}
               height={1000}
-              className="w-full h-[35vh] sm:h-[55vh] md:h-[71vh] object-contain backdrop-blur-3xl"
+              className="w-full h-full object-cover object-top md:object-center md:object-contain backdrop-blur-3xl"
             />
           </div>
           <div className="flex flex-col gap-4 md:gap-8">
             <div className="flex flex-wrap max-w-md gap-2">
-              {/* {post.categories.map((category) => (
-                <span
-                  key={category._id}
-                  className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm text-[.8rem] sm:text-sm w-fit"
-                >
-                  {category.name}
-                </span>
-              ))} */}
+              {post.categories.length > 0 &&
+                post.categories.map((category) => (
+                  <span
+                    key={category._id}
+                    className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm text-[.8rem] sm:text-sm w-fit"
+                  >
+                    {category.name}
+                  </span>
+                ))}
             </div>
             <h1 className="font-bold text-2xl sm:text-3xl lg:text-4xl">
               {post.heading}
@@ -123,7 +99,7 @@ const PostInDetail = async ({ params }) => {
           </div>
           <p className="text-blue-gray-200 text-base">{post.content}</p>
         </div>
-        {/* <RelatedPosts categories={post.categories} currentPostId={post._id} /> */}
+        <RelatedPosts categories={post.categories} currentPostId={post._id} />
       </div>
     </section>
   );

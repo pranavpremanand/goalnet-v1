@@ -18,7 +18,7 @@ const PostItem = ({ post, handleCategoryChange }) => {
             alt="post"
             width={500}
             height={500}
-            className="w-full h-full rounded-xl object-contain group-hover:brightness-75 duration-200 transition-all backdrop-blur-xl"
+            className="w-full h-full rounded-xl object-contain group-hover:brightness-75 duration-200 transition-all backdrop-blur-3xl"
           />
         </Link>
         <div className="flex flex-col justify-start gap-3">

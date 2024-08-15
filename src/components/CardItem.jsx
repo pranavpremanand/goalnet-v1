@@ -11,7 +11,7 @@ const CardItem = ({ post, handleCategoryChange }) => {
     >
       <Link
         href={`/${post._id}`}
-        className="w-full h-[40vh] sm:h-[48vh] md:h-[40vh] lg:h-[45vh] group-hover:brightness-75"
+        className="w-full h-[38vh] sm:h-[48vh] md:h-[40vh] lg:h-[45vh] group-hover:brightness-75"
         style={{ backgroundImage: `url(${post.image}` }}
       >
         <Image
@@ -19,7 +19,7 @@ const CardItem = ({ post, handleCategoryChange }) => {
           alt="Post"
           width={1000}
           height={1000}
-          className="w-full h-full object-center object-contain duration-200 transition-all backdrop-blur-xl"
+          className="w-full h-full object-top object-cover duration-200 transition-all backdrop-blur-3xl"
         />
       </Link>
       <div className="flex flex-col justify-between gap-3 h-full">

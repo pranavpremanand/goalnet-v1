@@ -39,7 +39,7 @@ const PostItem = ({ post }) => {
     <div className="flex flex-col gap-3 border-b border-[#191919] pb-4 sm:border-none group">
       <Link
         href={`/${post._id}`}
-        className="w-full h-[25vh] max-h-[10rem] group-hover:brightness-75"
+        className="w-full h-[35vh] max-h-[15rem] group-hover:brightness-75"
         style={{ backgroundImage: `url(${post.image}` }}
       >
         <Image
@@ -47,17 +47,17 @@ const PostItem = ({ post }) => {
           width={500}
           height={500}
           alt="post"
-          className="w-full h-full overflow-hidden backdrop-blur-sm object-contain transition-all duration-150 group-hover:brightness-75"
+          className="w-full h-full overflow-hidden backdrop-blur-3xl object-contain transition-all duration-150 group-hover:brightness-75"
         />
       </Link>
       <div className="flex flex-wrap max-w-md gap-2">
         {post.categories.map((category) => (
-          <button
+          <span
             key={category._id}
             className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm text-[.8rem] sm:text-sm w-fit"
           >
             {category.name}
-          </button>
+          </span>
         ))}
       </div>
       <Link href={`/${post._id}`}>

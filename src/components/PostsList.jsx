@@ -39,11 +39,8 @@ const PostsList = () => {
     refetch();
   };
   return (
-    <section id="news" className="wrapper mt-8">
+    <section id="posts" className="wrapper mt-8">
       <div className="flex items-center justify-between border-b border-[#191919] mb-5 gap-4">
-        {/* <h1 className="text-2xl sm:text-3xl font-semibold mb-3 tracking-wide capitalize">
-            Latest news
-          </h1> */}
         {categories.length > 0 && (
           <select
             onChange={(e) => handleCategoryChange(e.target.value)}
