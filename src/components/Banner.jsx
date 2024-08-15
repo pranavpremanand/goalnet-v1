@@ -62,6 +62,7 @@ const Banner = () => {
     },
 
     revalidateOnFocus: true,
+    refetchOnWindowFocus: true,
   });
 
   if (error) {
