@@ -40,7 +40,7 @@ const CardItem = ({ post, handleCategoryChange }) => {
               {post.heading}
             </h1>
           </Link>
-          <p className="text-blue-gray-300 truncate-lines-3 line-clamp-3">
+          <p className="text-blue-gray-300 truncate-lines-3 line-clamp-3 whitespace-pre-wrap">
             {post.content}
           </p>
           <Link href={`/${post._id}`} className="primary-btn w-fit">

@@ -1,7 +1,7 @@
 "use client";
 import { useContext, useRef, useState } from "react";
 import Loading from "@/components/Loading";
-import { SpinnerContext } from "@/components/SpinnerContext";
+import { SpinnerContext } from "@/components/Providers";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import {
@@ -15,10 +15,14 @@ import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { PiPlusBold } from "react-icons/pi";
 import PopupWrapper from "@/components/PopupWrapper";
+import AddCategoryFormModal from "@/components/AddCategoryFormModal";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategories } from "@/lib/redux/storeSlice";
 
 const EditPost = ({ postId }) => {
   const router = useRouter();
-  let categories = [];
+  const { categories } = useSelector((state) => state.store);
+  const dispatch = useDispatch();
   const [imgPreview, setImgPreview] = useState("");
   const { setIsLoading } = useContext(SpinnerContext);
   const [pending, setPending] = useState(false);
@@ -27,6 +31,7 @@ const EditPost = ({ postId }) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [showDeletePostAlert, setShowDeletePostAlert] = useState(false);
   const [showPostVisibilityAlert, setShowPostVisibilityAlert] = useState(false);
+  const [showFormModal, setShowFormModal] = useState(false);
   //   const [link, setLink] = useState("");
   //   const [otherLinks, setOtherLinks] = useState([]);
   //   const [linkError, setLinkError] = useState("");
@@ -56,6 +61,7 @@ const EditPost = ({ postId }) => {
     queryFn: async () => {
       const response = await getPostById(postId);
       const data = await response.json();
+      dispatch(setCategories(data.categories));
       const postData = data.data;
       setValue("heading", postData.heading);
       setValue(
@@ -85,7 +91,6 @@ const EditPost = ({ postId }) => {
     );
 
   if (isLoading) return <Loading />;
-  categories = data.categories;
   const post = data.data;
 
   if (categories.length === 0)
@@ -315,7 +320,10 @@ const EditPost = ({ postId }) => {
                 />
               </div>
               {!post.image && (
-                <button className="secondary-btn w-fit mt-2" onClick={resetImgData}>
+                <button
+                  className="secondary-btn w-fit mt-2"
+                  onClick={resetImgData}
+                >
                   Cancel
                 </button>
               )}
@@ -495,6 +503,9 @@ const EditPost = ({ postId }) => {
           />
         )}
       </form>
+      {showFormModal && (
+        <AddCategoryFormModal closePopup={() => setShowFormModal(false)} />
+      )}
     </>
   );
 };

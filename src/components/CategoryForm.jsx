@@ -5,7 +5,7 @@ import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { SpinnerContext } from "./SpinnerContext";
+import { SpinnerContext } from "./Providers";
 import { createCategory } from "@/apiCalls";
 
 const CategoryForm = ({ refetchData }) => {

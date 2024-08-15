@@ -40,7 +40,7 @@ const PostItem = ({ post, handleCategoryChange }) => {
             >
               {post.heading}
             </Link>
-            <p className="text-gray-300 text-md truncate-lines-3 line-clamp-3">
+            <p className="text-gray-300 text-md truncate-lines-3 line-clamp-3 whitespace-pre-wrap">
               {post.content}
             </p>
           </div>

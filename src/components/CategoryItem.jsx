@@ -4,7 +4,7 @@ import { formatDistanceToNow } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CategorySchema } from "@/lib/validationSchema";
-import { SpinnerContext } from "./SpinnerContext";
+import { SpinnerContext } from "./Providers";
 import {
   deleteCategory,
   deleteCategoryAndPosts,

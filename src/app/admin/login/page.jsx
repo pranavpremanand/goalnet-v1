@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/lib/validationSchema";
-import { SpinnerContext } from "@/components/SpinnerContext";
+import { SpinnerContext } from "@/components/Providers";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { login } from "@/apiCalls";
 

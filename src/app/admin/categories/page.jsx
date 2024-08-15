@@ -33,7 +33,6 @@ const Categories = () => {
     );
 
   if (isLoading) return <Loading />;
-  console.log(data);
   categories = data.categories;
   return (
     <section className="grow">

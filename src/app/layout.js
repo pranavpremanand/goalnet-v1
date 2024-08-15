@@ -1,6 +1,6 @@
 import { Jost } from "next/font/google";
 import "./globals.css";
-import { Provider } from "../components/SpinnerContext";
+import { Providers } from "../components/Providers";
 import { Toaster } from "react-hot-toast";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${jost.className} bg-black text-blue-gray-100 min-h-screen flex flex-col`}
       >
-        <Provider>
+        <Providers>
           <Toaster
             position="top-center"
             toastOptions={{
@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
           <Header />
           {children}
           <Footer />
-        </Provider>
+        </Providers>
       </body>
     </html>
   );

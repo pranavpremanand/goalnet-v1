@@ -4,7 +4,7 @@ import { headerLinks } from "../constants";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
-import { SpinnerContext } from "./SpinnerContext";
+import { SpinnerContext } from "./Providers";
 import Loading from "./Loading";
 import { logout } from "../apiCalls";
 import toast from "react-hot-toast";

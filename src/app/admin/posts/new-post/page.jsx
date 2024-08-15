@@ -1,9 +1,11 @@
 "use client";
 import { createCategory, createPost, getCategories } from "@/apiCalls";
+import AddCategoryFormModal from "@/components/AddCategoryFormModal";
 import CategoryForm from "@/components/CategoryForm";
 import Loading from "@/components/Loading";
 import PopupWrapper from "@/components/PopupWrapper";
-import { SpinnerContext } from "@/components/SpinnerContext";
+import { SpinnerContext } from "@/components/Providers";
+import { setCategories } from "@/lib/redux/storeSlice";
 import { CategorySchema, PostSchema } from "@/lib/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
@@ -15,17 +17,22 @@ import toast from "react-hot-toast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import { PiCaretRightBold, PiPlus, PiPlusBold } from "react-icons/pi";
+import { useDispatch, useSelector } from "react-redux";
 
 const NewPost = () => {
-  const { data, error, isLoading, refetch } = useQuery({
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.store);
+  const { data, error, isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
       const response = await getCategories();
-      return response.json();
+      const data = await response.json();
+      dispatch(setCategories(data.categories));
+      return data;
     },
     refetchOnWindowFocus: true,
   });
-  let categories = [];
+  // let categories = [];
   const [imgPreview, setImgPreview] = useState("");
   const { setIsLoading } = useContext(SpinnerContext);
   const imgInputRef = useRef(null);
@@ -68,7 +75,7 @@ const NewPost = () => {
     );
 
   if (isLoading) return <Loading />;
-  categories = data.categories;
+  // categories = data.categories;
 
   if (categories.length === 0)
     return (
@@ -135,9 +142,9 @@ const NewPost = () => {
         const response = await createPost(values).then((res) => res.json());
         if (response.success) {
           toast.success(response.message);
-          // reset();
-          // setSelectedCategories([]);
-          // setImgPreview("");
+          reset();
+          setSelectedCategories([]);
+          setImgPreview("");
         } else {
           console.log(response);
           toast.error(response.message);
@@ -280,7 +287,10 @@ const NewPost = () => {
                   className="rounded-md backdrop-blur-3xl"
                 />
               </div>
-              <button className="secondary-btn w-fit mt-2" onClick={resetImgData}>
+              <button
+                className="secondary-btn w-fit mt-2"
+                onClick={resetImgData}
+              >
                 Cancel
               </button>
             </>
@@ -437,9 +447,8 @@ const NewPost = () => {
         </button>
       </form>
       {showFormModal && (
-        <AddCategoryForm
+        <AddCategoryFormModal
           closePopup={() => setShowFormModal(false)}
-          refetch={refetch}
         />
       )}
     </section>
@@ -447,70 +456,3 @@ const NewPost = () => {
 };
 
 export default NewPost;
-
-const AddCategoryForm = ({ closePopup, refetch }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    mode: "all",
-    resolver: zodResolver(CategorySchema),
-    defaultValues: {
-      name: "",
-    },
-  });
-
-  // create category
-  const onSubmit = async (values) => {
-    setIsLoading(true);
-    try {
-      const response = await createCategory(values).then((res) => res.json());
-      if (response.success) {
-        toast.success(response.message);
-        refetch();
-        closePopup();
-      } else {
-        toast.error(response.message);
-      }
-      reset();
-    } catch (err) {
-      toast.error(err.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  return (
-    <PopupWrapper closePopup={closePopup}>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-3 bg-blue-gray-50 p-6 max-w-xs rounded-xl text-black"
-      >
-        <div className="w-full">
-          <label className="ml-1">Add Category</label>
-          <input
-            {...register("name")}
-            disabled={isLoading}
-            type="text"
-            className="outline-none p-2 rounded-full border-black/50 text-black border w-full"
-          />
-          <small className="ml-2 text-black">{errors.name?.message}</small>
-        </div>
-        <button
-          className={`${isLoading ? "disabled-btn" : "primary-btn"} w-full`}
-          disabled={isLoading}
-          type="submit"
-        >
-          {isLoading ? (
-            <AiOutlineLoading3Quarters className="animate-spin text-[1.35rem] text-center" />
-          ) : (
-            "Create"
-          )}
-        </button>
-      </form>
-    </PopupWrapper>
-  );
-};

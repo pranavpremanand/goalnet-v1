@@ -69,7 +69,7 @@ const PostItem = ({ post }) => {
           {post.heading}
         </h2>
       </Link>
-      <p className="text-blue-gray-300 truncate-lines-3 line-clamp-3">
+      <p className="text-blue-gray-300 truncate-lines-3 line-clamp-3 whitespace-pre-wrap">
         {post.content}
       </p>
     </div>
