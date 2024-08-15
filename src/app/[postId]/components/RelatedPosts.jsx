@@ -6,17 +6,21 @@ import Link from "next/link";
 const RelatedPosts = async ({ categories, currentPostId }) => {
   let posts = [];
   const categoryList = categories.map((category) => category._id);
-  connectDb()
-  posts = await Post.find({
-    _id: { $ne: currentPostId },
-    categories: categoryList,
-    isDeleted: false,
-  })
-    .populate({ path: "categories", select: "name _id" })
-    .limit(4)
-    .sort({
-      createdAt: -1,
-    });
+  try {
+    connectDb();
+    posts = await Post.find({
+      _id: { $ne: currentPostId },
+      categories: categoryList,
+      isDeleted: false,
+    })
+      .populate({ path: "categories", select: "name _id" })
+      .limit(4)
+      .sort({
+        createdAt: -1,
+      });
+  } catch (err) {
+    return null;
+  }
 
   if (posts.length === 0) return null;
 

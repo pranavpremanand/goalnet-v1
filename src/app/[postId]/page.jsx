@@ -32,7 +32,6 @@ const PostInDetail = async ({ params }) => {
       );
     }
   } catch (error) {
-    console.error("Error fetching post:", error);
     return (
       <div className="wrapper grow flex items-center justify-center flex-col gap-2">
         <p className="text-2xl">Failed to load post. Try reloading the page</p>
@@ -100,7 +99,7 @@ const PostInDetail = async ({ params }) => {
           </div>
           <p className="text-blue-gray-200 text-base">{post.content}</p>
         </div>
-        {/* <RelatedPosts categories={post.categories} currentPostId={post._id} /> */}
+        <RelatedPosts categories={post.categories} currentPostId={post._id} />
       </div>
     </section>
   );
