@@ -10,12 +10,16 @@ import {
   updateCategory,
 } from "@/apiCalls";
 import toast from "react-hot-toast";
-import PopupWrapper from "./PopupWrapper";
+import PopupWrapper from "../../../../components/PopupWrapper";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
   const [editable, setEditable] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [
+    showVisibilityChangeConfirmation,
+    setShowVisibilityChangeConfirmation,
+  ] = useState(false);
   const [showDeletePostsConfirmation, setShowDeletePostsConfirmation] =
     useState(false);
 
@@ -38,7 +42,7 @@ const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
     try {
       const response = await updateCategory({
         id: category._id,
-        ...values,
+        name: values.name.trim(),
       }).then((res) => res.json());
 
       if (response.success) {
@@ -60,22 +64,26 @@ const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
   };
 
   // delete category
-  const handleDeleteCategory = async () => {
+  const handleChangeVisibility = async () => {
     setIsLoading(true);
     try {
       const response = await deleteCategory(category._id).then((res) =>
         res.json()
       );
-      setShowDeleteConfirmation(false);
+      setShowVisibilityChangeConfirmation(false);
       if (response.success) {
         toast.success(response.message);
         dispatch(
-          setCategories(categories.filter((c) => c._id !== category._id))
+          setCategories(
+            categories.map((c) => (c._id === category._id ? response.data : c))
+          )
         );
       } else {
         toast.error(response.message);
-        if (response.deletePostsConfirmation) {
-          setShowDeletePostsConfirmation(true);
+        if (response.hidePostsConfirmation) {
+          setTimeout(() => {
+            setShowDeletePostsConfirmation(true);
+          }, 500);
         }
       }
     } catch (err) {
@@ -86,7 +94,7 @@ const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
   };
 
   // delete category and posts
-  const handleDeletePosts = async () => {
+  const handleHidePosts = async () => {
     setIsLoading(true);
     try {
       const response = await deleteCategoryAndPosts(category._id).then((res) =>
@@ -97,8 +105,12 @@ const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
         toast.success(response.message);
         setShowDeletePostsConfirmation(false);
         dispatch(
-          setCategories(categories.filter((c) => c._id !== category._id))
-        )
+          setCategories(
+            categories.map((c) =>
+              c._id === category._id ? { ...c, isDeleted: true } : c
+            )
+          )
+        );
       } else {
         toast.error(response.message);
       }
@@ -158,12 +170,21 @@ const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
               Edit
             </button>
           )}
-          <button
-            onClick={() => setShowDeleteConfirmation(true)}
-            className="px-4 py-1 text-sm md:text-[.8rem] bg-black text-red-600 hover:bg-red-600 hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full"
-          >
-            Delete
-          </button>
+          {category.isDeleted ? (
+            <button
+              onClick={() => setShowVisibilityChangeConfirmation(true)}
+              className="w-[6rem] flex items-center gap-1 px-4 py-1 text-sm md:text-[.8rem] bg-black text-red-600 hover:bg-red-600 hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full"
+            >
+              <FaEyeSlash className="text-lg" /> Hidden
+            </button>
+          ) : (
+            <button
+              onClick={() => setShowVisibilityChangeConfirmation(true)}
+              className="w-[6rem] flex items-center gap-1 px-4 py-1 text-sm md:text-[.8rem] bg-black text-green-600 hover:bg-green-600 hover:text-black tracking-wide font-semibold transition-colors duration-300 rounded-full"
+            >
+              <FaEye className="text-lg" /> Public
+            </button>
+          )}
         </div>
         <span className="self-start mt-1 md:self-auto text-xs md:w-[10rem] md:ml-3 text-gray-600">
           {formatDistanceToNow(category.createdAt, {
@@ -171,16 +192,18 @@ const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
           })}
         </span>
       </div>
-      {showDeleteConfirmation && (
-        <DeleteCategoryAlert
-          closePopup={() => setShowDeleteConfirmation(false)}
-          handleDeleteCategory={handleDeleteCategory}
+      {showVisibilityChangeConfirmation && (
+        <ChangeCategoryVisibilityAlert
+          closePopup={() => setShowVisibilityChangeConfirmation(false)}
+          handleChangeVisibility={handleChangeVisibility}
+          isDeleted={category.isDeleted}
+          isLoading={isLoading}
         />
       )}
       {showDeletePostsConfirmation && (
-        <DeletePostsAlert
+        <HidePostsAlert
           closePopup={() => setShowDeletePostsConfirmation(false)}
-          handleDeletePosts={handleDeletePosts}
+          handleHidePosts={handleHidePosts}
         />
       )}
     </>
@@ -189,14 +212,19 @@ const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
 
 export default CategoryItem;
 
-const DeleteCategoryAlert = ({ closePopup, handleDeleteCategory }) => {
+const ChangeCategoryVisibilityAlert = ({
+  closePopup,
+  handleChangeVisibility,
+  isDeleted,
+  isLoading,
+}) => {
   return (
     <PopupWrapper closePopup={closePopup}>
       <div className="bg-blue-gray-50 rounded-xl p-5 text-black max-w-xs">
-        <h1 className="text-xl font-semibold">Delete Confirmation!</h1>
+        <h1 className="text-xl font-semibold">Confirmation Alert!</h1>
         <p className="text-md text-gray-700 mt-2 mb-3">
-          Are you sure you want to delete this category? This action cannot be
-          undone.
+          Are you sure you want to {isDeleted ? "unhide" : "hide"} this
+          category? You can change it anytime.
         </p>
         <div className="grid grid-cols-2 gap-4">
           <button
@@ -206,8 +234,14 @@ const DeleteCategoryAlert = ({ closePopup, handleDeleteCategory }) => {
             Cancel
           </button>
           <button
-            onClick={handleDeleteCategory}
-            className="default-btn-styles bg-red-700 border-red-700 text-blue-gray-50 hover:bg-red-900"
+            disabled={isLoading}
+            type="button"
+            onClick={handleChangeVisibility}
+            className={`default-btn-styles text-black ${
+              isDeleted
+                ? "bg-green-600 border-green-600 hover:bg-green-400 hover:border-green-400"
+                : "bg-yellow-600 border-yellow-600 hover:bg-yellow-700 hover:border-yellow-700"
+            }`}
           >
             Confirm
           </button>
@@ -217,14 +251,14 @@ const DeleteCategoryAlert = ({ closePopup, handleDeleteCategory }) => {
   );
 };
 
-const DeletePostsAlert = ({ closePopup, handleDeletePosts }) => {
+const HidePostsAlert = ({ closePopup, handleHidePosts }) => {
   return (
     <PopupWrapper closePopup={closePopup}>
       <div className="bg-blue-gray-50 rounded-xl p-5 text-black max-w-xs">
-        <h1 className="text-xl font-semibold">Delete Confirmation!</h1>
+        <h1 className="text-xl font-semibold">Confirmation Alert!</h1>
         <p className="text-md text-gray-700 mt-2 mb-3">
-          Are you sure you want to delete the posts associated with this category? This
-          action cannot be undone.
+          Are you sure you want to hide the posts associated with this category?
+          You can change it anytime.
         </p>
         <div className="grid grid-cols-2 gap-4">
           <button
@@ -234,7 +268,7 @@ const DeletePostsAlert = ({ closePopup, handleDeletePosts }) => {
             Cancel
           </button>
           <button
-            onClick={handleDeletePosts}
+            onClick={handleHidePosts}
             className="default-btn-styles bg-red-700 border-red-700 text-blue-gray-50 hover:bg-red-900"
           >
             Confirm

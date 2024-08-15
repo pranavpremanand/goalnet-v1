@@ -28,8 +28,11 @@ const Login = () => {
   const onSubmit = async (values) => {
     setIsLoading(true);
     try {
-      const response = await login(values).then((res) => res.json());
-      console.log(response)
+      const response = await login({
+        ...values,
+        email: values.email.trim(),
+      }).then((res) => res.json());
+      console.log(response);
       if (response.success) {
         toast.success(response.message);
         router.replace("/admin");

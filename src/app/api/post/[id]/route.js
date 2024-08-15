@@ -11,7 +11,7 @@ export const GET = async (req, { params }) => {
       path: "categories",
       select: "name _id",
     });
-    const categories = await Category.find({isDeleted: false});
+    const categories = await Category.find({ isDeleted: false });
     if (!data) {
       return NextResponse.json(
         { success: false, message: "Post not found" },
@@ -36,13 +36,55 @@ export const POST = async (req, { params }) => {
     const { id } = params;
     const { isDeleted } = await req.json();
     connectDb();
+    const post = await Post.findById(id).populate({
+      path: "categories",
+      select: "name _id isDeleted",
+    });
+
+    if (!post) {
+      return NextResponse.json(
+        { success: false, message: "Post not found" },
+        { status: 404 }
+      );
+    }
+
+    if (post.isDeleted) {
+      // check for all hidden categories linked to this post
+      const hiddenCategories = post.categories.filter(
+        (category) => category.isDeleted
+      );
+      if (hiddenCategories.length > 0) {
+        const hiddenCategoryNames = hiddenCategories.map(
+          (category) => category.name
+        );
+        return NextResponse.json(
+          {
+            success: false,
+            message: `Cannot unhide post.\nThe following categories are hidden:\n${hiddenCategoryNames.join(
+              ", "
+            )}.`,
+            hiddenCategoryNames,
+          },
+          { status: 400 }
+        );
+      } else {
+        // hide the post
+        await Post.updateOne({ _id: id }, { $set: { isDeleted } });
+        return NextResponse.json(
+          {
+            success: true,
+            message: "Unhid the post successfully",
+          },
+          { status: 200 }
+        );
+      }
+    }
+
     await Post.updateOne({ _id: id }, { $set: { isDeleted } });
     return NextResponse.json(
       {
         success: true,
-        message: isDeleted
-          ? "Hid the post successfully"
-          : "Unhid the post successfully",
+        message: "Hid the post successfully",
       },
       { status: 200 }
     );

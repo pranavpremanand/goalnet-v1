@@ -19,7 +19,7 @@ const NewPost = () => {
   const { error, isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const response = await getCategories();
+      const response = await getCategories({ includeDeleted: false });
       const data = await response.json();
       dispatch(setCategories(data.categories));
       return data;
@@ -130,14 +130,18 @@ const NewPost = () => {
       if (result.secure_url) {
         values.image = result.secure_url;
         values.categories = selectedCategories;
-        const response = await createPost(values).then((res) => res.json());
+        const newData = {
+          ...values,
+          heading: values.heading.trim(),
+          content: values.content.trim(),
+        };
+        const response = await createPost(newData).then((res) => res.json());
         if (response.success) {
           toast.success(response.message);
           reset();
           setSelectedCategories([]);
           setImgPreview("");
         } else {
-          console.log(response);
           toast.error(response.message);
         }
       } else {
@@ -438,9 +442,7 @@ const NewPost = () => {
         </button>
       </form>
       {showFormModal && (
-        <AddCategoryFormModal
-          closePopup={() => setShowFormModal(false)}
-        />
+        <AddCategoryFormModal closePopup={() => setShowFormModal(false)} />
       )}
     </section>
   );

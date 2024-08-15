@@ -8,6 +8,7 @@ import {
   changePostVisibility,
   deletePost,
   getPostById,
+  unhidePostAndItsCategories,
   updatePost,
 } from "@/apiCalls";
 import { usePathname, useRouter } from "next/navigation";
@@ -24,7 +25,7 @@ const EditPost = ({ postId }) => {
   const { categories } = useSelector((state) => state.store);
   const dispatch = useDispatch();
   const [imgPreview, setImgPreview] = useState("");
-  const { setIsLoading } = useContext(SpinnerContext);
+  const { isLoading: loading, setIsLoading } = useContext(SpinnerContext);
   const [pending, setPending] = useState(false);
   const imgInputRef = useRef(null);
   const pathname = usePathname();
@@ -33,6 +34,11 @@ const EditPost = ({ postId }) => {
   const [showPostVisibilityAlert, setShowPostVisibilityAlert] = useState(false);
   const [showFormModal, setShowFormModal] = useState(false);
   const [post, setPost] = useState({});
+  const [hiddenCategoryNames, setHiddenCategoryNames] = useState([]);
+  const [
+    showUnhidePostAndItsCategoriesAlert,
+    setShowUnhidePostAndItsCategoriesAlert,
+  ] = useState(false);
   //   const [link, setLink] = useState("");
   //   const [otherLinks, setOtherLinks] = useState([]);
   //   const [linkError, setLinkError] = useState("");
@@ -182,7 +188,12 @@ const EditPost = ({ postId }) => {
 
       values.categories = selectedCategories;
 
-      const response = await updatePost(values).then((res) => res.json());
+      const newData = {
+        ...values,
+        heading: values.heading.trim(),
+        content: values.content.trim(),
+      };
+      const response = await updatePost(newData).then((res) => res.json());
       if (response.success) {
         toast.success(response.message);
       } else {
@@ -221,11 +232,39 @@ const EditPost = ({ postId }) => {
         toast.success(response.message);
       } else {
         toast.error(response.message);
+        if (response.hiddenCategoryNames) {
+          setShowPostVisibilityAlert(false);
+          setHiddenCategoryNames(response.hiddenCategoryNames);
+          setTimeout(() => {
+            setShowUnhidePostAndItsCategoriesAlert(true);
+          }, 500);
+        }
       }
     } catch (err) {
       toast.error(err.message);
     } finally {
       setPending(false);
+    }
+  };
+
+  // unhide categories along with the post
+  const unhidePostWithCategories = async () => {
+    setIsLoading(true);
+    try {
+      const response = await unhidePostAndItsCategories({ id: post._id }).then(
+        (res) => res.json()
+      );
+      if (response.success) {
+        toast.success(response.message);
+        setShowUnhidePostAndItsCategoriesAlert(false);
+        setPost({ ...post, isDeleted: false });
+      } else {
+        toast.error(response.message);
+      }
+    } catch (err) {
+      toast.error(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -507,6 +546,14 @@ const EditPost = ({ postId }) => {
       {showFormModal && (
         <AddCategoryFormModal closePopup={() => setShowFormModal(false)} />
       )}
+      {showUnhidePostAndItsCategoriesAlert && (
+        <UnhidePostAndItsCategoriesAlert
+          closePopup={() => setShowUnhidePostAndItsCategoriesAlert(false)}
+          hiddenCategoryNames={hiddenCategoryNames}
+          isLoading={loading}
+          unhidePostWithCategories={unhidePostWithCategories}
+        />
+      )}
     </>
   );
 };
@@ -577,6 +624,44 @@ const VisibilityAlert = ({
                 ? "bg-green-600 border-green-600 hover:bg-green-400 hover:border-green-400"
                 : "bg-yellow-600 border-yellow-600 hover:bg-yellow-700 hover:border-yellow-700"
             }`}
+          >
+            Confirm
+          </button>
+        </div>
+      </div>
+    </PopupWrapper>
+  );
+};
+
+// unhide categories along with the post alert
+const UnhidePostAndItsCategoriesAlert = ({
+  closePopup,
+  hiddenCategoryNames,
+  isLoading,
+  unhidePostWithCategories,
+}) => {
+  return (
+    <PopupWrapper closePopup={closePopup}>
+      <div className="bg-blue-gray-50 rounded-xl p-5 text-black max-w-xs">
+        <h1 className="text-xl font-semibold">Confirmation Alert!</h1>
+        <p className="text-md text-gray-700 mt-2 mb-3">
+          Are you sure you want to unhide{" "}
+          <span className="font-bold">{hiddenCategoryNames.join(", ")}</span>{" "}
+          along with this post?
+        </p>
+        <div className="grid grid-cols-2 gap-4">
+          <button
+            type="button"
+            className="default-btn-styles bg-black border-black text-blue-gray-50 hover:bg-black/90"
+            onClick={closePopup}
+          >
+            Cancel
+          </button>
+          <button
+            disabled={isLoading}
+            onClick={unhidePostWithCategories}
+            type="button"
+            className="default-btn-styles bg-green-600 border-green-600 hover:bg-green-400 hover:border-green-400"
           >
             Confirm
           </button>

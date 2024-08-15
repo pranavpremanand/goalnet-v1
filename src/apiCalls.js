@@ -16,7 +16,7 @@ export const logout = () => {
 
 // create a new category
 export const createCategory = (data) => {
-  return fetch("/api/category", {
+  return fetch("/api/category/create", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -26,9 +26,13 @@ export const createCategory = (data) => {
 };
 
 // get all categories
-export const getCategories = () => {
+export const getCategories = (data) => {
   return fetch("/api/category", {
-    method: "GET",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
   });
 };
 
@@ -131,3 +135,14 @@ export const deletePost = (id) => {
     method: "DELETE",
   });
 };
+
+// unhide post and it's categories
+export const unhidePostAndItsCategories = (data) => {
+  return fetch("/api/post/unhide-post", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+}

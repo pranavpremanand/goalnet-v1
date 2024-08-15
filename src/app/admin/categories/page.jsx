@@ -1,13 +1,13 @@
 "use client";
 import CategoryForm from "@/app/admin/categories/components/CategoryForm";
 import Loading from "@/components/Loading";
-import CategoryItem from "@/components/CategoryItem";
 import Link from "next/link";
 import { PiCaretRightBold } from "react-icons/pi";
 import { getCategories } from "@/apiCalls";
 import { useQuery } from "@tanstack/react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategories } from "@/lib/redux/storeSlice";
+import CategoryItem from "./components/CategoryItem";
 
 const Categories = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const Categories = () => {
   const { error, isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const response = await getCategories();
+      const response = await getCategories({ includeDeleted: true });
       const data = await response.json();
       dispatch(setCategories(data.categories));
       return data;
@@ -58,7 +58,11 @@ const Categories = () => {
           </h1>
         )}
 
-        <CategoryForm dispatch={dispatch} categories={categories} setCategories={setCategories}/>
+        <CategoryForm
+          dispatch={dispatch}
+          categories={categories}
+          setCategories={setCategories}
+        />
         {categories.length > 0 && (
           <div className="flex flex-col gap-4">
             <h1 className="text-2xl font-bold tracking-wider text-center mb-2">

@@ -34,9 +34,9 @@ export default function RootLayout({ children }) {
               className: "",
               style: {
                 border: "1px solid #f1ff00",
-                padding: "16px",
+                padding: "10px",
                 color: "#f1ff00",
-                backgroundColor: "#191919",
+                backgroundColor: "#000000",
               },
             }}
           />
