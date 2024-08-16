@@ -103,6 +103,7 @@ const PostInDetail = async ({ params }) => {
                   title: "Check this out!",
                   text: `${post.heading}:`,
                   url: `https://goalnetonline.vercel.app/${post._id}`,
+                  image: post.image,
                 }}
               />
             </div>

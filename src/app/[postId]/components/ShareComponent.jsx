@@ -11,10 +11,21 @@ const ShareComponent = ({ content }) => {
     toast.success("Link Copied");
   };
 
+  // function to fetch image and convert it to a File object
+  const fetchImageAsFile = async (url) => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const fileName = url.split("/").pop(); // Extract filename from URL
+    return new File([blob], fileName, { type: blob.type });
+  };
+
   const handleShare = async () => {
     if (navigator.share) {
       try {
-        await navigator.share(content);
+        // Fetch image and convert it to a File object
+        const imageFile = await fetchImageAsFile(content.image);
+
+        await navigator.share({ ...content, files: [imageFile] });
       } catch (err) {}
     } else {
       handleCopy();
@@ -47,7 +58,7 @@ const ShareComponent = ({ content }) => {
           alt="wa-icon"
           width={100}
           height={100}
-          className='w-[2rem] h-[2rem] object-contain'
+          className="w-[2rem] h-[2rem] object-contain"
         />
       </Link>
       <Link
@@ -62,10 +73,10 @@ const ShareComponent = ({ content }) => {
           alt="fb-icon"
           width={100}
           height={100}
-          className='w-[2rem] h-[2rem] object-contain'
+          className="w-[2rem] h-[2rem] object-contain"
         />
       </Link>
-      
+
       <Link
         href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
           content.url
@@ -78,7 +89,7 @@ const ShareComponent = ({ content }) => {
           alt="twitter-icon"
           width={100}
           height={100}
-          className='w-[2.2rem] h-[2.2rem] object-contain'
+          className="w-[2.2rem] h-[2.2rem] object-contain"
         />
       </Link>
       <Link
@@ -91,7 +102,7 @@ const ShareComponent = ({ content }) => {
           alt="telegram-icon"
           width={100}
           height={100}
-          className='w-[2rem] h-[2rem] object-contain'
+          className="w-[2rem] h-[2rem] object-contain"
         />
       </Link>
     </div>
