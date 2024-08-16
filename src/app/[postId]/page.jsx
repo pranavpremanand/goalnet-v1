@@ -9,6 +9,24 @@ import { BiCaretLeft } from "react-icons/bi";
 import { FaRegClock } from "react-icons/fa";
 import Category from "@/lib/database/models/category.model";
 
+export const generateMetadata = async ({ params }) => {
+  const { postId } = params;
+  try {
+    connectDb();
+    const post = await Post.findOne({ _id: postId, isDeleted: false })
+    return {
+      title: post.heading,
+      openGraph: {
+        images: [post.image],
+      },
+    };
+  } catch (error) {
+    return {
+      title: "Post not found",  
+    };
+  }
+};
+
 const PostInDetail = async ({ params }) => {
   const { postId } = params;
 
