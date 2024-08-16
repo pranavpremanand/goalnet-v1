@@ -58,7 +58,7 @@ export default function About() {
             </p>
           </div>
           <h2 className="text-2xl">
-            Welcome to{" "}
+            {/* Welcome to{" "} */}
             <b className="text-white">
               Goal<span className="text-primary">Net.</span>
             </b>{" "}

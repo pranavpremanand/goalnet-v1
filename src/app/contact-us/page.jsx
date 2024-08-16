@@ -10,7 +10,7 @@ const ContactUs = () => {
     <div className="wrapper grow relative">
       <div className="flex flex-col gap-8 my-10">
         <div className="flex flex-col gap-6">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-snug">
             Get in Touch with <br />
             <span className="text-white">Goal</span>
             <span className="text-primary">Net.</span>
@@ -54,11 +54,11 @@ const ContactUs = () => {
           </p>
         </div>
         <Image
-          src="/assets/images/logo.png"
-          alt="logo"
+          src="/assets/images/messi-training.jpeg"
+          alt="#"
           width={500}
           height={500}
-          className="blur-sm absolute -rotate-12 inset-0 w-full h-full object-contain sm:object-cover -z-10 brightness-[20%]"
+          className="absolute inset-0 w-full h-full object-cover -z-10 brightness-[20%]"
         />
         <Link
           href="mailto:contactgoalnet@gmail.com"

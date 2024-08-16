@@ -1,20 +1,11 @@
 import Link from "next/link";
 import { socialLinks } from "../constants";
+import Image from "next/image";
 
 const Footer = () => {
   return (
     <div className="border-t border-[#191919] text-gray-500 py-6 h-fit bg-black">
       <div className="wrapper flex items-center justify-between flex-col gap-4 sm:flex-row">
-        {/* <Link href="/">
-          <Image
-            src="/assets/images/logo-1.png"
-            alt="GoalNet Logo"
-            width={500}
-            height={500}
-            className="w-[4rem] h-[4rem] object-contain object-center"
-            loading='lazy'
-          />
-        </Link> */}
         <small>© 2024 - GoalNet | All rights reserved</small>
         <div className="flex gap-4 text-2xl">
           {socialLinks.map((link) => (
@@ -28,6 +19,16 @@ const Footer = () => {
             </Link>
           ))}
         </div>
+        {/* <Link href="/" className="justify-self-end">
+          <Image
+            src="/assets/images/GoalNet - Logo.png"
+            alt="GoalNet Logo"
+            width={500}
+            height={500}
+            className="w-[6rem] md:w-[7.5rem] h-[1.5rem] md:h-[2rem] object-cover object-center"
+            loading="lazy"
+          />
+        </Link> */}
       </div>
     </div>
   );

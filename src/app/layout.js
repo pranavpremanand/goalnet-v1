@@ -20,6 +20,21 @@ export const metadata = {
   description:
     "GoalNet: Your gateway to football. Discover trending stories, transfer rumors, tactics, and more.",
   icons: { icon: "/assets/images/logo.png" },
+  openGraph: {
+    type: "website",
+    url: "https://goalnetonline.vercel.app",
+    title: "GoalNet",
+    description:
+      "GoalNet: Your gateway to football. Discover trending stories, transfer rumors, tactics, and more.",
+    images: [
+      {
+        url: "/assets/images/GoalNet - Logo.png",
+        width: 800,
+        height: 600,
+        alt: "GoalNet Logo",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({ children }) {
