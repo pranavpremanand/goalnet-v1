@@ -7,6 +7,7 @@ const nextConfig = {
     domains: ['res.cloudinary.com']
   },
   env: {
+    WEBSITE_URL: "https://goalnetonline.vercel.app",
     MONGO_URL:
       "mongodb+srv://pranavpremanand:march16th@cluster0.1njw5bf.mongodb.net/goalnet",
     JWT_SECRET: "goalnetofficial",
