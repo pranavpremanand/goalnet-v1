@@ -52,7 +52,7 @@ const NavItems = ({ onClose }) => {
               onClick={onClose}
               className={`${
                 isActive ? "text-primary" : "text-gray-100 md:text-blue-gray-50"
-              } font-[600] tracking-wide text-xl md:text-base`}
+              } font-[600] tracking-wide text-3xl md:text-base`}
             >
               {link.label}
             </Link>
