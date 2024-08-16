@@ -1,7 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata = {
-    title: "Contact Us",
+  title: "Contact Us",
 };
 
 const ContactUs = () => {
@@ -10,70 +11,51 @@ const ContactUs = () => {
       <div className="flex flex-col gap-8 my-10">
         <div className="flex flex-col gap-3">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-            Connect with <br />
+            Get in Touch with <br />
             <span className="text-white">Goal</span>
             <span className="text-primary">Net.</span>
           </h2>
           <p className="text-gray-300">
-            Whether you’re curious about the latest transfer rumors, want to
-            dive deeper into tactical analysis, or have feedback on our content,
-            we’d love to hear from you! Click the button below to drop us an
-            email—let’s keep the football conversation going. Your passion fuels
-            GoalNet!
+            At GoalNet, we value your input and are always eager to hear from
+            our fellow football enthusiasts. Whether you have a question,
+            feedback, or want to discuss football news and trends, we’re here to
+            connect!
           </p>
+          <h5 className="font-semibold text-lg">How can we help?</h5>
+          <p>
+            <span className="font-semibold text-lg">&bull; General Inquiries: </span>
+            {
+              "Got a question about our content or want to know more about GoalNet? We’re here to assist you."
+            }
+          </p>
+          <p>
+            <span className="font-semibold text-lg">&bull; Feedback: </span>
+            {
+              "Your thoughts help us improve! Share your opinions on our articles, features, or anything else you’d like to see on GoalNet."
+            }
+          </p>
+          <p>
+            <span className="font-semibold text-lg">&bull; Collaborations: </span>
+            {
+              "Interested in working with us? Whether it's a partnership or a feature request, we’re open to collaborating with like-minded football enthusiasts."
+            }
+          </p>
+          <h5 className="font-semibold text-lg">How to Reach Us:</h5>
+          <p>
+            Simply click the button below to send us an email. We’ll do our best
+            to get back to you as quickly as possible. Let’s keep the football
+            conversation going and make GoalNet even better together!
+          </p>
+          <h5 className="font-semibold text-lg">[Email Us Now]</h5>
         </div>
         <Image
           src="/assets/images/logo.png"
           alt="logo"
           width={500}
           height={500}
-          className="blur-sm absolute -rotate-12 inset-0 w-full h-full object-contain sm:object-cover -z-10 brightness-[25%]"
+          className="blur-sm absolute -rotate-12 inset-0 w-full h-full object-contain sm:object-cover -z-10 brightness-[20%]"
         />
-
-        {/* <form className="flex flex-col items-center gap-3 w-full md:w-1/2 bg-[#191919] bg-opacity-70 p-5 rounded-3xl"> */}
-          {/* <h2 className="text-2xl">Contact Us</h2>
-          <div className="flex flex-col w-full">
-            <label htmlFor="name" className="text-gray-300 ml-3">
-              Full Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              className="px-3 py-2 text-black outline-none border-primary rounded-md border"
-            />
-          </div>
-          <div className="flex flex-col w-full">
-            <label htmlFor="name" className="text-gray-300 ml-3">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="px-3 py-2 text-black outline-none border-primary rounded-md border"
-            />
-          </div>
-          <div className="flex flex-col w-full">
-            <label htmlFor="name" className="text-gray-300 ml-3">
-              Subject
-            </label>
-            <input
-              type="text"
-              id="subject"
-              className="px-3 py-2 text-black outline-none border-primary rounded-md border"
-            />
-          </div>
-          <div className="flex flex-col w-full">
-            <label htmlFor="name" className="text-gray-300 ml-3">
-              Message
-            </label>
-            <textarea
-              rows="6"
-              id="message"
-              className="px-3 py-2 text-black outline-none border-primary rounded-md border"
-            />
-          </div> */}
-          <button className="primary-btn h-fit w-[15rem]">Contact Us</button>
-        {/* </form> */}
+        <Link href="mailto:contactgoalnet@gmail.com" rel="noopener noreferrer" target="_blank" className="primary-btn text-center h-fit w-[15rem]">Contact Us</Link>
       </div>
     </div>
   );
