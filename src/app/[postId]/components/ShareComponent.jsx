@@ -11,25 +11,10 @@ const ShareComponent = ({ content }) => {
     toast.success("Link Copied");
   };
 
-  // function to fetch image and convert it to a File object
-  const fetchImageAsFile = async (url) => {
-    const response = await fetch(url);
-    const blob = await response.blob();
-    const fileName = url.split("/").pop(); // Extract filename from URL
-    return new File([blob], fileName, { type: blob.type });
-  };
-
   const handleShare = async () => {
     if (navigator.share) {
       try {
-        // Fetch image and convert it to a File object
-        const imageFile = await fetchImageAsFile(content.image);
-
-        if (imageFile) {
-          await navigator.share({ ...content, files: [imageFile] });
-        } else {
-          handleCopy();
-        }
+        await navigator.share(content);
       } catch (err) {
         handleCopy();
       }
