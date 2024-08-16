@@ -25,8 +25,14 @@ const ShareComponent = ({ content }) => {
         // Fetch image and convert it to a File object
         const imageFile = await fetchImageAsFile(content.image);
 
-        await navigator.share({ ...content, files: [imageFile] });
-      } catch (err) {}
+        if (imageFile) {
+          await navigator.share({ ...content, files: [imageFile] });
+        } else {
+          handleCopy();
+        }
+      } catch (err) {
+        handleCopy();
+      }
     } else {
       handleCopy();
     }
