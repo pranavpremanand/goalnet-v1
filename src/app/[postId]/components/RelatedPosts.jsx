@@ -26,7 +26,7 @@ const RelatedPosts = async ({ categories, currentPostId }) => {
 
   return (
     <div className="flex flex-col gap-3 border-t border-[#191919]">
-      <h2 className="text-xl md:text-2xl mt-10 font-medium">Related Posts</h2>
+      <h2 className="text-xl md:text-2xl mt-10 font-medium">Related Stories</h2>
       <div className="w-full grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
         {posts.map((post) => (
           <PostItem key={post._id} post={post} />

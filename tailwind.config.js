@@ -18,6 +18,10 @@ module.exports = withMT({
       colors: {
         primary: "#f1ff00",
       },
+      fontFamily: {
+        jost: ["Jost", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
+      },
     },
   },
   plugins: [],

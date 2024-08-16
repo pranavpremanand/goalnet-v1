@@ -11,7 +11,7 @@ import { FaRegClock } from "react-icons/fa";
 
 const PostsList = () => {
   const [page, setPage] = useState(1);
-  const [category, setCategory] = useState({ name: "Latest News", _id: "0" });
+  const [category, setCategory] = useState({ name: "Latest Stories", _id: "0" });
 
   // get initial posts
   const { data, error, refetch } = useQuery({
@@ -39,7 +39,7 @@ const PostsList = () => {
     let selectedCategory = categories.find((category) => category._id === val);
 
     if (!selectedCategory) {
-      selectedCategory = { name: "Latest News", _id: "0" };
+      selectedCategory = { name: "Latest Stories", _id: "0" };
     }
     setCategory(selectedCategory); // Update state with new category
     setPage(1);
@@ -56,15 +56,15 @@ const PostsList = () => {
           >
             <option
               value="0"
-              className="text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis"
+              className="font-jost text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis"
             >
-              Latest News
+              Latest Stories
             </option>
             {categories.map((category) => (
               <option
                 key={category._id}
                 value={category._id}
-                className="text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis"
+                className="font-jost text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis"
               >
                 {category.name}
               </option>

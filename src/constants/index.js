@@ -15,7 +15,7 @@ export const headerLinks = [
     adminOnly: true,
   },
   { label: "About Us", url: "/about-us", adminOnly: false },
-  { label: "Contact Us", url: "/#", adminOnly: false },
+  { label: "Contact Us", url: "/contact-us", adminOnly: false },
   // { label: "Contact Us", url: "/contact-us", adminOnly: false },
   // { label: "Fixtures", url: "/fixtures", adminOnly: false },
 ];
