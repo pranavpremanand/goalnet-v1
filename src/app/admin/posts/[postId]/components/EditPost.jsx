@@ -258,6 +258,9 @@ const EditPost = ({ postId }) => {
         toast.success(response.message);
         setShowUnhidePostAndItsCategoriesAlert(false);
         setPost({ ...post, isDeleted: false });
+        setSelectedCategories(
+          selectedCategories.map((c) => (c.isDeleted = false))
+        );
       } else {
         toast.error(response.message);
       }
@@ -398,20 +401,32 @@ const EditPost = ({ postId }) => {
         <div className="grid gap-1">
           <label className="ml-1">Category</label>
           <div className="p-2 flex flex-wrap max-h-[15rem] overflow-scroll gap-3 bg-white rounded-sm">
-            {categories.map((category) => (
-              <button
-                type="button"
-                className={`${
-                  selectedCategories.includes(category._id)
-                    ? "bg-[#191919] text-white"
-                    : "bg-blue-gray-100 text-[#191919]"
-                } rounded-full px-3 py-2 text-sm`}
-                key={category._id}
-                onClick={() => handleCategorySelect(category._id)}
-              >
-                {category.name}
-              </button>
-            ))}
+            {categories.map((category) =>
+              category.isDeleted &&
+              selectedCategories.includes(category._id) ? (
+                <button
+                  type="button"
+                  className="bg-red-600 text-[#191919] rounded-full px-3 py-2 text-sm"
+                  key={category._id}
+                  onClick={() => handleCategorySelect(category._id)}
+                >
+                  {category.name}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className={`${
+                    selectedCategories.includes(category._id)
+                      ? "bg-[#191919] text-white"
+                      : "bg-blue-gray-100 text-[#191919]"
+                  } rounded-full px-3 py-2 text-sm`}
+                  key={category._id}
+                  onClick={() => handleCategorySelect(category._id)}
+                >
+                  {category.name}
+                </button>
+              )
+            )}
             <button
               type="button"
               className="text-white bg-[#191919] rounded-full w-[2.2rem] h-[2.2rem] flex justify-center items-center"

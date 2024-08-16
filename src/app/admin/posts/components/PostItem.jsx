@@ -42,7 +42,7 @@ const PostItem = ({ post, handleCategoryChange }) => {
               </p>
             </div>
             <div className="flex flex-col lg:flex-row justify-between md:pr-5 items-start lg:items-center gap-3">
-              <span className="text-blue-gray-50 flex self-end lg:self-start items-center gap-2 text-sm">
+              <span className="text-[#a1a1a1] flex self-end lg:self-start items-center gap-2 text-[.8rem]">
                 <FaRegClock />
                 {formatDistanceToNow(post.createdAt, {
                   addSuffix: true,

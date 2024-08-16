@@ -44,16 +44,15 @@ const PostInDetail = async ({ params }) => {
 
   return (
     <section className="wrapper grow text-blue-gray-50">
-      <div className="flex justify-end md:justify-start items-center gap-1 mb-5">
+      <div className="flex justify-start items-center gap-1 mb-5 py-2 sm:py-3 border-y border-[#2e2e2e]">
         <Link href="/" className="text-md flex items-center font-medium">
           <BiCaretLeft className="text-3xl sm:text-2xl" /> Back
         </Link>
       </div>
-
-      <div className="pb-16">
-        <div className="flex flex-col gap-8 pb-7">
+      <div className="pb-12">
+        <div className="flex flex-col gap-3 pb-7">
           <div
-            className="w-full h-[55vh] sm:h-[65vh] md:h-[73vh]"
+            className="w-full h-[50vh] sm:h-[65vh] md:h-[73vh] mt-2 relative"
             style={{
               backgroundImage: `url(${
                 post.image || "/assets/images/logo.png"
@@ -67,9 +66,18 @@ const PostInDetail = async ({ params }) => {
               height={1000}
               className="w-full h-full object-cover object-top md:object-center md:object-contain backdrop-blur-3xl"
             />
+            <div className="inline sm:hidden absolute right-1 bottom-1">
+              <ShareComponent
+                content={{
+                  title: "Check this out!",
+                  text: `${post.heading}:`,
+                  url: `https://goalnetonline.vercel.app/${post._id}`,
+                }}
+              />
+            </div>
           </div>
-          <div className="flex flex-col gap-4 md:gap-8">
-            <div className="flex flex-wrap max-w-md gap-2">
+          <div className="flex flex-col gap-4 md:gap-5">
+            <div className="flex flex-wrap max-w-md lg:max-w-lg gap-2">
               {post.categories.length > 0 &&
                 post.categories.map((category) => (
                   <span
@@ -83,7 +91,13 @@ const PostInDetail = async ({ params }) => {
             <h1 className="font-bold text-2xl sm:text-3xl lg:text-4xl">
               {post.heading}
             </h1>
-            <div className="flex flex-col-reverse md:flex-row justify-between md:items-center gap-2 md:gap-4 md:mt-2">
+          </div>
+          <div className="flex flex-row justify-end sm:justify-between items-center gap-4 sm:my-1 pb-2 sm:py-2 border-b sm:border-y border-[#2e2e2e]">
+            <span className="flex items-center gap-2 text-[.8rem] md:text-sm text-[#a1a1a1]">
+              <FaRegClock />
+              {formatDate(post.createdAt, "dd MMMM yyyy")}
+            </span>
+            <div className="hidden sm:inline-block">
               <ShareComponent
                 content={{
                   title: "Check this out!",
@@ -91,14 +105,13 @@ const PostInDetail = async ({ params }) => {
                   url: `https://goalnetonline.vercel.app/${post._id}`,
                 }}
               />
-              <span className="flex items-center gap-2 text-sm text-[#a1a1a1]">
-                <FaRegClock />
-                {formatDate(post.createdAt, "dd MMMM yyyy")}
-              </span>
             </div>
           </div>
-          <p className="text-blue-gray-200 text-base whitespace-pre-wrap">{post.content}</p>
+          <p className="text-blue-gray-200 text-base whitespace-pre-wrap mt-4">
+            {post.content}
+          </p>
         </div>
+
         <RelatedPosts categories={post.categories} currentPostId={post._id} />
       </div>
     </section>

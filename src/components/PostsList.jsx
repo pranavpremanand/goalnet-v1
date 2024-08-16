@@ -184,7 +184,7 @@ const CardItem = ({ post, handleCategoryChange }) => {
             Read more
           </Link>
         </div>
-        <span className="text-blue-gray-50 flex items-center gap-2 text-sm">
+        <span className="text-[#a1a1a1] flex items-center gap-2 text-[.8rem] self-end">
           <FaRegClock />
           {formatDistanceToNow(post.createdAt, {
             addSuffix: true,
