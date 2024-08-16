@@ -144,11 +144,11 @@ export default PostsList;
 const CardItem = ({ post, handleCategoryChange }) => {
   return (
     <div
-      className={`grid grid-cols-1 md:grid-cols-[47%,50%] lg:grid-cols-[40%,45%] gap-5 border-b border-[#2e2e2e] pb-5 group`}
+      className={`grid grid-cols-1 md:grid-cols-[47%,50%] lg:grid-cols-[40%,45%] gap-5 border-b border-[#2e2e2e] pb-5`}
     >
       <Link
         href={`/${post._id}`}
-        className="w-full h-[38vh] sm:h-[48vh] md:h-[40vh] lg:h-[45vh] group-hover:brightness-75"
+        className="w-full h-[38vh] sm:h-[48vh] md:h-[40vh] lg:h-[45vh] hover:brightness-75"
         style={{ backgroundImage: `url(${post.image}` }}
       >
         <Image
@@ -173,7 +173,7 @@ const CardItem = ({ post, handleCategoryChange }) => {
             ))}
           </div>
           <Link href={`/${post._id}`}>
-            <h1 className="text-blue-gray-50 group-hover:text-primary duration-200 transition-colors font-semibold text-lg sm:text-xl lg:text-2xl truncate-lines-2 line-clamp-2">
+            <h1 className="text-blue-gray-50 hover:text-primary duration-200 transition-colors font-semibold text-lg sm:text-xl lg:text-2xl truncate-lines-2 line-clamp-2">
               {post.heading}
             </h1>
           </Link>

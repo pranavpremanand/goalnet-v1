@@ -105,7 +105,7 @@ const Banner = () => {
               className="w-full h-[65vh] md:h-[85vh] object-cover object-top md:object-center md:object-contain brightness-[83%] backdrop-blur-3xl"
               style={{ opacity: opacities[i] }}
             />
-            <div className="wrapper absolute left-1/2 -translate-x-1/2 top-2/3 sm:top-1/2 -translate-y-[40%] sm:-translate-y-[30%] lg:-translate-y-1/4 flex flex-col gap-2 md:gap-3">
+            <div className="wrapper absolute left-1/2 -translate-x-1/2 top-2/3 sm:top-1/2 -translate-y-[45%] sm:-translate-y-[30%] lg:-translate-y-1/4 flex flex-col gap-2 md:gap-3">
               <span className="text-blue-gray-50 flex items-center gap-2 rounded-sm text-[.8rem]">
                 <FaRegClock />
                 {formatDistanceToNow(banner.createdAt, {
@@ -122,7 +122,7 @@ const Banner = () => {
                   </span>
                 ))}
               </div>
-              <h1 className="drop-shadow-4xl text-blue-gray-50 font-bold text-2xl sm:text-3xl lg:text-5xl max-w-[96%] sm:max-w-[70%] lg:max-w-[75%] truncate-lines-2 line-clamp-2 sm:line-clamp-3">
+              <h1 className="drop-shadow-4xl text-blue-gray-50 font-bold text-2xl sm:text-3xl lg:text-5xl max-w-[96%] sm:max-w-[70%] lg:max-w-[75%] truncate-lines-2 line-clamp-3">
                 {banner.heading}
               </h1>
               <Link

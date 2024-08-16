@@ -5,12 +5,20 @@ import { Toaster } from "react-hot-toast";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "keen-slider/keen-slider.min.css";
-import Head from "next/head";
 
 const jost = Jost({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
+
+export const viewport = {
+  initialScale: 1,
+  width: "device-width",
+  userScalable: false,
+  maximumScale: 1,
+  themeColor: 'black',
+  colorScheme: 'dark',
+}
 
 export const metadata = {
   title: {
@@ -25,14 +33,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
-        />
-      </Head>
       <body
-        className={`${jost.className} bg-black text-blue-gray-100 min-h-screen flex flex-col`}
+        className={`${jost.className} text-blue-gray-100 min-h-screen flex flex-col`}
       >
         <Providers>
           <Toaster
