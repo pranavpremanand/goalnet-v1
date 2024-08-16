@@ -36,7 +36,7 @@ const NavItems = ({ onClose }) => {
   }
 
   return (
-    <div className="w-fit flex flex-col bg-black md:bg-transparent md:flex-row gap-3 md:gap-10">
+    <div className="w-fit flex flex-col bg-black md:bg-transparent md:flex-row gap-5 md:gap-10">
       {headerLinks
         .filter(
           (link) =>

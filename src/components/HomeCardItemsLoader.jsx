@@ -1,7 +1,7 @@
 import React from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
-const HomeCardItemLoader = ({ category }) => {
+const HomeCardItemsLoader = ({ category }) => {
   return (
     <section
       id="posts"
@@ -77,4 +77,4 @@ const HomeCardItemLoader = ({ category }) => {
   );
 };
 
-export default HomeCardItemLoader;
+export default HomeCardItemsLoader;

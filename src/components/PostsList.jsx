@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { getAllPosts } from "@/apiCalls";
-import HomeCardItemLoader from "./HomeCardItemLoader";
+import HomeCardItemsLoader from "./HomeCardItemsLoader";
 import { useQuery } from "@tanstack/react-query";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
@@ -30,7 +30,7 @@ const PostsList = () => {
   if (error) return null;
 
   if (!data) {
-    return <HomeCardItemLoader category={category} />;
+    return <HomeCardItemsLoader category={category} />;
   }
 
   let { posts, categories, totalPages } = data.data;
