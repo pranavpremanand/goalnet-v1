@@ -1,5 +1,9 @@
 import Image from "next/image";
 
+export const metadata = {
+    title: "Contact Us",
+};
+
 const ContactUs = () => {
   return (
     <div className="wrapper grow relative">
