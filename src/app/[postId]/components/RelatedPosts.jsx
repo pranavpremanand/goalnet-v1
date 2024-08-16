@@ -63,14 +63,6 @@ const PostItem = ({ post }) => {
             {category.name}
           </span>
         ))}
-        {post.categories.map((category) => (
-          <span
-            key={category._id}
-            className="bg-blue-500 text-blue-gray-50 px-2 py-[.2rem] rounded-sm text-[.8rem] sm:text-sm w-fit"
-          >
-            {category.name}
-          </span>
-        ))}
       </div>
       <Link href={`/${post._id}`}>
         <h2 className="text-blue-gray-50 text-wrap group-hover:text-primary duration-200 transition-colors font-semibold text-lg sm:text-xl lg:text-2xl truncate-lines-2 line-clamp-2">
