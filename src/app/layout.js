@@ -20,6 +20,31 @@ export const metadata = {
   description:
     "GoalNet: Your gateway to football. Discover trending stories, transfer rumors, tactics, and more.",
   icons: { icon: "/assets/images/logo.png" },
+  openGraph: {
+    title: "GoalNet",
+    description:
+      "GoalNet: Your gateway to football. Discover trending stories, transfer rumors, tactics, and more.",
+    url: process.env.WEBSITE_URL,
+    images: [
+      {
+        url: `${process.env.WEBSITE_URL}/assets/images/logo.png`,
+        width: 800,
+        height: 600,
+        alt: "GoalNet Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GoalNet",
+    description:
+      "GoalNet: Your gateway to football. Discover trending stories, transfer rumors, tactics, and more.",
+    images: [
+      {
+        url: `${process.env.WEBSITE_URL}/assets/images/logo.png`,
+      },
+    ],
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -30,17 +55,6 @@ export default function RootLayout({ children }) {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
         />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="GoalNet" />
-        <meta
-          property="og:description"
-          content="GoalNet: Your gateway to football. Discover trending stories, transfer rumors, tactics, and more."
-        />
-        <meta
-          property="og:image"
-          content={`${process.env.WEBSITE_URL}/assets/images/logo.png`}
-        />
-        <meta property="og:url" content={process.env.WEBSITE_URL} />
       </Head>
       <body
         className={`${jost.className} bg-black text-blue-gray-100 min-h-screen flex flex-col`}

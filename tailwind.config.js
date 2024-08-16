@@ -24,5 +24,16 @@ module.exports = withMT({
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities(
+        {
+          ".drop-shadow-4xl": {
+            textShadow: "5px 5px 8px rgba(0, 0, 0, 0.7)",
+          },
+        },
+        ["responsive", "hover"]
+      );
+    },
+  ],
 });
