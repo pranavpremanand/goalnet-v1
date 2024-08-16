@@ -24,6 +24,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       <body
         className={`${jost.className} bg-black text-blue-gray-100 min-h-screen flex flex-col`}
       >
