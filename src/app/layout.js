@@ -20,31 +20,6 @@ export const metadata = {
   description:
     "GoalNet: Your gateway to football. Discover trending stories, transfer rumors, tactics, and more.",
   icons: { icon: "/assets/images/logo.png" },
-  openGraph: {
-    title: "GoalNet",
-    description:
-      "GoalNet: Your gateway to football. Discover trending stories, transfer rumors, tactics, and more.",
-    url: process.env.WEBSITE_URL,
-    images: [
-      {
-        url: `${process.env.WEBSITE_URL}/assets/images/logo.png`,
-        width: 800,
-        height: 600,
-        alt: "GoalNet Logo",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "GoalNet",
-    description:
-      "GoalNet: Your gateway to football. Discover trending stories, transfer rumors, tactics, and more.",
-    images: [
-      {
-        url: `${process.env.WEBSITE_URL}/assets/images/logo.png`,
-      },
-    ],
-  },
 };
 
 export default function RootLayout({ children }) {
@@ -53,7 +28,7 @@ export default function RootLayout({ children }) {
       <Head>
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
         />
       </Head>
       <body
