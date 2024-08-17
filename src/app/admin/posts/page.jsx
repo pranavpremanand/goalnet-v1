@@ -157,7 +157,7 @@ const Loader = ({ category }) => {
           </Link>
         </div>
 
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col gap-4 md:flex-row justify-between items-center">
           <Link href="/admin/posts/new-post" className="primary-btn">
             Upload a post
           </Link>
