@@ -13,7 +13,7 @@ export const GET = async () => {
         path: "categories",
         select: "name _id",
       })
-      .limit(4)
+      .limit(6)
       .sort({ createdAt: -1 });
 
     return NextResponse.json(
