@@ -20,26 +20,6 @@
   }
 }
 
-/* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-  --tw-bg-opacity: 1;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-} */
-
-/* html,
-body:root {
-  height: 100%;
-} */
-
 html {
   list-style: none;
   padding: 0;
@@ -47,22 +27,12 @@ html {
   scroll-behavior: smooth;
 }
 
-/* body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
 
 ::-webkit-scrollbar {
   width: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-  /* background: rgb(127 29 29 / var(--tw-bg-opacity)); */
   background: #f1ff00;
   border-radius: 6px;
 }
@@ -77,33 +47,6 @@ input[type="password"],
 input[type="email"] {
   background: #f1f1f1;
 }
-
-/* .animate-ball {
-  animation: ball-bounce 0.9s;
-  animation-direction: alternate;
-  animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
-  animation-iteration-count: infinite;
-  -webkit-animation-name: ball-bounce;
-  -webkit-animation-duration: 0.9s;
-  -webkit-animation-direction: alternate;
-  -webkit-animation-timing-function: cubic-bezier(0.5, 0.05, 1, 0.5);
-  -webkit-animation-iteration-count: infinite;
-}
-
-@keyframes ball-bounce {
-  0% {
-    -webkit-transform: translate3d(0, -180px, 0);
-    transform: translate3d(0, -180px, 0);
-  }
-  90% {
-    -webkit-transform: translate3d(0, -100px, 0);
-    transform: translate3d(0, -100px, 0);
-  }
-  100% {
-    -webkit-transform: scaleX(1.2);
-    transform: scaleX(1.2);
-  }
-} */
 
 .banner-loader {
   width: 1.2rem;
@@ -149,3 +92,35 @@ input[type="email"] {
     background-position-x: -200%;
   }
 }
+
+/* loading.jsx loader styles */
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 4px solid #FFF;
+  border-right: 4px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border-bottom: 4px solid #f1ff00;
+  border-left: 4px solid transparent;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 

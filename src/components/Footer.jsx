@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { socialLinks } from "../constants";
-import Image from "next/image";
 
 const Footer = () => {
   return (

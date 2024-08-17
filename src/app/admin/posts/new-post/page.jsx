@@ -121,19 +121,18 @@ const NewPost = () => {
       formData.append("file", values.image);
       formData.append("upload_preset", "goalnet");
 
-      const res = await fetch(process.env.CLOUDINARY_UPLOAD_URL, {
+      const res = await fetch(process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL, {
         method: "POST",
         body: formData,
       });
       const result = await res.json();
-
       if (result.secure_url) {
-        values.image = result.secure_url;
-        values.categories = selectedCategories;
         const newData = {
           ...values,
           heading: values.heading.trim(),
           content: values.content.trim(),
+          image: result.secure_url,
+          categories: selectedCategories,
         };
         const response = await createPost(newData).then((res) => res.json());
         if (response.success) {
@@ -277,9 +276,9 @@ const NewPost = () => {
                 <Image
                   src={imgPreview}
                   alt="uploaded image"
-                  layout="fill"
-                  objectFit="contain"
-                  className="rounded-md backdrop-blur-3xl"
+                  width={1000}
+                  height={1000}
+                  className="h-full rounded-md backdrop-blur-3xl object-contain"
                 />
               </div>
               <button
