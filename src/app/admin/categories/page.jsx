@@ -1,6 +1,5 @@
 "use client";
 import CategoryForm from "@/app/admin/categories/components/CategoryForm";
-import Loading from "@/components/Loading";
 import Link from "next/link";
 import { PiCaretRightBold } from "react-icons/pi";
 import { getCategories } from "@/apiCalls";
@@ -8,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategories } from "@/lib/redux/storeSlice";
 import CategoryItem from "./components/CategoryItem";
+import Loading from "@/app/loading";
 
 const Categories = () => {
   const dispatch = useDispatch();
@@ -40,13 +40,13 @@ const Categories = () => {
     <section className="grow">
       <div className="wrapper">
         <div className="flex items-center gap-1">
-          <Link href="/admin" className="text-md text-blue-gray-50">
+          <Link href="/admin" className="text-md">
             Home
-          </Link>{" "}
+          </Link>
           <PiCaretRightBold className="text-sm mt-[.15rem]" />
           <Link
             href="/admin/categories"
-            className="text-md text-primary underline"
+            className="text-md text-primary"
           >
             Categories
           </Link>

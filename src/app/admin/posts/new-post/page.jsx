@@ -238,7 +238,7 @@ const NewPost = () => {
         <PiCaretRightBold className="text-sm mt-[.15rem]" />
         <Link
           href="/admin/posts/new-post"
-          className="text-md text-primary underline"
+          className="text-md text-primary"
         >
           New Post
         </Link>

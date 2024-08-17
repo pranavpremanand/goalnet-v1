@@ -1,6 +1,6 @@
 "use client";
 import { getAllPosts } from "@/apiCalls";
-import PostItem from "@/app/admin/posts/components/PostItem";
+import PostItem from "@/components/PostItem";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -55,11 +55,11 @@ const Posts = () => {
     <section className="grow">
       <div className="wrapper">
         <div className="flex items-center gap-1 mb-10">
-          <Link href="/admin" className="text-md text-blue-gray-50">
+          <Link href="/admin" className="text-md">
             Home
           </Link>
           <PiCaretRightBold className="text-sm mt-[.15rem]" />
-          <Link href="/admin/posts" className="text-md text-primary underline">
+          <Link href="/admin/posts" className="text-md text-primary">
             Posts
           </Link>
         </div>

@@ -60,7 +60,7 @@ const NavItems = ({ onClose }) => {
         })}
       {isAdmin && (
         <span
-          className="text-gray-100 cursor-pointer md:text-blue-gray-50 font-[600] tracking-wide text-base"
+          className="text-gray-100 cursor-pointer md:text-blue-gray-50 font-[600] tracking-wide text-3xl md:text-base"
           onClick={handleLogout}
         >
           Logout

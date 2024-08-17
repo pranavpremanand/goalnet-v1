@@ -9,7 +9,7 @@ const AdminHome = () => {
   ];
   return (
     <section className="wrapper grow">
-      <Link href="/admin" className="text-md text-primary underline">
+      <Link href="/admin" className="text-md text-primary">
         Home
       </Link>
 

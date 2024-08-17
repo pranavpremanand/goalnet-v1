@@ -8,23 +8,20 @@ import Link from "next/link";
 import { BiCaretLeft } from "react-icons/bi";
 import { FaRegClock } from "react-icons/fa";
 import Category from "@/lib/database/models/category.model";
+import NotFound from "../not-found";
 
 export const generateMetadata = async ({ params }) => {
   const { postId } = params;
   try {
     connectDb();
-    const post = await Post.findOne({ _id: postId, isDeleted: false })
+    const post = await Post.findOne({ _id: postId, isDeleted: false });
     return {
       title: post.heading,
       openGraph: {
         images: [post.image],
       },
     };
-  } catch (error) {
-    return {
-      title: "Post not found",  
-    };
-  }
+  } catch (error) {}
 };
 
 const PostInDetail = async ({ params }) => {
@@ -38,26 +35,8 @@ const PostInDetail = async ({ params }) => {
       path: "categories",
       select: "name _id",
     });
-
-    if (!post) {
-      return (
-        <div className="wrapper grow flex items-center justify-center flex-col gap-2">
-          <p className="text-2xl">Post not found</p>
-          <a className="secondary-btn" href="/">
-            Home page
-          </a>
-        </div>
-      );
-    }
   } catch (error) {
-    return (
-      <div className="wrapper grow flex items-center justify-center flex-col gap-2">
-        <p className="text-2xl">Failed to load post. Try reloading the page</p>
-        <a className="secondary-btn" href={`/${postId}`}>
-          Reload
-        </a>
-      </div>
-    );
+    return <NotFound />;
   }
 
   return (
