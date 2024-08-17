@@ -152,7 +152,7 @@ const Loader = ({ category }) => {
             Home
           </Link>
           <PiCaretRightBold className="text-sm mt-[.15rem]" />
-          <Link href="/admin/posts" className="text-md text-primary underline">
+          <Link href="/admin/posts" className="text-md text-primary">
             Posts
           </Link>
         </div>
