@@ -14,12 +14,8 @@ const ShareComponent = ({ content }) => {
   const handleShare = async () => {
     if (navigator.share) {
       try {
-        await navigator.share({
-          ...content,
-          files: [new File([], content.image, { type: "image/jpeg" })],
-        });
+        await navigator.share(content);
       } catch (err) {
-        handleCopy();
       }
     } else {
       handleCopy();
