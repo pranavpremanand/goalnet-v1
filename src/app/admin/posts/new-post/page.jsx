@@ -1,7 +1,7 @@
 "use client";
 import { createPost, getCategories } from "@/apiCalls";
+import Loading from "@/app/loading";
 import AddCategoryFormModal from "@/components/AddCategoryFormModal";
-import Loading from "@/components/Loading";
 import { SpinnerContext } from "@/components/Providers";
 import { setCategories } from "@/lib/redux/storeSlice";
 import { useQuery } from "@tanstack/react-query";

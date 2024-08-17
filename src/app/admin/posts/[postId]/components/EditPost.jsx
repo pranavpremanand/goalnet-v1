@@ -1,6 +1,5 @@
 "use client";
 import { useContext, useRef, useState } from "react";
-import Loading from "@/components/Loading";
 import { SpinnerContext } from "@/components/Providers";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
@@ -19,6 +18,7 @@ import PopupWrapper from "@/components/PopupWrapper";
 import AddCategoryFormModal from "@/components/AddCategoryFormModal";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategories } from "@/lib/redux/storeSlice";
+import Loading from "@/app/loading";
 
 const EditPost = ({ postId }) => {
   const router = useRouter();

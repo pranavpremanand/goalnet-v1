@@ -3,16 +3,12 @@ import { usePathname } from "next/navigation";
 import { headerLinks } from "../constants";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
-import { SpinnerContext } from "./Providers";
-import Loading from "./Loading";
 import { logout } from "../apiCalls";
 import toast from "react-hot-toast";
 
 const NavItems = ({ onClose }) => {
   const pathname = usePathname();
   const router = useRouter();
-  const { isLoading, setIsLoading } = useContext(SpinnerContext);
   const isAdmin = pathname.includes("/admin") && pathname !== "/admin/login";
 
   // do logout
@@ -30,10 +26,6 @@ const NavItems = ({ onClose }) => {
       setIsLoading(false);
     }
   };
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <div className="w-fit flex flex-col bg-black md:bg-transparent md:flex-row gap-5 md:gap-10">
