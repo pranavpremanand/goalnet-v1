@@ -18,7 +18,7 @@ const ContactUs = () => {
         <div className="flex flex-col gap-6 max-w-4xl">
           <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold">
             Get in Touch with <br />
-            <h1 className={`${poppins.className} text-3xl sm:text-4xl lg:text-5xl mt-3`}>
+            <h1 className={`${poppins.className} text-3xl sm:text-4xl lg:text-5xl mt-1`}>
               <span className="text-white">Goal</span>
               <span className="text-primary">Net.</span>
             </h1>

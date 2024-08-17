@@ -1,4 +1,10 @@
 import Image from "next/image";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
 
 export const metadata = {
   title: "About Us",
@@ -18,7 +24,7 @@ export default function About() {
         <div className="flex flex-col gap-5">
           <h1 className="text-3xl">
             Welcome to{" "}
-            <b className="text-white">
+            <b className={`${poppins.className} text-white`}>
               Goal<span className="text-primary">Net.</span>
             </b>
           </h1>
@@ -58,8 +64,8 @@ export default function About() {
             </p>
           </div>
           <h2 className="text-2xl">
-            {/* Welcome to{" "} */}
-            <b className="text-white">
+            Welcome to{" "}
+            <b className={`${poppins.className} text-white`}>
               Goal<span className="text-primary">Net.</span>
             </b>{" "}
             – where football lives and breathes.
