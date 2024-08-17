@@ -40,10 +40,10 @@ export default RelatedPosts;
 
 const PostItem = ({ post }) => {
   return (
-    <div className="w-full flex flex-col gap-3 border-b border-[#2e2e2e] pb-4 sm:border-none group">
+    <div className="w-full flex flex-col gap-3 border-b border-[#2e2e2e] pb-4 sm:border-none">
       <Link
         href={`/${post._id}`}
-        className="w-full h-[35vh] max-h-[15rem] group-hover:brightness-75"
+        className="w-full h-[35vh] max-h-[15rem] hover:brightness-75"
         style={{ backgroundImage: `url(${post.image}` }}
       >
         <Image
@@ -51,7 +51,7 @@ const PostItem = ({ post }) => {
           width={500}
           height={500}
           alt="post"
-          className="w-full h-full overflow-hidden backdrop-blur-3xl object-contain transition-all duration-150 group-hover:brightness-75"
+          className="w-full h-full overflow-hidden backdrop-blur-3xl object-contain transition-all duration-150 hover:brightness-75"
         />
       </Link>
       <div className="flex max-w-xs sm:max-w-md md:max-w-xl gap-2 truncate line-clamp-1">
@@ -65,7 +65,7 @@ const PostItem = ({ post }) => {
         ))}
       </div>
       <Link href={`/${post._id}`}>
-        <h2 className="text-blue-gray-50 text-wrap group-hover:text-primary duration-200 transition-colors font-semibold text-lg sm:text-xl lg:text-2xl truncate-lines-2 line-clamp-2">
+        <h2 className="text-blue-gray-50 text-wrap hover:text-primary duration-200 transition-colors font-semibold text-lg sm:text-xl lg:text-2xl truncate-lines-2 line-clamp-2">
           {post.heading}
         </h2>
       </Link>
