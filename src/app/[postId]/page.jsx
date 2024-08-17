@@ -56,7 +56,7 @@ const PostInDetail = async ({ params }) => {
               })`,
             }}
           >
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black/30 z-10"></div>
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black/20 z-10"></div>
             <Image
               src={post.image || "/assets/images/logo.png"}
               alt="post"

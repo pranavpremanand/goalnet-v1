@@ -1,7 +1,6 @@
 import Banner from "../components/Banner";
 import PostsList from "@/components/PostsList";
 
-export const revalidate = 120;
 export const metadata = {
   title: "Home",
 };

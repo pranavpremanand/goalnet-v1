@@ -26,15 +26,15 @@ const ShareComponent = ({ content }) => {
     }
   };
   return (
-    <div className="flex items-center gap-2 sm:gap-3 justify-end">
+    <div className="flex items-center gap-3 justify-end">
       <button
-        className="text-2xl md:bg-gray-700 w-8 h-8 md:w-[1.8rem] md:h-[1.8rem] md:p-2 flex lg:hidden justify-center items-center rounded-full"
+        className="text-3xl md:bg-gray-700 w-8 h-8 md:p-2 flex lg:hidden justify-center items-center rounded-full"
         onClick={handleShare}
       >
         <FaShareAlt />
       </button>
       <button
-        className="text-2xl md:bg-gray-700 w-8 h-8 md:w-[1.8rem] md:h-[1.8rem] md:p-2 hidden lg:flex justify-center items-center rounded-full"
+        className="text-3xl md:bg-gray-700 w-8 h-8 md:p-2 hidden lg:flex justify-center items-center rounded-full"
         onClick={handleCopy}
       >
         <FaLink />
@@ -52,7 +52,7 @@ const ShareComponent = ({ content }) => {
           alt="wa-icon"
           width={100}
           height={100}
-          className="w-[2rem] h-[2rem] object-contain"
+          className="w-[2.3rem] h-[2.3rem] object-contain"
         />
       </Link>
       <Link
@@ -67,7 +67,7 @@ const ShareComponent = ({ content }) => {
           alt="fb-icon"
           width={100}
           height={100}
-          className="w-[2rem] h-[2rem] object-contain"
+          className="w-[2.3rem] h-[2.3rem] object-contain"
         />
       </Link>
 
@@ -83,7 +83,7 @@ const ShareComponent = ({ content }) => {
           alt="twitter-icon"
           width={100}
           height={100}
-          className="w-[2.2rem] h-[2.2rem] object-contain"
+          className="w-[2.5rem] h-[2.5rem] object-contain"
         />
       </Link>
       <Link
@@ -96,7 +96,7 @@ const ShareComponent = ({ content }) => {
           alt="telegram-icon"
           width={100}
           height={100}
-          className="w-[2rem] h-[2rem] object-contain"
+          className="w-[2.3rem] h-[2.3rem] object-contain"
         />
       </Link>
     </div>
