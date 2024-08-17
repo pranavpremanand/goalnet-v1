@@ -56,6 +56,7 @@ const PostInDetail = async ({ params }) => {
               })`,
             }}
           >
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black/30 z-10"></div>
             <Image
               src={post.image || "/assets/images/logo.png"}
               alt="post"
@@ -63,12 +64,13 @@ const PostInDetail = async ({ params }) => {
               height={1000}
               className="w-full h-full object-cover object-top md:object-center md:object-contain backdrop-blur-3xl"
             />
-            <div className="inline sm:hidden absolute right-1 bottom-1">
+            <div className="inline sm:hidden absolute z-20 right-1 bottom-1">
               <ShareComponent
                 content={{
-                  title: "Check this out!",
+                  title: "Check this story!",
                   text: `${post.heading}:`,
                   url: `https://goalnetonline.vercel.app/${post._id}`,
+                  image: post.image,
                 }}
               />
             </div>
