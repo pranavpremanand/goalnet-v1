@@ -11,7 +11,7 @@ import {
   updatePost,
 } from "@/apiCalls";
 import { usePathname, useRouter } from "next/navigation";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { PiPlusBold } from "react-icons/pi";
 import PopupWrapper from "@/components/PopupWrapper";
@@ -21,7 +21,6 @@ import { setCategories } from "@/lib/redux/storeSlice";
 import Loading from "@/app/loading";
 
 const EditPost = ({ postId }) => {
-  const queryClient = useQueryClient();
   const router = useRouter();
   const { categories } = useSelector((state) => state.store);
   const dispatch = useDispatch();
@@ -196,10 +195,6 @@ const EditPost = ({ postId }) => {
       };
       const response = await updatePost(newData).then((res) => res.json());
       if (response.success) {
-        if (values.isBanner) {
-          queryClient.invalidateQueries(["banners"]);
-          queryClient.refetchQueries(["banners"]);
-        }
         toast.success(response.message);
       } else {
         toast.error(response.message);

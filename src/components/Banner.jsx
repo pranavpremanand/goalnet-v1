@@ -59,6 +59,7 @@ const Banner = () => {
     queryFn: async () => {
       const response = await getBanners();
       const data = await response.json();
+      console.log(data);
       setBanners(data.banners);
       return data;
     },
