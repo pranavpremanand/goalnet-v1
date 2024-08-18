@@ -58,6 +58,7 @@ const Banner = () => {
     queryKey: ["banners"],
     queryFn: async () => {
       const response = await getBanners();
+      console.log({ response });
       return response.json();
     },
 

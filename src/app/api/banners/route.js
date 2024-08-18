@@ -18,7 +18,7 @@ export const GET = async () => {
 
     return NextResponse.json(
       { success: true, banners, message: "Banners fetched successfully" },
-      { status: 200, headers: { "Cache-Control": "no-store" } }
+      { status: 200 }
     );
   } catch (err) {
     return NextResponse.json(
