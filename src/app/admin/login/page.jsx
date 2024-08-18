@@ -57,7 +57,7 @@ const Login = () => {
     // }
   };
   return (
-    <section className="bg-gradient-radial from-[#191919] to-black grow flex items-center">
+    <section className="bg-gradient-radial from-secondary to-black grow flex items-center">
       <div className="wrapper flex justify-center items-center h-full">
         <form
           onSubmit={handleSubmit(onSubmit)}

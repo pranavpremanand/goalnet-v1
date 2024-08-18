@@ -130,7 +130,7 @@ const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
           >
             <input
               type="text"
-              className="grow text-2xl md:text-base text-wrap line-clamp-2 mt-3 md:mt-0 outline-none bg-[#191919] p-1 rounded-sm"
+              className="grow text-2xl md:text-base text-wrap line-clamp-2 mt-3 md:mt-0 outline-none bg-secondary p-1 rounded-sm"
               {...register("name")}
               disabled={isLoading}
             />

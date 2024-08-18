@@ -10,9 +10,9 @@ const HomeCardItemsLoader = ({ category }) => {
       <div className="flex items-center justify-between border-b border-[#2e2e2e] gap-4">
         <select
           disabled
-          className="text-blue-gray-50 bg-[#191919] px-3 py-1 mb-2 text-xl w-full md:w-[16rem] text-ellipsis outline-none"
+          className="text-blue-gray-50 bg-[#252525] px-3 py-1 mb-2 text-xl w-full md:w-[16rem] text-ellipsis outline-none"
         >
-          <option className="text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis">
+          <option className="text-blue-gray-50 bg-[#252525] w-[16rem] text-ellipsis">
             {category.name}
           </option>
         </select>
@@ -32,7 +32,7 @@ const HomeCardItemsLoader = ({ category }) => {
         </div>
       </div>
 
-      <div className="card rounded-sm bg-black is-loading w-full grid grid-cols-1 md:grid-cols-[47%,50%] lg:grid-cols-[40%,45%] gap-5">
+      <div className="card rounded-lg bg-secondary border-2 border-[#252525] p-2 is-loading w-full grid grid-cols-1 md:grid-cols-[47%,50%] lg:grid-cols-[40%,45%] gap-5">
         <div className="image h-[30vh] md:h-[40vh] lg:h-[45vh] rounded-sm"></div>
         <div className="content pt-2 flex flex-col gap-3">
           <div className="flex flex-col justify-between gap-3 h-full">
@@ -46,7 +46,7 @@ const HomeCardItemsLoader = ({ category }) => {
         </div>
       </div>
 
-      <div className="card rounded-sm bg-black is-loading w-full grid grid-cols-1 md:grid-cols-[47%,50%] lg:grid-cols-[40%,45%] gap-5">
+      <div className="card rounded-lg bg-secondary border-2 border-[#252525] p-2 is-loading w-full grid grid-cols-1 md:grid-cols-[47%,50%] lg:grid-cols-[40%,45%] gap-5">
         <div className="image h-[30vh] md:h-[40vh] lg:h-[45vh] rounded-sm"></div>
         <div className="content pt-2 flex flex-col gap-3">
           <div className="flex flex-col justify-between gap-3 h-full">
@@ -60,7 +60,7 @@ const HomeCardItemsLoader = ({ category }) => {
         </div>
       </div>
 
-      <div className="card rounded-sm bg-black is-loading w-full grid grid-cols-1 md:grid-cols-[47%,50%] lg:grid-cols-[40%,45%] gap-5">
+      <div className="card rounded-lg bg-secondary border-2 border-[#252525] p-2 is-loading w-full grid grid-cols-1 md:grid-cols-[47%,50%] lg:grid-cols-[40%,45%] gap-5">
         <div className="image h-[30vh] md:h-[40vh] lg:h-[45vh] rounded-sm"></div>
         <div className="content pt-2 flex flex-col gap-3">
           <div className="flex flex-col justify-between gap-3 h-full">

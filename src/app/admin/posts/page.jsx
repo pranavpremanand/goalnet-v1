@@ -72,11 +72,11 @@ const Posts = () => {
             <select
               onChange={(e) => handleCategoryChange(e.target.value)}
               value={category._id}
-              className="text-blue-gray-50 bg-[#191919] px-3 py-1 mb-2 text-lg w-full md:w-[16rem] text-ellipsis outline-none"
+              className="text-blue-gray-50 bg-[#252525] px-3 py-1 mb-2 text-lg w-full md:w-[16rem] text-ellipsis outline-none"
             >
               <option
                 value="0"
-                className="text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis"
+                className="text-blue-gray-50 bg-[#252525] w-[16rem] text-ellipsis"
               >
                 Latest News
               </option>
@@ -84,7 +84,7 @@ const Posts = () => {
                 <option
                   key={category._id}
                   value={category._id}
-                  className="text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis"
+                  className="text-blue-gray-50 bg-[#252525] w-[16rem] text-ellipsis"
                 >
                   {category.name}
                 </option>
@@ -163,9 +163,9 @@ const Loader = ({ category }) => {
           </Link>
           <select
             disabled
-            className="text-blue-gray-50 bg-[#191919] px-3 py-1 mb-2 text-lg w-full md:w-[16rem] text-ellipsis outline-none"
+            className="text-blue-gray-50 bg-[#252525] px-3 py-1 mb-2 text-lg w-full md:w-[16rem] text-ellipsis outline-none"
           >
-            <option className="text-blue-gray-50 bg-[#191919]">
+            <option className="text-blue-gray-50 bg-[#252525]">
               {category.name}
             </option>
           </select>
@@ -176,10 +176,10 @@ const Loader = ({ category }) => {
         </h1>
 
         <div className="grid grid-cols-1 gap-10 pb-5">
-          <div className="card rounded-xl bg-black is-loading w-full  grid grid-cols-1 md:grid-cols-[50%_50%] lg:grid-cols-[30%_70%] gap-1 md:gap-5">
+          <div className="card rounded-xl bg-secondary border-2 border-[#252525] p-2 is-loading w-full  grid grid-cols-1 md:grid-cols-[50%_50%] lg:grid-cols-[30%_70%] gap-1 md:gap-5">
             <div className="image h-[30vh] sm:h-[35vh] lg:h-[30vh] rounded-xl"></div>
             <div className="content pt-2 flex flex-col gap-3">
-              <div className="flex flex-col justify-between gap-3 h-full">
+              <div className="flex flex-col justify-between gap-3 h-full w-11/12">
                 <div className="flex flex-col gap-3">
                   <span className="h-[1.75rem] w-[13rem]"></span>
                   <h2 className="h-[2.5rem] md:h-[4rem]"></h2>
@@ -189,10 +189,10 @@ const Loader = ({ category }) => {
               </div>
             </div>
           </div>
-          <div className="card rounded-xl bg-black is-loading w-full  grid grid-cols-1 md:grid-cols-[50%_50%] lg:grid-cols-[30%_70%] gap-1 md:gap-5">
+          <div className="card rounded-xl bg-secondary border-2 border-[#252525] p-2 is-loading w-full  grid grid-cols-1 md:grid-cols-[50%_50%] lg:grid-cols-[30%_70%] gap-1 md:gap-5">
             <div className="image h-[30vh] sm:h-[35vh] lg:h-[30vh] rounded-xl"></div>
             <div className="content pt-2 flex flex-col gap-3">
-              <div className="flex flex-col justify-between gap-3 h-full">
+              <div className="flex flex-col justify-between gap-3 h-full w-11/12">
                 <div className="flex flex-col gap-3">
                   <span className="h-[1.75rem] w-[13rem]"></span>
                   <h2 className="h-[2.5rem] md:h-[4rem]"></h2>

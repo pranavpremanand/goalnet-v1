@@ -327,8 +327,8 @@ queryClient.invalidateQueries(["banners"]);
                 type="button"
                 className={`${
                   selectedCategories.includes(category._id)
-                    ? "bg-[#191919] text-white"
-                    : "bg-blue-gray-100 text-[#191919]"
+                    ? "bg-secondary text-white"
+                    : "bg-blue-gray-100 text-secondary"
                 } rounded-full px-3 py-2 text-sm`}
                 key={category._id}
                 onClick={() => handleCategorySelect(category._id)}
@@ -338,7 +338,7 @@ queryClient.invalidateQueries(["banners"]);
             ))}
             <button
               type="button"
-              className="text-white bg-[#191919] rounded-full w-[2.2rem] h-[2.2rem] flex justify-center items-center"
+              className="text-white bg-secondary rounded-full w-[2.2rem] h-[2.2rem] flex justify-center items-center"
               onClick={() => setShowFormModal(true)}
             >
               <PiPlusBold />

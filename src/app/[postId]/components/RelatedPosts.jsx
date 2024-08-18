@@ -25,7 +25,7 @@ const RelatedPosts = async ({ categories, currentPostId }) => {
   if (posts.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-3 border-t border-[#191919]">
+    <div className="flex flex-col gap-3 border-t border-secondary">
       <h2 className="text-xl md:text-2xl mt-10 font-medium">Related Stories</h2>
       <div className="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-6">
         {posts.map((post) => (
