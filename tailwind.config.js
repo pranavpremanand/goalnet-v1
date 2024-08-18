@@ -12,7 +12,7 @@ module.exports = withMT({
     extend: {
       colors: {
         primary: "#f1ff00",
-        secondary: "#191919",
+        secondary: "#000000",
         // lightBackground: '#f5f5f5', // Light mode background color
         // darkBackground: '#191919', // Dark mode background color
         // lightText: '#000000', // Light mode text color
