@@ -41,13 +41,13 @@ const PostInDetail = async ({ params }) => {
 
   return (
     <section className="wrapper grow text-blue-gray-50">
-      <div className="flex justify-start items-center gap-1 mb-5 py-2 sm:py-3 border-y border-[#2e2e2e]">
+      <div className="flex justify-start items-center gap-1 mb-5 py-2 sm:py-3 border-y border-[#252525]">
         <Link href="/" className="text-md flex items-center font-medium">
           <BiCaretLeft className="text-3xl sm:text-2xl" /> Back
         </Link>
       </div>
       <div className="pb-12">
-        <div className="flex flex-col gap-3 pb-7">
+        <div className="flex flex-col gap-3 pb-7 border-b border-[#191919]">
           <div
             className="w-full h-[50vh] sm:h-[65vh] md:h-[73vh] mt-2 relative"
             style={{
@@ -86,11 +86,11 @@ const PostInDetail = async ({ params }) => {
                   </span>
                 ))}
             </div>
-            <h1 className="font-bold text-2xl sm:text-3xl lg:text-4xl">
+            <h1 className="font-bold text-2xl sm:text-3xl lg:text-5xl my-3 leading-relaxed">
               {post.heading}
             </h1>
           </div>
-          <div className="flex flex-row justify-end sm:justify-between items-center gap-4 sm:my-1 pb-2 sm:py-2 border-b sm:border-y border-[#2e2e2e]">
+          <div className="flex flex-row justify-end sm:justify-between items-center gap-4 sm:my-1 pb-2 sm:py-2 border-b sm:border-y border-[#252525]">
             <span className="flex items-center gap-2 text-[.8rem] md:text-sm text-[#a1a1a1]">
               <FaRegClock />
               {formatDate(post.createdAt, "dd MMMM yyyy")}

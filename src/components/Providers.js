@@ -3,6 +3,7 @@ import { store } from "@/lib/redux/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createContext, useState } from "react";
 import { Provider } from "react-redux";
+import MiniLoader from "./MiniLoader";
 
 export const SpinnerContext = createContext(null);
 
@@ -15,6 +16,11 @@ export const Providers = ({ children }) => {
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <SpinnerContext.Provider value={{ isLoading, setIsLoading }}>
+          {isLoading && (
+            <div className="fixed top-0 left-0 z-50 w-screen h-screen bg-secondary/70">
+              <MiniLoader />
+            </div>
+          )}
           {children}
         </SpinnerContext.Provider>
       </Provider>

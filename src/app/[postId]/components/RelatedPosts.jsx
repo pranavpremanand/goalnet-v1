@@ -28,8 +28,13 @@ const RelatedPosts = async ({ categories, currentPostId }) => {
     <div className="flex flex-col gap-3 border-t border-secondary">
       <h2 className="text-xl md:text-2xl mt-10 font-medium">Related Stories</h2>
       <div className="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {posts.map((post) => (
-          <PostItem key={post._id} post={post} />
+        {posts.map((post, idx) => (
+          <PostItem
+            key={post._id}
+            post={post}
+            length={posts.length}
+            index={idx}
+          />
         ))}
       </div>
     </div>
@@ -38,9 +43,13 @@ const RelatedPosts = async ({ categories, currentPostId }) => {
 
 export default RelatedPosts;
 
-const PostItem = ({ post }) => {
+const PostItem = ({ post, length, index }) => {
   return (
-    <div className="w-full flex flex-col gap-3 border-b border-[#2e2e2e] pb-4 sm:border-none">
+    <div
+      className={`${
+        length - 1 > index && "border-b border-[#252525]"
+      } w-full flex flex-col gap-3 pb-4 sm:border-none`}
+    >
       <Link
         href={`/${post._id}`}
         className="w-full  hover:brightness-75"

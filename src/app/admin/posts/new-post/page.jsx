@@ -4,7 +4,7 @@ import Loading from "@/app/loading";
 import AddCategoryFormModal from "@/components/AddCategoryFormModal";
 import { SpinnerContext } from "@/components/Providers";
 import { setCategories } from "@/lib/redux/storeSlice";
-import { useQuery, useQueryClient  } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useRef, useContext } from "react";
@@ -14,7 +14,7 @@ import { PiCaretRightBold, PiPlusBold } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 
 const NewPost = () => {
-const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.store);
   const { error, isLoading } = useQuery({
@@ -141,9 +141,10 @@ const queryClient = useQueryClient();
           reset();
           setSelectedCategories([]);
           setImgPreview("");
-if(values.isBanner){
-queryClient.invalidateQueries(["banners"]);
-}
+          if (values.isBanner) {
+            queryClient.invalidateQueries(["banners"]);
+            queryClient.refetchQueries(["banners"]);
+          }
         } else {
           toast.error(response.message);
         }
@@ -240,10 +241,7 @@ queryClient.invalidateQueries(["banners"]);
           Posts
         </Link>
         <PiCaretRightBold className="text-sm mt-[.15rem]" />
-        <Link
-          href="/admin/posts/new-post"
-          className="text-md text-primary"
-        >
+        <Link href="/admin/posts/new-post" className="text-md text-primary">
           New Post
         </Link>
       </div>

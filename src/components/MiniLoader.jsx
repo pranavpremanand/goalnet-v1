@@ -1,11 +1,11 @@
 import React from "react";
 
-const SmallLoader = () => {
+const MiniLoader = () => {
   return (
     <div className="h-full flex justify-center items-center">
-      <span className="banner-loader"></span>
+      <span className="mini-loader"></span>
     </div>
   );
 };
 
-export default SmallLoader;
+export default MiniLoader;

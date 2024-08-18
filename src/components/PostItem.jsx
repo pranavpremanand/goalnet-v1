@@ -6,7 +6,7 @@ import { FaEye, FaEyeSlash, FaRegClock } from "react-icons/fa";
 
 const PostItem = ({ post, handleCategoryChange }) => {
   return (
-    <div className="pb-5 border-b border-[#2e2e2e]">
+    <div className="pb-5 border-b border-[#252525]">
       <Link href={`/admin/posts/${post._id}`} className="group">
         <div className="h-[60vh] md:h-[40vh] lg:h-[35vh] duration-200 transition-all rounded-xl border-transparent p-2 border group-hover:border-primary/60 w-full grid grid-cols-1 md:grid-cols-[45%_50%] lg:grid-cols-[30%_65%] gap-1 md:gap-5">
           <div

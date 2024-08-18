@@ -11,7 +11,7 @@ import {
   updatePost,
 } from "@/apiCalls";
 import { usePathname, useRouter } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { PiPlusBold } from "react-icons/pi";
 import PopupWrapper from "@/components/PopupWrapper";
@@ -21,6 +21,7 @@ import { setCategories } from "@/lib/redux/storeSlice";
 import Loading from "@/app/loading";
 
 const EditPost = ({ postId }) => {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const { categories } = useSelector((state) => state.store);
   const dispatch = useDispatch();
@@ -174,7 +175,7 @@ const EditPost = ({ postId }) => {
         formData.append("file", values.image);
         formData.append("upload_preset", "goalnet");
 
-        const res = await fetch(process.env.CLOUDINARY_UPLOAD_URL, {
+        const res = await fetch(process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL, {
           method: "POST",
           body: formData,
         });
@@ -195,6 +196,10 @@ const EditPost = ({ postId }) => {
       };
       const response = await updatePost(newData).then((res) => res.json());
       if (response.success) {
+        if (values.isBanner) {
+          queryClient.invalidateQueries(["banners"]);
+          queryClient.refetchQueries(["banners"]);
+        }
         toast.success(response.message);
       } else {
         toast.error(response.message);
@@ -323,6 +328,7 @@ const EditPost = ({ postId }) => {
   //       setLinkError("Link already exists");
   //     }
   //   };
+
   return (
     <>
       <h1 className="text-2xl font-bold tracking-wider text-center mb-5">
@@ -515,6 +521,7 @@ const EditPost = ({ postId }) => {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 w-full">
           <button
+            disabled={isLoading}
             type="submit"
             className="primary-btn w-full col-span-2 md:col-span-4"
             onClick={validateValues}

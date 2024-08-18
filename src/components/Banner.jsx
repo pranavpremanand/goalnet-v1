@@ -6,7 +6,7 @@ import { FaRegClock } from "react-icons/fa";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { getBanners } from "@/apiCalls";
-import SmallLoader from "./SmallLoader";
+import MiniLoader from "./MiniLoader";
 import { useQuery } from "@tanstack/react-query";
 
 const Banner = () => {
@@ -79,7 +79,7 @@ const Banner = () => {
   if (isLoading) {
     return (
       <div className="w-screen h-[65vh] md:h-[85vh] bg-blue-gray-50/5">
-        <SmallLoader />
+        <MiniLoader />
       </div>
     );
   }
