@@ -4,7 +4,7 @@ import Loading from "@/app/loading";
 import AddCategoryFormModal from "@/components/AddCategoryFormModal";
 import { SpinnerContext } from "@/components/Providers";
 import { setCategories } from "@/lib/redux/storeSlice";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient  } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useRef, useContext } from "react";
@@ -14,6 +14,7 @@ import { PiCaretRightBold, PiPlusBold } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 
 const NewPost = () => {
+const queryClient = useQueryClient();
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.store);
   const { error, isLoading } = useQuery({
@@ -140,6 +141,9 @@ const NewPost = () => {
           reset();
           setSelectedCategories([]);
           setImgPreview("");
+if(values.isBanner){
+queryClient.invalidateQueries(["banners"]);
+}
         } else {
           toast.error(response.message);
         }
