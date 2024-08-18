@@ -10,8 +10,8 @@ import MiniLoader from "./MiniLoader";
 import { useQuery } from "@tanstack/react-query";
 
 const Banner = () => {
+  const [banners, setBanners] = useState([]);
   const [opacities, setOpacities] = useState([]);
-  let banners = [];
   const [sliderRef] = useKeenSlider(
     {
       initial: 0,
@@ -54,18 +54,19 @@ const Banner = () => {
   );
 
   // get banners
-  const { data, error, isLoading } = useQuery({
+  const { error, isLoading } = useQuery({
     queryKey: ["banners"],
     queryFn: async () => {
       const response = await getBanners();
-      console.log({ response });
-      return response.json();
+      const data = await response.json();
+      setBanners(data.banners);
+      return data;
     },
-
     revalidateOnFocus: true,
   });
 
   if (error) {
+    console.log(error);
     return (
       <div className="wrapper grow flex items-center justify-center flex-col gap-2">
         <p className="text-2xl">Failed to load data. Try reloading the page</p>
@@ -84,9 +85,9 @@ const Banner = () => {
     );
   }
 
-  banners = data.banners;
-
   if (banners.length === 0) return null;
+
+  console.log(banners);
 
   return (
     <section className="flex flex-col items-center" id="home">
