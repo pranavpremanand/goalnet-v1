@@ -38,8 +38,8 @@ const Header = () => {
   return (
     <header className="sticky -top-1 left-0 z-30 w-full">
       <div
-        className={`py-2 md:py-4 transition-colors duration-1000 ${
-          isScrolled ? "backdrop-blur-lg bg-transparent" : "bg-black"
+        className={`py-2 md:py-3 transition-colors duration-1000 ${
+          isScrolled ? "backdrop-blur-lg bg-transparent" : "bg-secondary"
         }`}
       >
         <div className="wrapper flex justify-between items-center">

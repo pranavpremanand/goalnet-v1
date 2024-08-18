@@ -105,7 +105,7 @@ const PostInDetail = async ({ params }) => {
               />
             </div>
           </div>
-          <p className="text-blue-gray-200 text-base whitespace-pre-wrap mt-4">
+          <p className="text-blue-gray-100 whitespace-pre-wrap mt-4">
             {post.content}
           </p>
         </div>

@@ -13,7 +13,6 @@ const NavItems = ({ onClose }) => {
 
   // do logout
   const handleLogout = async () => {
-    setIsLoading(true);
     try {
       const response = await logout().then((res) => res.json());
       if (response.success) {
@@ -22,8 +21,6 @@ const NavItems = ({ onClose }) => {
       }
     } catch (err) {
       toast.error(err.message);
-    } finally {
-      setIsLoading(false);
     }
   };
 

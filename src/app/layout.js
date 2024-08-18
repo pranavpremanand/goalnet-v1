@@ -47,7 +47,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${jost.className} text-blue-gray-100 bg-black min-h-screen flex flex-col`}
+        className={`${jost.className} text-blue-gray-100 bg-secondary min-h-screen flex flex-col`}
       >
         <Providers>
           <Toaster

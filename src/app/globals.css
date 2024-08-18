@@ -2,18 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Light mode styles */
+/* body {
+  @apply bg-lightBackground text-lightText;
+} */
+
+/* Dark mode styles */
+/* @media (prefers-color-scheme: dark) {
+  body {
+    @apply bg-darkBackground text-darkText;
+  }
+} */
+
 @layer utilities {
   .wrapper {
     @apply max-w-7xl lg:mx-auto py-2 px-5 md:px-10 w-full;
   }
   .primary-btn {
-    @apply px-4 md:px-6 py-2 text-sm bg-primary text-black hover:bg-black hover:text-primary border border-primary hover:border-primary tracking-wide font-medium transition-colors duration-300 rounded-full;
+    @apply px-4 md:px-6 py-2 text-sm bg-primary text-black hover:bg-secondary hover:text-primary border border-primary hover:border-primary tracking-wide font-medium transition-colors duration-300 rounded-full;
   }
   .secondary-btn {
-    @apply px-4 md:px-6 py-2 text-sm bg-black text-primary hover:bg-primary hover:text-black border border-primary tracking-wide font-medium transition-colors duration-300 rounded-full;
+    @apply px-4 md:px-6 py-2 text-sm bg-secondary text-primary hover:bg-primary hover:text-black border border-primary tracking-wide font-medium transition-colors duration-300 rounded-full;
   }
   .disabled-btn {
-    @apply px-4 md:px-6 py-2 text-sm bg-black text-gray-500 border border-gray-500 tracking-wide font-medium rounded-full flex justify-center;
+    @apply px-4 md:px-6 py-2 text-sm bg-secondary text-gray-500 border border-gray-500 tracking-wide font-medium rounded-full flex justify-center;
   }
   .default-btn-styles {
     @apply px-4 md:px-6 py-2 text-sm border tracking-wide font-medium rounded-full flex justify-center;

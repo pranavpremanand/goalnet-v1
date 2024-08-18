@@ -13,7 +13,7 @@ export const metadata = {
 
 const ContactUs = () => {
   return (
-    <div className="wrapper grow relative">
+    <div className="wrapper grow relative bg-secondary/20">
       <div className="flex flex-col gap-8 my-10">
         <div className="flex flex-col gap-6 max-w-4xl">
           <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold">

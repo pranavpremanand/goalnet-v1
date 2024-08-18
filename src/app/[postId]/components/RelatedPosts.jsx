@@ -27,7 +27,7 @@ const RelatedPosts = async ({ categories, currentPostId }) => {
   return (
     <div className="flex flex-col gap-3 border-t border-[#191919]">
       <h2 className="text-xl md:text-2xl mt-10 font-medium">Related Stories</h2>
-      <div className="w-full grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+      <div className="w-full grid md:grid-cols-2 xl:grid-cols-3 gap-6">
         {posts.map((post) => (
           <PostItem key={post._id} post={post} />
         ))}
@@ -43,15 +43,15 @@ const PostItem = ({ post }) => {
     <div className="w-full flex flex-col gap-3 border-b border-[#2e2e2e] pb-4 sm:border-none">
       <Link
         href={`/${post._id}`}
-        className="w-full h-[35vh] max-h-[15rem] hover:brightness-75"
-        style={{ backgroundImage: `url(${post.image}` }}
+        className="w-full  hover:brightness-75"
+        // style={{ backgroundImage: `url(${post.image}` }}
       >
         <Image
           src={post.image}
           width={500}
           height={500}
           alt="post"
-          className="w-full h-full overflow-hidden backdrop-blur-3xl object-contain transition-all duration-150 hover:brightness-75"
+          className="w-full h-[35vh] max-h-[15rem] overflow-hidden backdrop-blur-3xl object-cover transition-all duration-150 hover:brightness-75"
         />
       </Link>
       <div className="flex max-w-xs sm:max-w-md md:max-w-xl gap-2 truncate line-clamp-1">

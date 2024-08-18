@@ -10,13 +10,14 @@ module.exports = withMT({
   // darkMode: 'selector',
   theme: {
     extend: {
-      // backgroundImage: {
-      //   "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-      //   "gradient-conic":
-      //     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      // },
       colors: {
         primary: "#f1ff00",
+        secondary: "#000000",
+        // lightBackground: '#f5f5f5', // Light mode background color
+        // darkBackground: '#191919', // Dark mode background color
+        // lightText: '#000000', // Light mode text color
+        // darkText: '#ffffff', // Dark mode text color
+        // #252525
       },
       fontFamily: {
         jost: ["Jost", "sans-serif"],
