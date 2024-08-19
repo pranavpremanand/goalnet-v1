@@ -104,8 +104,7 @@ const Banner = () => {
               style={{ opacity: opacities[i] }}
             />
             <div
-              className="absolute top-0 left-0 w-full h-full from-transparent to-black 
-bg-[linear-gradient(to_bottom,transparent_40%,black)] z-10"
+              className="absolute top-0 left-0 w-[101%] h-[101%] from-transparent to-black bg-[linear-gradient(to_bottom,transparent_30%,#101010)] z-10"
             ></div>
             <div className="z-20 wrapper absolute left-1/2 -translate-x-1/2 top-2/3 sm:top-1/2 -translate-y-[45%] sm:-translate-y-[30%] lg:-translate-y-1/4 flex flex-col gap-2 md:gap-3">
               <span className="text-blue-gray-50 flex items-center gap-2 rounded-sm text-[.8rem]">

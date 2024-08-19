@@ -73,11 +73,11 @@ const PostsList = () => {
         <select
           onChange={(e) => handleCategoryChange(e.target.value)}
           value={category._id}
-          className="text-blue-gray-50 bg-[#191919] px-3 py-1 mb-2 text-xl w-full md:w-[16rem] text-ellipsis outline-none"
+          className="text-blue-gray-50 bg-[#101010] px-3 py-1 mb-2 text-xl w-full md:w-[16rem] text-ellipsis outline-none"
         >
           <option
             value="0"
-            className="font-jost text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis"
+            className="font-jost text-blue-gray-50 bg-[#101010] w-[16rem] text-ellipsis"
           >
             Latest Stories
           </option>
@@ -86,7 +86,7 @@ const PostsList = () => {
               <option
                 key={category._id}
                 value={category._id}
-                className="font-jost text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis"
+                className="font-jost text-blue-gray-50 bg-[#101010] w-[16rem] text-ellipsis"
               >
                 {category.name}
               </option>

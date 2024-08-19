@@ -18,6 +18,7 @@ module.exports = withMT({
         // lightText: '#000000', // Light mode text color
         // darkText: '#ffffff', // Dark mode text color
         // #252525
+        // #101010
       },
       fontFamily: {
         jost: ["Jost", "sans-serif"],

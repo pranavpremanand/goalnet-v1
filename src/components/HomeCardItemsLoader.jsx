@@ -5,12 +5,12 @@ const HomeCardItemsLoader = ({ category, hideCategories }) => {
   return (
     <section id="posts" className="wrapper mt-8 pt-5 grid grid-cols-1 gap-10">
       {!hideCategories && (
-        <div className="flex items-center justify-between border-b border-[#191919] gap-4">
+        <div className="flex items-center justify-between border-b border-[#101010] gap-4">
           <select
             disabled
-            className="text-blue-gray-50 bg-[#191919] px-3 py-1 mb-2 text-xl w-full md:w-[16rem] text-ellipsis outline-none"
+            className="text-blue-gray-50 bg-[#101010] px-3 py-1 mb-2 text-xl w-full md:w-[16rem] text-ellipsis outline-none"
           >
-            <option className="text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis">
+            <option className="text-blue-gray-50 bg-[#101010] w-[16rem] text-ellipsis">
               {category.name}
             </option>
           </select>
