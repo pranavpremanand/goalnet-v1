@@ -73,7 +73,7 @@ const LatestTransfers = () => {
                 width={500}
                 height={500}
                 alt="card"
-                className="w-4/5 sm:w-full h-[30vh] lg:h-3/6 object-contain object-center backdrop-blur-3xl"
+                className="w-3/5 sm:w-full h-[30vh] lg:h-3/6 object-contain object-center backdrop-blur-3xl"
               />
               <div className="w-full flex flex-col justify-between gap-5 md:gap-3 bg-[#101010] h-full sm:h-fit lg:h-3/6 px-3 pt-3 sm:pt-2 pb-3">
                 <Link
@@ -104,7 +104,7 @@ const LatestTransfers = () => {
                 width={500}
                 height={500}
                 alt="card"
-                className="w-4/5 sm:w-full h-[30vh] lg:h-3/6 object-contain object-center backdrop-blur-3xl"
+                className="w-3/5 sm:w-full h-[30vh] lg:h-3/6 object-contain object-center backdrop-blur-3xl"
               />
               <div className="w-full flex flex-col justify-between gap-5 md:gap-3 bg-[#101010] h-full sm:h-fit lg:h-3/6 px-3 pt-3 sm:pt-2 pb-3">
                 <Link
