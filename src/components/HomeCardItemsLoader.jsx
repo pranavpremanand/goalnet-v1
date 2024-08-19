@@ -14,20 +14,6 @@ const HomeCardItemsLoader = ({ category, hideCategories }) => {
               {category.name}
             </option>
           </select>
-          {/* <div className="hidden md:flex gap-2 -mt-2">
-          <button
-            disabled
-            className="border text-gray-500 border-gray-500 transition duration-200 text-3xl"
-          >
-            <GrFormPrevious />
-          </button>
-          <button
-            disabled
-            className="border text-gray-500 border-gray-500 transition duration-200 text-3xl"
-          >
-            <GrFormNext />
-          </button>
-        </div> */}
         </div>
       )}
 

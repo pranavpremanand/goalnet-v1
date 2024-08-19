@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState  } from "react";
 import { getAllPosts } from "@/apiCalls";
 import HomeCardItemsLoader from "./HomeCardItemsLoader";
 import { useQuery } from "@tanstack/react-query";
@@ -175,7 +175,7 @@ const CardItem = ({ post, handleCategoryChange, isLastItem }) => {
             ))}
           </div>
           <Link href={`/${post._id}`}>
-            <h1 className="text-blue-gray-50 hover:text-primary duration-200 transition-colors font-semibold text-lg sm:text-xl lg:text-2xl truncate-lines-2 line-clamp-2">
+            <h1 className="text-blue-gray-50 hover:text-primary duration-200 transition-colors font-medium text-lg sm:text-xl lg:text-2xl truncate-lines-2 line-clamp-2">
               {post.heading}
             </h1>
           </Link>

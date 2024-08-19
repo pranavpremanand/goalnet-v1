@@ -146,3 +146,10 @@ export const unhidePostAndItsCategories = (data) => {
     body: JSON.stringify(data),
   });
 }
+
+// latest transfers
+export const getLatestTransfers = () => {
+  return fetch("/api/transfers", {
+    method: "GET",
+  });
+}
