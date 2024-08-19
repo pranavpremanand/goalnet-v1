@@ -47,11 +47,23 @@ export const POST = async (req) => {
       createdAt: -1,
     });
 
+    const banners = await Post.find({
+      isBanner: true,
+      isDeleted: false,
+    })
+      .populate({
+        path: "categories",
+        select: "name _id",
+      })
+      .limit(6)
+      .sort({ createdAt: -1 });
+
     const totalPages = Math.ceil(totalItems / postLimit);
 
     const data = {
       posts,
       categories,
+      banners,
       totalItems,
       totalPages,
       page,

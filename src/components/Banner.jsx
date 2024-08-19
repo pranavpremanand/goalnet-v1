@@ -59,7 +59,6 @@ const Banner = () => {
     queryFn: async () => {
       const response = await getBanners();
       const data = await response.json();
-      console.log(data);
       setBanners(data.banners);
       return data;
     },
@@ -67,7 +66,6 @@ const Banner = () => {
   });
 
   if (error) {
-    console.log(error);
     return (
       <div className="wrapper grow flex items-center justify-center flex-col gap-2">
         <p className="text-2xl">Failed to load data. Try reloading the page</p>
@@ -87,8 +85,6 @@ const Banner = () => {
   }
 
   if (banners.length === 0) return null;
-
-  console.log(banners);
 
   return (
     <section className="flex flex-col items-center" id="home">

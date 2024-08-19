@@ -16,7 +16,7 @@ const HomeCardItemsLoader = ({ category }) => {
             {category.name}
           </option>
         </select>
-        <div className="hidden md:flex gap-2 -mt-2">
+        {/* <div className="hidden md:flex gap-2 -mt-2">
           <button
             disabled
             className="border text-gray-500 border-gray-500 transition duration-200 text-3xl"
@@ -29,7 +29,7 @@ const HomeCardItemsLoader = ({ category }) => {
           >
             <GrFormNext />
           </button>
-        </div>
+        </div> */}
       </div>
 
       <div className="card rounded-lg bg-secondary border-2 border-[#191919] p-2 is-loading w-full grid grid-cols-1 md:grid-cols-[47%,50%] lg:grid-cols-[40%,45%] gap-5">

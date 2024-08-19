@@ -7,14 +7,22 @@ import { useQuery } from "@tanstack/react-query";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import Image from "next/image";
-import { FaRegClock } from "react-icons/fa";
+import { FaReadme, FaRegClock } from "react-icons/fa";
+import { MdMoreTime } from "react-icons/md";
 
 const PostsList = () => {
   const [page, setPage] = useState(1);
-  const [category, setCategory] = useState({ name: "Latest Stories", _id: "0" });
+  const [category, setCategory] = useState({
+    name: "Latest Stories",
+    _id: "0",
+  });
+  const [posts, setPosts] = useState([]);
+  let totalPages = 1;
+  const [categories, setCategories] = useState([]);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   // get initial posts
-  const { data, error, refetch } = useQuery({
+  const { data, error, refetch, isLoading, isFetchedAfterMount } = useQuery({
     queryKey: ["all-posts", category._id, page],
     queryFn: async () => {
       const response = await getAllPosts({
@@ -22,45 +30,62 @@ const PostsList = () => {
         category: category._id,
         isAdmin: false,
       });
-      return response.json();
+      const result = await response.json();
+      setCategories(result.data.categories);
+      if (isFetchedAfterMount) {
+        if (isFirstLoad) {
+          setPosts([...result.data.posts]);
+        }
+      } else {
+        setIsFirstLoad(false);
+        setPosts([...posts, ...result.data.posts]);
+      }
+      return result;
     },
-    revalidateOnFocus: true,
+    refetchOnWindowFocus: true,
   });
 
   if (error) return null;
 
-  if (!data) {
+  if (isLoading && isFirstLoad) {
     return <HomeCardItemsLoader category={category} />;
   }
 
-  let { posts, categories, totalPages } = data.data;
+  if (data) {
+    totalPages = data.data.totalPages;
+  }
 
   const handleCategoryChange = (val) => {
     let selectedCategory = categories.find((category) => category._id === val);
+    setPosts([]);
+    setIsFirstLoad(true);
+    setPage(1);
 
     if (!selectedCategory) {
       selectedCategory = { name: "Latest Stories", _id: "0" };
     }
     setCategory(selectedCategory); // Update state with new category
-    setPage(1);
     refetch();
   };
+
+  console.log({ totalPages, page });
+
   return (
     <section id="posts" className="wrapper mt-8">
       <div className="flex items-center justify-between border-b border-[#191919] mb-5 gap-4">
-        {categories.length > 0 && (
-          <select
-            onChange={(e) => handleCategoryChange(e.target.value)}
-            value={category._id}
-            className="text-blue-gray-50 bg-[#191919] px-3 py-1 mb-2 text-xl w-full md:w-[16rem] text-ellipsis outline-none"
+        <select
+          onChange={(e) => handleCategoryChange(e.target.value)}
+          value={category._id}
+          className="text-blue-gray-50 bg-[#191919] px-3 py-1 mb-2 text-xl w-full md:w-[16rem] text-ellipsis outline-none"
+        >
+          <option
+            value="0"
+            className="font-jost text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis"
           >
-            <option
-              value="0"
-              className="font-jost text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis"
-            >
-              Latest Stories
-            </option>
-            {categories.map((category) => (
+            Latest Stories
+          </option>
+          {categories.length > 0 &&
+            categories.map((category) => (
               <option
                 key={category._id}
                 value={category._id}
@@ -69,9 +94,8 @@ const PostsList = () => {
                 {category.name}
               </option>
             ))}
-          </select>
-        )}
-        <div className="hidden md:flex gap-2 -mt-2">
+        </select>
+        {/* <div className="hidden md:flex gap-2 -mt-2">
           <button
             disabled={page === 1}
             className={`${
@@ -96,21 +120,22 @@ const PostsList = () => {
           >
             <GrFormNext />
           </button>
-        </div>
+        </div> */}
       </div>
       <div className="grid grid-cols-1 gap-10 w-full pt-5">
         {posts.length > 0 ? (
-          posts.map((post) => (
+          posts.map((post, i) => (
             <CardItem
               post={post}
               key={post._id}
+              isLastItem={i === posts.length - 1}
               handleCategoryChange={handleCategoryChange}
             />
           ))
         ) : (
           <h2 className="text-center text-2xl">No posts found</h2>
         )}
-        <div className="flex justify-between mb-5 -mt-4 gap-4">
+        {/* <div className="flex justify-between mb-5 -mt-4 gap-4">
           <button
             disabled={page === 1}
             className={`${
@@ -131,7 +156,32 @@ const PostsList = () => {
           >
             Next
           </button>
-        </div>
+        </div> */}
+        {!isLoading ? (
+          <>
+            {page === 1 && page < totalPages && (
+              <div className="flex justify-center mb-5 -mt-4">
+                <button
+                  onClick={() => setPage((prev) => prev + 1)}
+                  className="secondary-btn flex gap-2 items-center"
+                >
+                  Load More
+                  <MdMoreTime className="text-xl" />
+                </button>
+              </div>
+            )}
+          </>
+        ) : (
+          <div className="flex justify-center w-full mb-5 -mt-4">
+            <Image
+              className="h-14 w-h-14 object-contain animate-spin"
+              src="/assets/images/football.png"
+              alt="loading"
+              width={100}
+              height={100}
+            />
+          </div>
+        )}
       </div>
     </section>
   );
@@ -139,12 +189,13 @@ const PostsList = () => {
 
 export default PostsList;
 
-
 // post item
-const CardItem = ({ post, handleCategoryChange }) => {
+const CardItem = ({ post, handleCategoryChange, isLastItem }) => {
   return (
     <div
-      className={`grid grid-cols-1 md:grid-cols-[47%,50%] lg:grid-cols-[40%,45%] gap-5 border-b border-[#191919] pb-5`}
+      className={` ${
+        !isLastItem && "border-b"
+      } grid grid-cols-1 md:grid-cols-[47%,50%] lg:grid-cols-[40%,45%] gap-5 border-[#191919] pb-5`}
     >
       <Link
         href={`/${post._id}`}
@@ -180,7 +231,10 @@ const CardItem = ({ post, handleCategoryChange }) => {
           <p className="text-blue-gray-300 truncate-lines-3 line-clamp-3 whitespace-pre-wrap">
             {post.content}
           </p>
-          <Link href={`/${post._id}`} className="primary-btn w-fit">
+          <Link
+            href={`/${post._id}`}
+            className="primary-btn w-fit"
+          >
             Read more
           </Link>
         </div>
