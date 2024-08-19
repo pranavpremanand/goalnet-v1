@@ -1,22 +1,20 @@
 import React from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
-const HomeCardItemsLoader = ({ category }) => {
+const HomeCardItemsLoader = ({ category, hideCategories }) => {
   return (
-    <section
-      id="posts"
-      className="wrapper mt-8 pt-5 grid grid-cols-1 gap-10"
-    >
-      <div className="flex items-center justify-between border-b border-[#191919] gap-4">
-        <select
-          disabled
-          className="text-blue-gray-50 bg-[#191919] px-3 py-1 mb-2 text-xl w-full md:w-[16rem] text-ellipsis outline-none"
-        >
-          <option className="text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis">
-            {category.name}
-          </option>
-        </select>
-        {/* <div className="hidden md:flex gap-2 -mt-2">
+    <section id="posts" className="wrapper mt-8 pt-5 grid grid-cols-1 gap-10">
+      {!hideCategories && (
+        <div className="flex items-center justify-between border-b border-[#191919] gap-4">
+          <select
+            disabled
+            className="text-blue-gray-50 bg-[#191919] px-3 py-1 mb-2 text-xl w-full md:w-[16rem] text-ellipsis outline-none"
+          >
+            <option className="text-blue-gray-50 bg-[#191919] w-[16rem] text-ellipsis">
+              {category.name}
+            </option>
+          </select>
+          {/* <div className="hidden md:flex gap-2 -mt-2">
           <button
             disabled
             className="border text-gray-500 border-gray-500 transition duration-200 text-3xl"
@@ -30,7 +28,8 @@ const HomeCardItemsLoader = ({ category }) => {
             <GrFormNext />
           </button>
         </div> */}
-      </div>
+        </div>
+      )}
 
       <div className="card rounded-lg bg-secondary border-2 border-[#191919] p-2 is-loading w-full grid grid-cols-1 md:grid-cols-[47%,50%] lg:grid-cols-[40%,45%] gap-5">
         <div className="image h-[30vh] md:h-[40vh] lg:h-[45vh] rounded-sm"></div>

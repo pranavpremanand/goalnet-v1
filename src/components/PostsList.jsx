@@ -1,13 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { getAllPosts } from "@/apiCalls";
 import HomeCardItemsLoader from "./HomeCardItemsLoader";
 import { useQuery } from "@tanstack/react-query";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import Image from "next/image";
-import { FaReadme, FaRegClock } from "react-icons/fa";
+import { FaRegClock } from "react-icons/fa";
 import { MdMoreTime } from "react-icons/md";
 
 const PostsList = () => {
@@ -68,8 +67,6 @@ const PostsList = () => {
     refetch();
   };
 
-  console.log({ totalPages, page });
-
   return (
     <section id="posts" className="wrapper mt-8">
       <div className="flex items-center justify-between border-b border-[#191919] mb-5 gap-4">
@@ -95,32 +92,6 @@ const PostsList = () => {
               </option>
             ))}
         </select>
-        {/* <div className="hidden md:flex gap-2 -mt-2">
-          <button
-            disabled={page === 1}
-            className={`${
-              page === 1
-                ? "text-gray-500 border-gray-500"
-                : "text-primary border-primary hover:border-gray-500 hover:text-gray-500"
-            }  transition duration-200 text-3xl border`}
-            onClick={() => setPage((prev) => (page > 1 ? prev - 1 : prev))}
-          >
-            <GrFormPrevious />
-          </button>
-          <button
-            disabled={page >= totalPages}
-            className={`${
-              page >= totalPages
-                ? "text-gray-500 border-gray-500"
-                : "text-primary border-primary hover:border-gray-500 hover:text-gray-500"
-            }  transition duration-200 text-3xl border`}
-            onClick={() =>
-              setPage((prev) => (page < totalPages ? prev + 1 : prev))
-            }
-          >
-            <GrFormNext />
-          </button>
-        </div> */}
       </div>
       <div className="grid grid-cols-1 gap-10 w-full pt-5">
         {posts.length > 0 ? (
@@ -133,33 +104,13 @@ const PostsList = () => {
             />
           ))
         ) : (
-          <h2 className="text-center text-2xl">No posts found</h2>
+          <h2 className="text-center text-2xl">
+            {!isFirstLoad && "No posts found"}
+          </h2>
         )}
-        {/* <div className="flex justify-between mb-5 -mt-4 gap-4">
-          <button
-            disabled={page === 1}
-            className={`${
-              page === 1 ? "disabled-btn" : "secondary-btn"
-            } min-w-[7rem] sm:min-w-[10rem]`}
-            onClick={() => setPage((prev) => (page > 1 ? prev - 1 : prev))}
-          >
-            Previous
-          </button>
-          <button
-            disabled={page >= totalPages}
-            className={`${
-              page >= totalPages ? "disabled-btn" : "secondary-btn"
-            } min-w-[7rem] sm:min-w-[10rem]`}
-            onClick={() =>
-              setPage((prev) => (prev < totalPages ? prev + 1 : prev))
-            }
-          >
-            Next
-          </button>
-        </div> */}
         {!isLoading ? (
           <>
-            {page === 1 && page < totalPages && (
+            {page === 1 && page < totalPages && !isFirstLoad && (
               <div className="flex justify-center mb-5 -mt-4">
                 <button
                   onClick={() => setPage((prev) => prev + 1)}
@@ -231,10 +182,7 @@ const CardItem = ({ post, handleCategoryChange, isLastItem }) => {
           <p className="text-blue-gray-300 truncate-lines-3 line-clamp-3 whitespace-pre-wrap">
             {post.content}
           </p>
-          <Link
-            href={`/${post._id}`}
-            className="primary-btn w-fit"
-          >
+          <Link href={`/${post._id}`} className="primary-btn w-fit">
             Read more
           </Link>
         </div>
