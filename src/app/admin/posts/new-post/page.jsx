@@ -236,7 +236,7 @@ const NewPost = () => {
           Posts
         </Link>
         <PiCaretRightBold className="text-sm mt-[.15rem]" />
-        <Link href="/admin/posts/new-post" className="text-md text-primary" title="Upload a post">
+        <Link href="/admin/posts/new-post" className="text-md text-primary" title="New Post">
           New Post
         </Link>
       </div>

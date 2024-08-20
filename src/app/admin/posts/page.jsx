@@ -65,8 +65,8 @@ const Posts = () => {
         </div>
 
         <div className="flex flex-col gap-4 md:flex-row justify-between items-center">
-          <Link href="/admin/posts/new-post" className="primary-btn" title="Upload a post">
-            Upload a post
+          <Link href="/admin/posts/new-post" className="primary-btn" title="Create New Post">
+            Create New Post
           </Link>
           {categories.length > 0 && (
             <select
@@ -158,8 +158,8 @@ const Loader = ({ category }) => {
         </div>
 
         <div className="flex flex-col gap-4 md:flex-row justify-between items-center">
-          <Link href="/admin/posts/new-post" className="primary-btn" title="Upload a post">
-            Upload a post
+          <Link href="/admin/posts/new-post" className="primary-btn" title="Create New Post">
+            Create New Post
           </Link>
           <select
             disabled

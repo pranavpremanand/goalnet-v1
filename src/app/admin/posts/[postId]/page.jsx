@@ -19,7 +19,7 @@ const page = async ({ params }) => {
         <Link
           href="/admin/posts/new-post"
           className="text-md text-primary"
-          title="Upload a post"
+          title="Edit Post"
         >
           Edit Post
         </Link>
