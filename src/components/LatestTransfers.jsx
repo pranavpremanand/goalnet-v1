@@ -53,7 +53,7 @@ const LatestTransfers = () => {
                     })}
                   </div>
                   <Link
-                    href={`/${cards[0]._id}`}
+                    href={`/stories/${cards[0]._id}`}
                     className="primary-btn w-fit flex items-center gap-2"
                     title="Full story"
                   >
@@ -78,7 +78,7 @@ const LatestTransfers = () => {
               />
               <div className="w-full flex flex-col justify-between gap-5 md:gap-3 bg-[#101010] h-full sm:h-fit lg:h-3/6 px-3 pt-3 sm:pt-2 pb-3">
                 <Link
-                  href={`/${cards[1]._id}`}
+                  href={`/stories/${cards[1]._id}`}
                   title={cards[1].heading}
                   className="text-base xl:text-lg text-wrap w-full font-medium text-white hover:text-primary transition-colors duration-150"
                 >
@@ -110,7 +110,7 @@ const LatestTransfers = () => {
               />
               <div className="w-full flex flex-col justify-between gap-5 md:gap-3 bg-[#101010] h-full sm:h-fit lg:h-3/6 px-3 pt-3 sm:pt-2 pb-3">
                 <Link
-                  href={`/${cards[2]._id}`}
+                  href={`/stories/${cards[2]._id}`}
                   title={cards[2].heading}
                   className="text-base xl:text-lg text-wrap w-full font-medium text-white hover:text-primary transition-colors duration-150"
                 >

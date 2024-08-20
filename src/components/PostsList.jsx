@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import { getAllPosts } from "@/apiCalls";
 import HomeCardItemsLoader from "./HomeCardItemsLoader";
 import { useQuery } from "@tanstack/react-query";
-import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import Image from "next/image";
 import { FaRegClock } from "react-icons/fa";
 import { MdMoreTime } from "react-icons/md";
+import { formatTimeDifference } from "@/lib/helpers";
 
 const PostsList = () => {
   const [page, setPage] = useState(1);
@@ -149,7 +149,7 @@ const CardItem = ({ post, handleCategoryChange, isLastItem }) => {
       } grid grid-cols-1 md:grid-cols-[47%,50%] lg:grid-cols-[40%,45%] gap-5 border-[#191919] pb-5`}
     >
       <Link
-        href={`/${post._id}`}
+        href={`/stories/${post._id}`}
         className="w-full h-[38vh] sm:h-[48vh] md:h-[40vh] lg:h-[45vh] hover:brightness-75 duration-200 transition-all"
         style={{ backgroundImage: `url(${post.image}` }}
         title={post.heading}
@@ -175,7 +175,7 @@ const CardItem = ({ post, handleCategoryChange, isLastItem }) => {
               </button>
             ))}
           </div>
-          <Link href={`/${post._id}`} title={post.heading}>
+          <Link href={`/stories/${post._id}`} title={post.heading}>
             <h1 className="text-blue-gray-50 hover:text-primary duration-200 transition-colors font-medium text-lg sm:text-xl lg:text-2xl truncate-lines-2 line-clamp-2">
               {post.heading}
             </h1>
@@ -183,15 +183,17 @@ const CardItem = ({ post, handleCategoryChange, isLastItem }) => {
           <p className="text-blue-gray-300 truncate-lines-3 line-clamp-3 whitespace-pre-wrap">
             {post.content}
           </p>
-          <Link href={`/${post._id}`} title={post.heading} className="primary-btn w-fit">
+          <Link
+            href={`/stories/${post._id}`}
+            title={post.heading}
+            className="primary-btn w-fit"
+          >
             Read more
           </Link>
         </div>
-        <span className="text-[#a1a1a1] flex items-center gap-2 text-[.8rem] self-end">
+        <span className="text-[#a1a1a1] flex items-center gap-1 text-[.8rem] self-end">
           <FaRegClock />
-          {formatDistanceToNow(post.createdAt, {
-            addSuffix: true,
-          })}
+          {formatTimeDifference(post.createdAt)}
         </span>
       </div>
     </div>

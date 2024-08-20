@@ -51,7 +51,7 @@ const PostItem = ({ post, length, index }) => {
       } w-full flex flex-col gap-3 pb-4 sm:border-none`}
     >
       <Link
-        href={`/${post._id}`}
+        href={`/stories/${post._id}`}
         className="w-full  hover:brightness-75"
         title={post.heading}
         // style={{ backgroundImage: `url(${post.image}` }}
@@ -74,7 +74,7 @@ const PostItem = ({ post, length, index }) => {
           </span>
         ))}
       </div>
-      <Link href={`/${post._id}`} title={post.heading}>
+      <Link href={`/stories/${post._id}`} title={post.heading}>
         <h2 className="text-blue-gray-50 text-wrap hover:text-primary duration-200 transition-colors font-semibold text-lg sm:text-xl lg:text-2xl truncate-lines-2 line-clamp-2">
           {post.heading}
         </h2>

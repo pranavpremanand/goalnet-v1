@@ -3,11 +3,11 @@ import Image from "next/image";
 import { useKeenSlider } from "keen-slider/react";
 import { useState } from "react";
 import { FaRegClock } from "react-icons/fa";
-import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { getBanners } from "@/apiCalls";
 import MiniLoader from "./MiniLoader";
 import { useQuery } from "@tanstack/react-query";
+import { formatTimeDifference } from "@/lib/helpers";
 
 const Banner = () => {
   const [banners, setBanners] = useState([]);
@@ -105,11 +105,9 @@ const Banner = () => {
             />
             <div className="absolute top-0 left-0 w-[101%] h-[101%] from-transparent to-black bg-[linear-gradient(to_bottom,transparent_30%,#101010)] z-10"></div>
             <div className="z-20 wrapper absolute left-1/2 -translate-x-1/2 top-2/3 sm:top-1/2 -translate-y-[45%] sm:-translate-y-[30%] lg:-translate-y-1/4 flex flex-col gap-2 md:gap-3">
-              <span className="text-blue-gray-50 flex items-center gap-2 rounded-sm text-[.8rem]">
+              <span className="text-blue-gray-50 flex items-center gap-1 rounded-sm text-[.8rem]">
                 <FaRegClock />
-                {formatDistanceToNow(banner.createdAt, {
-                  addSuffix: true,
-                })}
+                {formatTimeDifference(banner.createdAt)}
               </span>
               <div className="flex max-w-lg gap-2 truncate line-clamp-1">
                 {banner.categories.map((category) => (
@@ -125,7 +123,7 @@ const Banner = () => {
                 {banner.heading}
               </h1>
               <Link
-                href={`/${banner._id}`}
+                href={`/stories/${banner._id}`}
                 className="primary-btn w-fit mt-2 md:mt-4"
                 title={banner.heading}
               >

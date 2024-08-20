@@ -1,14 +1,14 @@
-import RelatedPosts from "@/app/[postId]/components/RelatedPosts";
-import ShareComponent from "@/app/[postId]/components/ShareComponent";
+
 import { connectDb } from "@/lib/database";
-import Post from "@/lib/database/models/post.model";
-import { formatDate } from "date-fns";
 import Image from "next/image";
-import { BiCaretLeft } from "react-icons/bi";
 import { FaRegClock } from "react-icons/fa";
 import Category from "@/lib/database/models/category.model";
-import NotFound from "../not-found";
 import BackButton from "@/components/BackButton";
+import { formatTimeDifference } from "@/lib/helpers";
+import Post from "@/lib/database/models/post.model";
+import NotFound from "@/app/not-found";
+import ShareComponent from "./components/ShareComponent";
+import RelatedPosts from "./components/RelatedPosts";
 
 export const generateMetadata = async ({ params }) => {
   const { postId } = params;
@@ -88,9 +88,9 @@ const PostInDetail = async ({ params }) => {
             </h1>
           </div>
           <div className="flex flex-row justify-end sm:justify-between items-center gap-4 sm:my-1 pb-2 sm:py-2 border-b sm:border-y border-[#252525]">
-            <span className="flex items-center gap-2 text-[.8rem] md:text-sm text-[#a1a1a1]">
+            <span className="flex items-center gap-1 text-[.8rem] md:text-sm text-[#a1a1a1]">
               <FaRegClock />
-              {formatDate(post.createdAt, "dd MMMM yyyy")}
+              {formatTimeDifference(post.createdAt)}
             </span>
             <div className="hidden sm:inline-block">
               <ShareComponent

@@ -1,6 +1,5 @@
 "use client";
-import { useState, useContext } from "react";
-import { formatDistanceToNow } from "date-fns";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CategorySchema } from "@/lib/validationSchema";
@@ -12,6 +11,7 @@ import {
 import toast from "react-hot-toast";
 import PopupWrapper from "../../../../components/PopupWrapper";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { formatTimeDifference } from "@/lib/helpers";
 
 const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
   const [editable, setEditable] = useState(false);
@@ -187,9 +187,7 @@ const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
           )}
         </div>
         <span className="self-start mt-1 md:self-auto text-xs md:w-[10rem] md:ml-3 text-gray-600">
-          {formatDistanceToNow(category.createdAt, {
-            addSuffix: true,
-          })}
+          {formatTimeDifference(category.createdAt)}
         </span>
       </div>
       {showVisibilityChangeConfirmation && (

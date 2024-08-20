@@ -1,4 +1,4 @@
-import { formatDistanceToNow } from "date-fns";
+import { formatTimeDifference } from "@/lib/helpers";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -42,11 +42,9 @@ const PostItem = ({ post, handleCategoryChange }) => {
               </p>
             </div>
             <div className="flex flex-col lg:flex-row justify-between md:pr-5 items-start lg:items-center gap-3">
-              <span className="text-[#a1a1a1] flex self-end lg:self-start items-center gap-2 text-[.8rem]">
+              <span className="text-[#a1a1a1] flex self-end lg:self-start items-center gap-1 text-[.8rem]">
                 <FaRegClock />
-                {formatDistanceToNow(post.createdAt, {
-                  addSuffix: true,
-                })}
+                {formatTimeDifference(post.createdAt)}
               </span>
               {post.isDeleted ? (
                 <span className="w-[7rem] px-2 py-1 bg-red-600 text-white flex items-center gap-2 justify-center tracking-wide font-semibold transition-colors duration-300 rounded-full">
