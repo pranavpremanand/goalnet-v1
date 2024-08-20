@@ -129,7 +129,7 @@ const Banner = () => {
                 className="primary-btn w-fit mt-2 md:mt-4"
                 title={banner.heading}
               >
-                Read More
+                Read more
               </Link>
             </div>
           </div>

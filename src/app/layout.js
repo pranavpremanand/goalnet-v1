@@ -26,11 +26,11 @@ export const metadata = {
     template: "%s | GoalNet",
   },
   description:
-    "GoalNet: Your gateway to football. Discover trending stories, transfer rumors, tactics, and more.",
+    "GoalNet: Your gateway to football. Discover trending stories, transfers, tactics, and more.",
   icons: { icon: "/assets/images/logo.png" },
   openGraph: {
     title: "GoalNet",
-    description: "GoalNet: Your gateway to football. Discover trending stories, transfer rumors, tactics, and more.",
+    description: "GoalNet: Your gateway to football. Discover trending stories, transfers, tactics, and more.",
     url: process.env.NEXT_PUBLIC_WEBSITE_URL,
     images: [
       {
