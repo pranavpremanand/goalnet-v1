@@ -8,7 +8,7 @@ const PostItem = ({ post, handleCategoryChange }) => {
   return (
     <div className="pb-5 border-b border-[#252525]">
       <Link href={`/admin/posts/${post._id}`} className="group" title={post.heading}>
-        <div className="h-[60vh] md:h-[40vh] lg:h-[35vh] duration-200 transition-all rounded-xl border-transparent p-2 border group-hover:border-primary/60 w-full grid grid-cols-1 md:grid-cols-[45%_50%] lg:grid-cols-[30%_65%] gap-1 md:gap-5">
+        <div className="h-[60vh] md:h-[40vh] lg:h-[35vh] duration-200 transition-all rounded-xl border-transparent p-2 border-2 group-hover:border-primary/90 w-full grid grid-cols-1 md:grid-cols-[45%_50%] lg:grid-cols-[30%_65%] gap-1 md:gap-5">
           <div
             style={{ backgroundImage: `url(${post.image})` }}
             className="rounded-xl overflow-hidden"
@@ -18,7 +18,7 @@ const PostItem = ({ post, handleCategoryChange }) => {
               alt="post"
               width={500}
               height={500}
-              className="w-full h-full rounded-xl object-contain group-hover:brightness-75 duration-200 transition-all backdrop-blur-3xl"
+              className="w-full h-full rounded-lg object-contain group-hover:brightness-75 duration-200 transition-all backdrop-blur-3xl"
             />
           </div>
           <div className="flex flex-col justify-start gap-3">
