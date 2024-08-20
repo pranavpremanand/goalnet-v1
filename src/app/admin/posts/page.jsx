@@ -3,11 +3,15 @@ import { getAllPosts } from "@/apiCalls";
 import PostItem from "@/components/PostItem";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { PiCaretRightBold } from "react-icons/pi";
 
-const Posts = () => {
-  const [page, setPage] = useState(1);
+const Posts = ({ searchParams }) => {
+  console.log("searchParams", searchParams);
+  let { page } = searchParams;
+  const router = useRouter();
+  // const [page, setPage] = useState(1);
   const [category, setCategory] = useState({ name: "Latest News", _id: "0" });
 
   // get initial posts
@@ -40,6 +44,18 @@ const Posts = () => {
 
   let { posts, categories, totalPages } = data.data;
 
+  const updateSearchParams = (newParams) => {
+    const params = new URLSearchParams(searchParams);
+
+    // Update the search params with new values
+    Object.keys(newParams).forEach((key) => {
+      params.set(key, newParams[key]);
+    });
+
+    // Use router.replace to update the URL without navigating
+    router.replace(`/admin/posts?${params.toString()}`, { shallow: true });
+  };
+
   const handleCategoryChange = (val) => {
     let selectedCategory = categories.find((category) => category._id === val);
 
@@ -47,10 +63,24 @@ const Posts = () => {
       selectedCategory = { name: "Latest News", _id: "0" };
     }
     setCategory(selectedCategory); // Update state with new category
-    setPage(1);
+    // setPage(1);
+
+    updateSearchParams({ category: val, page: 1 });
+    
     refetch();
   };
 
+  const nextPage = () => {
+    if (page < totalPages) {
+      router.push(`/admin/posts?page=${Number(page) + 1}`);
+    }
+  };
+
+  const prevPage = () => {
+    if (page > 1) {
+      router.push(`/admin/posts?page=${Number(page) - 1}`);
+    }
+  };
   return (
     <section className="grow">
       <div className="wrapper">
@@ -59,13 +89,21 @@ const Posts = () => {
             Home
           </Link>
           <PiCaretRightBold className="text-sm mt-[.15rem]" />
-          <Link href="/admin/posts" className="text-md text-primary" title="Posts">
+          <Link
+            href="/admin/posts"
+            className="text-md text-primary"
+            title="Posts"
+          >
             Posts
           </Link>
         </div>
 
         <div className="flex flex-col gap-4 md:flex-row justify-between items-center">
-          <Link href="/admin/posts/new-post" className="primary-btn" title="Create New Post">
+          <Link
+            href="/admin/posts/new-post"
+            className="primary-btn"
+            title="Create New Post"
+          >
             Create New Post
           </Link>
           {categories.length > 0 && (
@@ -110,11 +148,11 @@ const Posts = () => {
             </div>
             <div className="flex justify-between mb-5 -mt-2 gap-4">
               <button
-                disabled={page === 1}
+                disabled={page == 1}
                 className={`${
-                  page === 1 ? "disabled-btn" : "secondary-btn"
+                  page == 1 ? "disabled-btn" : "secondary-btn"
                 } min-w-[7rem] sm:min-w-[10rem]`}
-                onClick={() => setPage((prev) => (page > 1 ? prev - 1 : prev))}
+                onClick={prevPage}
               >
                 Previous
               </button>
@@ -123,9 +161,7 @@ const Posts = () => {
                 className={`${
                   page >= totalPages ? "disabled-btn" : "secondary-btn"
                 } min-w-[7rem] sm:min-w-[10rem]`}
-                onClick={() =>
-                  setPage((prev) => (prev < totalPages ? prev + 1 : prev))
-                }
+                onClick={nextPage}
               >
                 Next
               </button>
@@ -148,17 +184,29 @@ const Loader = ({ category }) => {
     <section className="grow">
       <div className="wrapper">
         <div className="flex items-center gap-1 mb-10">
-          <Link href="/admin" className="text-md text-blue-gray-50" title="Home">
+          <Link
+            href="/admin"
+            className="text-md text-blue-gray-50"
+            title="Home"
+          >
             Home
           </Link>
           <PiCaretRightBold className="text-sm mt-[.15rem]" />
-          <Link href="/admin/posts" className="text-md text-primary" title="Posts">
+          <Link
+            href="/admin/posts"
+            className="text-md text-primary"
+            title="Posts"
+          >
             Posts
           </Link>
         </div>
 
         <div className="flex flex-col gap-4 md:flex-row justify-between items-center">
-          <Link href="/admin/posts/new-post" className="primary-btn" title="Create New Post">
+          <Link
+            href="/admin/posts/new-post"
+            className="primary-btn"
+            title="Create New Post"
+          >
             Create New Post
           </Link>
           <select

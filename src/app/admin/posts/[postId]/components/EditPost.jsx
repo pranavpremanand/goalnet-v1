@@ -1,8 +1,8 @@
 "use client";
 import { useContext, useRef, useState } from "react";
-import { SpinnerContext } from "@/components/Providers";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
+import { SpinnerContext } from "@/components/Providers";
 import {
   changePostVisibility,
   deletePost,
