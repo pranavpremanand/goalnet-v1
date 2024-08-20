@@ -11,7 +11,6 @@ const Posts = ({ searchParams }) => {
   console.log("searchParams", searchParams);
   let { page } = searchParams;
   const router = useRouter();
-  // const [page, setPage] = useState(1);
   const [category, setCategory] = useState({ name: "Latest News", _id: "0" });
 
   // get initial posts
@@ -63,9 +62,8 @@ const Posts = ({ searchParams }) => {
       selectedCategory = { name: "Latest News", _id: "0" };
     }
     setCategory(selectedCategory); // Update state with new category
-    // setPage(1);
 
-    updateSearchParams({ category: val, page: 1 });
+    updateSearchParams({ page: 1 });
     
     refetch();
   };
