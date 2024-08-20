@@ -13,7 +13,6 @@ const Error = () => {
         <h1 className="text-5xl lg:text-8xl inline">ERR</h1>
         <Image
           src="/assets/images/football.png"
-          blurDataUrl="/assets/images/football.png"
           width={300}
           height={300}
           alt=""

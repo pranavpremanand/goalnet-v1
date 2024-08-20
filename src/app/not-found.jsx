@@ -8,7 +8,6 @@ const NotFound = () => {
         <h1 className="text-5xl lg:text-8xl inline">4</h1>
         <Image
           src="/assets/images/football.png"
-          blurDataUrl="/assets/images/football.png"
           width={300}
           height={300}
           alt=""
