@@ -13,6 +13,7 @@ const Error = () => {
         <h1 className="text-5xl lg:text-8xl inline">ERR</h1>
         <Image
           src="/assets/images/football.png"
+          blurDataUrl="/assets/images/football.png"
           width={300}
           height={300}
           alt=""
@@ -23,7 +24,7 @@ const Error = () => {
       <h2 className="text-2xl lg:text-4xl font-semibold text-center">
         Something went wrong
       </h2>
-      <Link href={isAdmin ? "/admin" : "/"} className="primary-btn mt-5">
+      <Link href={isAdmin ? "/admin" : "/"} className="primary-btn mt-5" title={"Home page"}>
         Home page
       </Link>
     </div>

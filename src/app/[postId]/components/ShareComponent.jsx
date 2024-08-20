@@ -42,8 +42,9 @@ const ShareComponent = ({ content }) => {
         )}`}
         target="_blank"
         rel="noopener noreferrer"
+        title="Whatsapp"
       >
-        <Image
+        <Image  
           src="/assets/images/whatsapp-icon.png"
           alt="wa-icon"
           width={100}
@@ -57,8 +58,9 @@ const ShareComponent = ({ content }) => {
         )}`}
         target="_blank"
         rel="noopener noreferrer"
+        title="Facebook"
       >
-        <Image
+        <Image  
           src="/assets/images/fb-icon.png"
           alt="fb-icon"
           width={100}
@@ -73,8 +75,9 @@ const ShareComponent = ({ content }) => {
         )}`}
         target="_blank"
         rel="noopener noreferrer"
+        title="Twitter"
       >
-        <Image
+        <Image  
           src="/assets/images/twitter-icon.png"
           alt="twitter-icon"
           width={100}
@@ -86,8 +89,9 @@ const ShareComponent = ({ content }) => {
         href={`https://t.me/share/url?url=${encodeURIComponent(content.url)}`}
         target="_blank"
         rel="noopener noreferrer"
+        title="Telegram"
       >
-        <Image
+        <Image  
           src="/assets/images/telegram-icon.png"
           alt="telegram-icon"
           width={100}

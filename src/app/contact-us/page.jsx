@@ -57,7 +57,7 @@ const ContactUs = () => {
             conversation going and make GoalNet even better together!
           </p>
         </div>
-        <Image
+        <Image  
           src="/assets/images/messi-training.jpeg"
           alt="#"
           width={500}
@@ -69,6 +69,8 @@ const ContactUs = () => {
           rel="noopener noreferrer"
           target="_blank"
           className="primary-btn text-center h-fit w-[15rem]"
+          aria-label="Email Us Now"
+          title="Email Us Now"
         >
           Email Us Now
         </Link>

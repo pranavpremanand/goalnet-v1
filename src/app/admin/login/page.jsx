@@ -130,7 +130,7 @@ const Login = () => {
             className="secondary-btn uppercase mt-3 flex w-full justify-center items-center gap-2"
             type="button"
           >
-            <Image
+            <Image  
               src="/assets/images/google-icon.png"
               alt=""
               width={300}

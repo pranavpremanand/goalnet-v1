@@ -43,9 +43,9 @@ const Header = () => {
         }`}
       >
         <div className="wrapper flex justify-between items-center">
-          <Link className={poppins.className} href={"/"} prefetch={false}>
+          <Link className={poppins.className} href={"/"} prefetch={false} title="Home">
             {/*
-          <Image
+          <Image  
             src="/assets/images/logo-1.png"
             alt="GoalNet Logo"
             width={500}
@@ -60,9 +60,9 @@ const Header = () => {
           <div className="hidden md:flex">
             <NavItems />
           </div>
-          <div className="md:hidden text-primary z-10">
+          <button className="md:hidden text-primary z-10">
             <Hamburger toggled={isOpen} toggle={setOpen} size={25} />
-          </div>
+          </button>
         </div>
       </div>
       <Drawer

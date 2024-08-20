@@ -34,7 +34,7 @@ const LatestTransfers = () => {
               style={{ backgroundImage: `url(${cards[0].image})` }}
               className="lg:h-full"
             >
-              <Image
+              <Image  
                 src={cards[0].image}
                 width={500}
                 height={500}
@@ -55,6 +55,7 @@ const LatestTransfers = () => {
                   <Link
                     href={`/${cards[0]._id}`}
                     className="primary-btn w-fit flex items-center gap-2"
+                    title="Full story"
                   >
                     Full story <GrLinkNext className="text-lg mt-1" />
                   </Link>
@@ -68,7 +69,7 @@ const LatestTransfers = () => {
               className="flex flex-row-reverse items-center sm:block w-full col-span-2 sm:col-span-1 lg:col-span-3"
               style={{ backgroundImage: `url(${cards[1].image})` }}
             >
-              <Image
+              <Image  
                 src={cards[1].image}
                 width={500}
                 height={500}
@@ -78,6 +79,7 @@ const LatestTransfers = () => {
               <div className="w-full flex flex-col justify-between gap-5 md:gap-3 bg-[#101010] h-full sm:h-fit lg:h-3/6 px-3 pt-3 sm:pt-2 pb-3">
                 <Link
                   href={`/${cards[1]._id}`}
+                  title={cards[1].heading}
                   className="text-base xl:text-lg text-wrap w-full font-medium text-white hover:text-primary transition-colors duration-150"
                 >
                   {cards[1].heading}
@@ -99,7 +101,7 @@ const LatestTransfers = () => {
               className="flex flex-row-reverse items-center sm:block w-full col-span-2 sm:col-span-1 lg:col-span-3"
               style={{ backgroundImage: `url(${cards[1].image})` }}
             >
-              <Image
+              <Image  
                 src={cards[2].image}
                 width={500}
                 height={500}
@@ -109,6 +111,7 @@ const LatestTransfers = () => {
               <div className="w-full flex flex-col justify-between gap-5 md:gap-3 bg-[#101010] h-full sm:h-fit lg:h-3/6 px-3 pt-3 sm:pt-2 pb-3">
                 <Link
                   href={`/${cards[2]._id}`}
+                  title={cards[2].heading}
                   className="text-base xl:text-lg text-wrap w-full font-medium text-white hover:text-primary transition-colors duration-150"
                 >
                   {cards[2].heading}

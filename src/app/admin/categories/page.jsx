@@ -40,14 +40,11 @@ const Categories = () => {
     <section className="grow">
       <div className="wrapper">
         <div className="flex items-center gap-1">
-          <Link href="/admin" className="text-md">
+          <Link href="/admin" className="text-md" title="Home">
             Home
           </Link>
           <PiCaretRightBold className="text-sm mt-[.15rem]" />
-          <Link
-            href="/admin/categories"
-            className="text-md text-primary"
-          >
+          <Link href="/admin/categories" className="text-md text-primary" title="Categories">
             Categories
           </Link>
         </div>
@@ -83,27 +80,6 @@ const Categories = () => {
             </div>
           </div>
         )}
-        {/* <div className="flex justify-between items-center gap-2 mt-2">
-          <button
-            className={
-              data.pagination.page === 1 ? "disabled-btn" : "secondary-btn"
-            }
-            disabled={data.pagination.page === 1}
-          >
-            Previous
-          </button>
-          <div className='w-7 h-7 text-black flex justify-center items-center font-semibold rounded-full bg-blue-gray-50'>{data.pagination.page}</div>
-          <button
-            className={
-              data.pagination.totalPages === data.pagination.page
-                ? "disabled-btn"
-                : "secondary-btn"
-            }
-            disabled={data.pagination.totalPages === data.pagination.page}
-          >
-            Next
-          </button>
-        </div> */}
       </div>
     </section>
   );

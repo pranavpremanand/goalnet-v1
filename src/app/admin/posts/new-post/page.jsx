@@ -228,15 +228,15 @@ const NewPost = () => {
   return (
     <section className="wrapper grow">
       <div className="flex items-center gap-1 mb-10">
-        <Link href="/admin" className="text-md">
+        <Link href="/admin" className="text-md" title="Home">
           Home
         </Link>
         <PiCaretRightBold className="text-sm mt-[.15rem]" />
-        <Link href="/admin/posts" className="text-md">
+        <Link href="/admin/posts" className="text-md" title="Posts">
           Posts
         </Link>
         <PiCaretRightBold className="text-sm mt-[.15rem]" />
-        <Link href="/admin/posts/new-post" className="text-md text-primary">
+        <Link href="/admin/posts/new-post" className="text-md text-primary" title="Upload a post">
           New Post
         </Link>
       </div>
@@ -270,7 +270,7 @@ const NewPost = () => {
                 onClick={() => imgInputRef.current?.click()}
                 style={{ backgroundImage: `url(${imgPreview})` }}
               >
-                <Image
+                <Image  
                   src={imgPreview}
                   alt="uploaded image"
                   width={1000}

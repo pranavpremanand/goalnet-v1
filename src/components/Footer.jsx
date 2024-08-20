@@ -13,13 +13,15 @@ const Footer = () => {
               href={link.url}
               className="hover:text-gray-400 transition duration-200"
               target="_blank"
+              rel="noreferrer"
+              title={link.label}
             >
               {link.icon}
             </Link>
           ))}
         </div>
         {/* <Link href="/" className="justify-self-end">
-          <Image
+          <Image  
             src="/assets/images/GoalNet - Logo.png"
             alt="GoalNet Logo"
             width={500}

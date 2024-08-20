@@ -355,7 +355,7 @@ const EditPost = ({ postId }) => {
                 onClick={() => imgInputRef.current?.click()}
                 style={{ backgroundImage: `url(${imgPreview})` }}
               >
-                <Image
+                <Image  
                   src={imgPreview}
                   alt="post"
                   width={1000}

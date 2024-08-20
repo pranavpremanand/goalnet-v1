@@ -4,11 +4,11 @@ import { connectDb } from "@/lib/database";
 import Post from "@/lib/database/models/post.model";
 import { formatDate } from "date-fns";
 import Image from "next/image";
-import Link from "next/link";
 import { BiCaretLeft } from "react-icons/bi";
 import { FaRegClock } from "react-icons/fa";
 import Category from "@/lib/database/models/category.model";
 import NotFound from "../not-found";
+import BackButton from "@/components/BackButton";
 
 export const generateMetadata = async ({ params }) => {
   const { postId } = params;
@@ -26,7 +26,6 @@ export const generateMetadata = async ({ params }) => {
 
 const PostInDetail = async ({ params }) => {
   const { postId } = params;
-
   let post;
 
   try {
@@ -42,9 +41,7 @@ const PostInDetail = async ({ params }) => {
   return (
     <section className="wrapper grow text-blue-gray-50">
       <div className="flex justify-start items-center gap-1 mb-5 py-2 sm:py-3 border-y border-[#252525]">
-        <Link href="/" className="text-md flex items-center font-medium">
-          <BiCaretLeft className="text-3xl sm:text-2xl" /> Back
-        </Link>
+        <BackButton />
       </div>
       <div className="pb-12">
         <div className="flex flex-col gap-3 pb-7 border-b border-[#191919]">
@@ -57,7 +54,7 @@ const PostInDetail = async ({ params }) => {
             }}
           >
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black/20 z-10"></div>
-            <Image
+            <Image  
               src={post.image || "/assets/images/logo.png"}
               alt="post"
               width={1000}

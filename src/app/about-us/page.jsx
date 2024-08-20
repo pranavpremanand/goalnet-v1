@@ -14,7 +14,7 @@ export default function About() {
   return (
     <section className="w-full my-10">
       <div className="flex flex-col wrapper gap-10">
-        <Image
+        <Image  
           src="/assets/images/about-us-banner.jpg"
           alt="About Us"
           width={1000}

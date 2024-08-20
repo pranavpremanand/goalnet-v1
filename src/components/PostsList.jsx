@@ -1,5 +1,5 @@
 "use client";
-import React, { useState  } from "react";
+import React, { useState } from "react";
 import { getAllPosts } from "@/apiCalls";
 import HomeCardItemsLoader from "./HomeCardItemsLoader";
 import { useQuery } from "@tanstack/react-query";
@@ -125,8 +125,8 @@ const PostsList = () => {
         ) : (
           <div className="flex justify-center w-full mb-5 -mt-4">
             <Image
-              className="h-14 w-h-14 object-contain animate-spin"
-              src="/assets/images/football.png"
+              className="h-10 w-h-10 object-contain animate-spin duration-100"
+              src="/assets/images/loading-icon.png"
               alt="loading"
               width={100}
               height={100}
@@ -152,6 +152,7 @@ const CardItem = ({ post, handleCategoryChange, isLastItem }) => {
         href={`/${post._id}`}
         className="w-full h-[38vh] sm:h-[48vh] md:h-[40vh] lg:h-[45vh] hover:brightness-75 duration-200 transition-all"
         style={{ backgroundImage: `url(${post.image}` }}
+        title={post.heading}
       >
         <Image
           src={post.image}
@@ -174,7 +175,7 @@ const CardItem = ({ post, handleCategoryChange, isLastItem }) => {
               </button>
             ))}
           </div>
-          <Link href={`/${post._id}`}>
+          <Link href={`/${post._id}`} title={post.heading}>
             <h1 className="text-blue-gray-50 hover:text-primary duration-200 transition-colors font-medium text-lg sm:text-xl lg:text-2xl truncate-lines-2 line-clamp-2">
               {post.heading}
             </h1>
@@ -182,7 +183,7 @@ const CardItem = ({ post, handleCategoryChange, isLastItem }) => {
           <p className="text-blue-gray-300 truncate-lines-3 line-clamp-3 whitespace-pre-wrap">
             {post.content}
           </p>
-          <Link href={`/${post._id}`} className="primary-btn w-fit">
+          <Link href={`/${post._id}`} title={post.heading} className="primary-btn w-fit">
             Read more
           </Link>
         </div>

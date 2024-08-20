@@ -8,6 +8,7 @@ const NotFound = () => {
         <h1 className="text-5xl lg:text-8xl inline">4</h1>
         <Image
           src="/assets/images/football.png"
+          blurDataUrl="/assets/images/football.png"
           width={300}
           height={300}
           alt=""
@@ -16,7 +17,7 @@ const NotFound = () => {
         <h1 className="text-5xl lg:text-8xl inline">4</h1>
       </div>
       <h2 className="text-2xl lg:text-4xl font-semibold">Page not found</h2>
-      <Link href="/" className="primary-btn mt-5">
+      <Link href="/" className="primary-btn mt-5" title={"Home page"}>
         Home page
       </Link>
     </div>

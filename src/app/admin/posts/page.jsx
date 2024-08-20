@@ -55,17 +55,17 @@ const Posts = () => {
     <section className="grow">
       <div className="wrapper">
         <div className="flex items-center gap-1 mb-10">
-          <Link href="/admin" className="text-md">
+          <Link href="/admin" className="text-md" title="Home">
             Home
           </Link>
           <PiCaretRightBold className="text-sm mt-[.15rem]" />
-          <Link href="/admin/posts" className="text-md text-primary">
+          <Link href="/admin/posts" className="text-md text-primary" title="Posts">
             Posts
           </Link>
         </div>
 
         <div className="flex flex-col gap-4 md:flex-row justify-between items-center">
-          <Link href="/admin/posts/new-post" className="primary-btn">
+          <Link href="/admin/posts/new-post" className="primary-btn" title="Upload a post">
             Upload a post
           </Link>
           {categories.length > 0 && (
@@ -148,17 +148,17 @@ const Loader = ({ category }) => {
     <section className="grow">
       <div className="wrapper">
         <div className="flex items-center gap-1 mb-10">
-          <Link href="/admin" className="text-md text-blue-gray-50">
+          <Link href="/admin" className="text-md text-blue-gray-50" title="Home">
             Home
           </Link>
           <PiCaretRightBold className="text-sm mt-[.15rem]" />
-          <Link href="/admin/posts" className="text-md text-primary">
+          <Link href="/admin/posts" className="text-md text-primary" title="Posts">
             Posts
           </Link>
         </div>
 
         <div className="flex flex-col gap-4 md:flex-row justify-between items-center">
-          <Link href="/admin/posts/new-post" className="primary-btn">
+          <Link href="/admin/posts/new-post" className="primary-btn" title="Upload a post">
             Upload a post
           </Link>
           <select
