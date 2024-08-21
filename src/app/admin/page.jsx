@@ -1,6 +1,10 @@
 import Link from "next/link";
 import React from "react";
 
+export const metadata = {
+  title: "Admin",
+};
+
 const AdminHome = () => {
   const links = [
     // { title: "Banners", link: "/" },

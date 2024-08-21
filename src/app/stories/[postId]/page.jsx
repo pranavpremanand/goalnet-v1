@@ -49,13 +49,13 @@ const PostInDetail = async ({ params }) => {
             className="w-full h-[45vh] sm:h-[65vh] md:h-[73vh] mt-2 relative"
             style={{
               backgroundImage: `url(${
-                post.image || "/assets/images/logo.png"
+                post.image
               })`,
             }}
           >
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black/20 z-10"></div>
             <Image  
-              src={post.image || "/assets/images/logo.png"}
+              src={post.image}
               alt="post"
               width={1000}
               height={1000}
@@ -83,7 +83,7 @@ const PostInDetail = async ({ params }) => {
                   </span>
                 ))}
             </div>
-            <h1 className="font-bold text-2xl sm:text-3xl lg:text-5xl my-3 leading-relaxed">
+            <h1 className="font-bold text-2xl sm:text-3xl lg:text-5xl my-1 leading-relaxed">
               {post.heading}
             </h1>
           </div>

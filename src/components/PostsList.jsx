@@ -162,7 +162,7 @@ const CardItem = ({ post, handleCategoryChange, isLastItem }) => {
           className="w-full h-full object-top object-cover backdrop-blur-3xl"
         />
       </Link>
-      <div className="flex flex-col justify-between gap-3 h-full">
+      <div className="flex flex-col justify-between gap-1 h-full">
         <div className="flex flex-col gap-3">
           <div className="flex max-w-lg gap-2 truncate line-clamp-1">
             {post.categories.map((category) => (
