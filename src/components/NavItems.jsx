@@ -16,11 +16,15 @@ const NavItems = ({ onClose }) => {
     try {
       const response = await logout().then((res) => res.json());
       if (response.success) {
-        toast.success(response.message);
+        toast.success(response.message, {
+          id: "success",
+        });
         router.replace("/admin/login");
       }
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, {
+        id: "error",
+      });
     }
   };
 

@@ -8,7 +8,9 @@ import { FaLink, FaShareAlt } from "react-icons/fa";
 const ShareComponent = ({ content }) => {
   const handleCopy = () => {
     navigator.clipboard.writeText(content.url);
-    toast.success("Link Copied");
+    toast.success("Link Copied",{
+      id: "success",
+    });
   };
 
   const handleShare = async () => {

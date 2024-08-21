@@ -16,9 +16,9 @@ export const viewport = {
   width: "device-width",
   userScalable: false,
   maximumScale: 1,
-  themeColor: 'black',
+  themeColor: "black",
   // colorScheme: 'dark',
-}
+};
 
 export const metadata = {
   title: {
@@ -30,7 +30,8 @@ export const metadata = {
   icons: { icon: "/assets/images/logo.png" },
   openGraph: {
     title: "GoalNet",
-    description: "GoalNet: Your gateway to football. Discover trending stories, transfers, tactics, and more.",
+    description:
+      "GoalNet: Your gateway to football. Discover trending stories, transfers, tactics, and more.",
     url: process.env.NEXT_PUBLIC_WEBSITE_URL,
     images: [
       {
@@ -53,12 +54,9 @@ export default function RootLayout({ children }) {
           <Toaster
             position="top-center"
             toastOptions={{
-              className: "",
               style: {
-                border: "1px solid #f1ff00",
-                padding: "10px",
                 color: "#f1ff00",
-                backgroundColor: "#000000",
+                backgroundColor: "#101010",
               },
             }}
           />

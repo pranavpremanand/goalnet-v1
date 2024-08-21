@@ -33,15 +33,21 @@ const AddCategoryFormModal = ({ closePopup }) => {
     try {
       const response = await createCategory(values).then((res) => res.json());
       if (response.success) {
-        toast.success(response.message);
+        toast.success(response.message,{
+          id: "success",
+        });
         dispatch(setCategories([...categories, response.data]));
         closePopup();
       } else {
-        toast.error(response.message);
+        toast.error(response.message,{
+          id: "error",
+        });
       }
       reset();
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message,{
+        id: "error",
+      });
     } finally {
       setIsLoading(false);
     }

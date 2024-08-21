@@ -20,16 +20,6 @@ const Footer = () => {
             </Link>
           ))}
         </div>
-        {/* <Link href="/" className="justify-self-end">
-          <Image  
-            src="/assets/images/GoalNet - Logo.png"
-            alt="GoalNet Logo"
-            width={500}
-            height={500}
-            className="w-[6rem] md:w-[7.5rem] h-[1.5rem] md:h-[2rem] object-cover object-center"
-            loading="lazy"
-          />
-        </Link> */}
       </div>
     </div>
   );

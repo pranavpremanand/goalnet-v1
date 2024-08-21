@@ -46,7 +46,9 @@ const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
       }).then((res) => res.json());
 
       if (response.success) {
-        toast.success(response.message);
+        toast.success(response.message, {
+          id: "success",
+        });
         setEditable(false);
         dispatch(
           setCategories(
@@ -54,10 +56,14 @@ const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
           )
         );
       } else {
-        toast.error(response.message);
+        toast.error(response.message, {
+          id: "error",
+        });
       }
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, {
+        id: "error",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -72,14 +78,18 @@ const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
       );
       setShowVisibilityChangeConfirmation(false);
       if (response.success) {
-        toast.success(response.message);
+        toast.success(response.message, {
+          id: "success",
+        });
         dispatch(
           setCategories(
             categories.map((c) => (c._id === category._id ? response.data : c))
           )
         );
       } else {
-        toast.error(response.message);
+        toast.error(response.message, {
+          id: "error",
+        });
         if (response.hidePostsConfirmation) {
           setTimeout(() => {
             setShowDeletePostsConfirmation(true);
@@ -87,7 +97,9 @@ const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
         }
       }
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, {
+        id: "error",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -102,7 +114,9 @@ const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
       );
 
       if (response.success) {
-        toast.success(response.message);
+        toast.success(response.message, {
+          id: "success",
+        });
         setShowDeletePostsConfirmation(false);
         dispatch(
           setCategories(
@@ -112,10 +126,14 @@ const CategoryItem = ({ category, dispatch, setCategories, categories }) => {
           )
         );
       } else {
-        toast.error(response.message);
+        toast.error(response.message, {
+          id: "error",
+        });
       }
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, {
+        id: "error",
+      });
     } finally {
       setIsLoading(false);
     }

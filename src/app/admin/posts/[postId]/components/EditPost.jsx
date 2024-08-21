@@ -182,7 +182,9 @@ const EditPost = ({ postId }) => {
         if (result.secure_url) {
           values.image = result.secure_url;
         } else {
-          toast.error("Image upload failed. Please try again");
+          toast.error("Image upload failed. Please try again",{
+            id:"image-upload-error",
+          });
         }
       }
 
@@ -195,12 +197,18 @@ const EditPost = ({ postId }) => {
       };
       const response = await updatePost(newData).then((res) => res.json());
       if (response.success) {
-        toast.success(response.message);
+        toast.success(response.message,{
+          id:"success",
+        });
       } else {
-        toast.error(response.message);
+        toast.error(response.message,{
+          id:"error",
+        });
       }
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message,{
+        id:"error",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -229,9 +237,13 @@ const EditPost = ({ postId }) => {
       if (response.success) {
         setPost({ ...post, isDeleted: !post.isDeleted });
         setShowPostVisibilityAlert(false);
-        toast.success(response.message);
+        toast.success(response.message,{
+          id:"success",
+        });
       } else {
-        toast.error(response.message);
+        toast.error(response.message,{
+          id:"error",
+        });
         if (response.hiddenCategoryNames) {
           setShowPostVisibilityAlert(false);
           setHiddenCategoryNames(response.hiddenCategoryNames);
@@ -241,7 +253,9 @@ const EditPost = ({ postId }) => {
         }
       }
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message,{
+        id:"error",
+      });
     } finally {
       setPending(false);
     }
@@ -255,17 +269,23 @@ const EditPost = ({ postId }) => {
         (res) => res.json()
       );
       if (response.success) {
-        toast.success(response.message);
+        toast.success(response.message,{
+          id:"success",
+        });
         setShowUnhidePostAndItsCategoriesAlert(false);
         setPost({ ...post, isDeleted: false });
         setSelectedCategories(
           selectedCategories.map((c) => (c.isDeleted = false))
         );
       } else {
-        toast.error(response.message);
+        toast.error(response.message,{
+          id:"error",
+        });
       }
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message,{
+        id:"error",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -277,13 +297,19 @@ const EditPost = ({ postId }) => {
       setPending(true);
       const response = await deletePost(post._id).then((res) => res.json());
       if (response.success) {
-        toast.success(response.message);
+        toast.success(response.message,{
+          id:"success",
+        });
         router.push("/admin/posts");
       } else {
-        toast.error(response.message);
+        toast.error(response.message,{
+          id:"error",
+        });
       }
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message,{
+        id:"error",
+      });
     } finally {
       setPending(false);
     }

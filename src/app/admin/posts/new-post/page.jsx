@@ -88,7 +88,6 @@ const NewPost = () => {
 
     if (selectedFile) {
       if (!validTypes.includes(selectedFile.type)) {
-        // toast.error("Please select a valid image file (jpg, jpeg, png, webp)");
         setError("image", {
           message: "Please select a valid image file (jpg, jpeg, png, webp)",
         });
@@ -96,7 +95,6 @@ const NewPost = () => {
       }
 
       if (selectedFile.size > maxSize) {
-        // toast.error("File size should be less than 5 MB");
         setError("image", { message: "File size should be less than 5 MB" });
         return;
       }
@@ -136,19 +134,26 @@ const NewPost = () => {
         };
         const response = await createPost(newData).then((res) => res.json());
         if (response.success) {
-          toast.success(response.message);
+          toast.success(response.message, {
+            id: "success",
+          });
           reset();
           setSelectedCategories([]);
           setImgPreview("");
         } else {
-          toast.error(response.message);
+          toast.error(response.message, {
+            id: "error",
+          });
         }
       } else {
-        toast.error("Image upload failed. Please try again");
+        toast.error("Image upload failed. Please try again", {
+          id: "image-upload-error",
+        });
       }
     } catch (err) {
-      console.log(err);
-      toast.error(err.message);
+      toast.error(err.message, {
+        id: "error",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -236,7 +241,11 @@ const NewPost = () => {
           Posts
         </Link>
         <PiCaretRightBold className="text-sm mt-[.15rem]" />
-        <Link href="/admin/posts/new-post" className="text-md text-primary" title="New Post">
+        <Link
+          href="/admin/posts/new-post"
+          className="text-md text-primary"
+          title="New Post"
+        >
           New Post
         </Link>
       </div>
@@ -270,7 +279,7 @@ const NewPost = () => {
                 onClick={() => imgInputRef.current?.click()}
                 style={{ backgroundImage: `url(${imgPreview})` }}
               >
-                <Image  
+                <Image
                   src={imgPreview}
                   alt="uploaded image"
                   width={1000}

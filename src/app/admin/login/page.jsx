@@ -34,13 +34,19 @@ const Login = () => {
       }).then((res) => res.json());
       console.log(response);
       if (response.success) {
-        toast.success(response.message);
+        toast.success(response.message,{
+          id: "success",
+        });
         router.replace("/admin");
       } else {
-        toast.error(response.message);
+        toast.error(response.message,{
+          id: "error",
+        });
       }
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message,{
+        id: "error",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -52,7 +58,8 @@ const Login = () => {
     //   const response = await signIn("google", { redirect: false });
     //   console.log("response", response);
     // } catch (err) {
-    //   toast.error(err.message);
+    //   toast.error(err.message,{
+    //     id: "error",});
     //   console.log(err, "Err");
     // }
   };
